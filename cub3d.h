@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/25 17:51:39 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/08/25 18:48:20 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
-# include "get_next_line/get_next_line.h"
+// # include "get_next_line/get_next_line.h"
 # include "./libft/libft.h"
-# include "./minilibx-linux/mlx.h"
+// # include "./minilibx-linux/mlx.h"
 
 # define KEY_ESC	65307
 # define KEY_W		119
@@ -33,7 +33,8 @@
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
 
-typedef struct s_img {
+typedef struct s_img
+{
 	void	*img_ptr;
 	char	*address;
 	int		bpp;
@@ -43,7 +44,8 @@ typedef struct s_img {
 	int		height;
 }	t_img;
 
-typedef struct s_player {
+typedef struct s_player
+{
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
@@ -52,7 +54,8 @@ typedef struct s_player {
 	double	vector_y;
 }	t_player;
 
-typedef struct s_map {
+typedef struct s_map
+{
 	char	**grid;
 	int		width;
 	int		height;
@@ -68,7 +71,8 @@ typedef struct s_map {
 	t_img	east_texture;
 }	t_map;
 
-typedef struct s_game {
+typedef struct s_game
+{
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_map		map;
