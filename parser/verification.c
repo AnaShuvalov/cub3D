@@ -6,11 +6,32 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:58 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/25 18:48:37 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/08/26 18:24:43 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+char	*verify_path(const char *line)
+{
+	char **splitted;
+
+	splitted = ft_split(line, ' ');
+	if (splitted[0][1] == 'N' || splitted[0][1] == 'S' || splitted[0][1] == 'W'
+		|| splitted[0][1] == 'E')
+	return (-1);
+}
+
+void	verify_metadata(t_game *game)
+{
+	if (game->map.north_texture_path == NULL
+			|| game->map.south_texture_path == NULL
+			|| game->map.west_texture_path == NULL
+			|| game->map.east_texture_path == NULL)
+		ft_error("Missing wall textures.\n");
+	if (game->map.floor_color == -1 || game->map.ceiling_color == -1)
+		ft_error("Missing floor or ceiling colors.\n");
+}
 
 void	verification(char *filename)
 {
