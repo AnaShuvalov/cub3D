@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/26 16:26:29 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:45:26 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	init_game(t_game *game)
 {
 	ft_bzero(game, sizeof(t_game));
+	game->map.floor_color = -1;
+	game->map.ceiling_color = -1;
 }
 
 int	main(int argc, char **argv)

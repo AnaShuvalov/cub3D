@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/26 16:58:41 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:06:10 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
-// # include "get_next_line/get_next_line.h"
+# include "get_next_line/get_next_line.h"
 # include "./libft/libft.h"
 // # include "./minilibx-linux/mlx.h"
 
