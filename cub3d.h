@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/25 18:48:20 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/08/26 16:58:41 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdbool.h>
 // # include "get_next_line/get_next_line.h"
 # include "./libft/libft.h"
 // # include "./minilibx-linux/mlx.h"
@@ -33,50 +34,73 @@
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
 
+// Key movemment flags - used for smooth wlaking and fluid movement.
+// If a key is pressed the bool is set to TRUE. When the key is released,
+// 	it is set to false.
+// The keys may be pressed for a longer time and simultaneously.
+typedef struct s_keys
+{
+	bool	w; // move forward
+	bool	a; // move left
+	bool	s; //move backward
+	bool	d; // move right
+	bool	left; // look left
+	bool	right; // look right
+}	t_keys;
+
+// Image buffer representation for MinilibX
+// Used to store the information of the framebuffer before loading it to the screen
 typedef struct s_img
 {
-	void	*img_ptr;
-	char	*address;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
+	void	*img_ptr; // pointer to the mlx image object
+	char	*address; // the starting memory address for the image pixels
+	int		bpp; // bits per pixel. how many bits per color each pixel uses (usually 32)
+	int		line_len; // the size in bytes of one horizontal line of pixels 
+	int		endian; // how colors are structured
+	int		width; // the width of the image in pixels
+	int		height; // the height of the image in pixels
 }	t_img;
 
+// Player state for movement and raycasting
+// position in grid units (type double - e.g. 4.5), direction and plane are vectors
+// GRID IS CONSIDERED grid[y][x] where y is row and x is column
 typedef struct s_player
 {
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	vector_x;
-	double	vector_y;
+	double	pos_x; // player's horisontal position on the grid. 5.5 means the middle of tile 5
+	double	pos_y; // player's vertical position on the grid
+	double	dir_x; // direction of the player's view - where east is 1.0 and west is -1.0
+	double	dir_y; // direction of the player's view - where south is 1.0 and north is -1.0
+	double	plane_x; // determines the field of view of the player on the x axis. is perpendicular to the direction vector
+	double	plane_y; // determines the field of view of the player on the y axis. is perpendicular to the direction vector
 }	t_player;
 
+// Map data from the .cub file 
 typedef struct s_map
 {
-	char	**grid;
-	int		width;
-	int		height;
-	char	*north_texture_path;
-	char	*south_texture_path;
-	char	*west_texture_path;
-	char	*east_texture_path;
-	int		floor_color;
-	int		ceiling_color;
-	t_img	north_texture;
-	t_img	south_texture;
-	t_img	west_texture;
-	t_img	east_texture;
+	char	**grid; // 2D grid array, containing 1, 0 and spaces 
+	int		width; // max width of the map grid
+	int		height; // max height of the map grid
+	char	*north_texture_path; // path to north texture from the .cub file
+	char	*south_texture_path; // path to south texture from the .cub file
+	char	*west_texture_path; // path to west texture from the .cub file
+	char	*east_texture_path; // path to east texture from the .cub file
+	int		floor_color; // floor color converted to int (hex format)
+	int		ceiling_color; // ceiling color converted to int (hex format)
+	t_img	north_texture; // loaded MLX image for north wall
+	t_img	south_texture; // loaded MLX image for south wall
+	t_img	west_texture; // loaded MLX image for west wall
+	t_img	east_texture; // loaded MLX image for east wall
 }	t_map;
 
+// main game struct
 typedef struct s_game
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_map		map;
-	t_player	player;
+	void		*mlx_ptr; // mlx library pointer
+	void		*win_ptr; // mlx window pointer
+	t_map		map; // parsed map with textures and colors
+	t_player	player; // player position and direction vectors
+	t_keys		key; // current state of the keys
+	t_img		framebuffer; // buffer image used to draw off screen before pushing it onscreen 
 }	t_game;
 
 #endif
