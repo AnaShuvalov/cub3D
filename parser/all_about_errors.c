@@ -6,13 +6,13 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:26:47 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/25 18:46:37 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/08/28 15:42:42 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	error_message(char *s)
+void	error_message(char *s)
 {
 	write (2, "Error\n", 6);
 	if (s)

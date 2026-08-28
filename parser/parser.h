@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:54 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/26 18:30:27 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/08/28 18:05:54 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,15 @@
 int		parser(int argc, char **argv, t_game *game);
 void	verification(char *filename);
 void	ft_error(char *s);
+void	error_message(char *s);
 void	verify_metadata(t_game *game);
-char	*verify_path(const char *line);
+int		verify_path(t_game *game, const char *line);
+int		verify_color(t_game *game, const char *line);
+int		verify_map(t_game *game, char *line);
 int		is_space_only(char *line);
+void	free_array(char **array);
+bool	check_for_map(char *line);
+int		check_path_validity(char *path);
+int		is_rgb(t_game *game, char *line, char **rgb);
 
 #endif
