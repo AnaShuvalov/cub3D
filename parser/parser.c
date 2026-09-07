@@ -6,19 +6,20 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 14:43:40 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 16:24:50 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	populate_game(t_game *game, char *line)
+static int	populate_game(t_game *game, char *line, t_list **map)
 {
-	bool	inside_map;
-
-	inside_map = check_for_map(line);
-	if (is_space_only(line) == 0 && inside_map == 0)
+	if (is_space_only(line) == 0)
+	{
+		if (*map != NULL)
+			return (error_message("Empty line inside the map.\n"), -1);
 		return (0);
+	}
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 	{
 		if (verify_path(game, line) == -1)
@@ -29,9 +30,9 @@ static int	populate_game(t_game *game, char *line)
 		if (verify_color(game, line) == -1)
 			return (-1);
 	}
-	else if (inside_map == 1)
+	else if (check_for_map(line) == 1)
 	{
-		if (verify_map(game, line) == -1)
+		if (create_map_linked_list(game, line, map) == -1)
 			return (-1);
 	}
 	else
@@ -44,12 +45,14 @@ static void	read_map(int fd, t_game *game)
 	char	buffer[1];
 	char	*line;
 	int		len;
+	t_list	*map;
 
 	if (read(fd, buffer, 0) < 0)
 	{
 		close(fd);
 		ft_error("The map path is unreadable\n");
 	}
+	map = NULL;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -58,13 +61,18 @@ static void	read_map(int fd, t_game *game)
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		if (populate_game(game, line) == -1)
+		if (populate_game(game, line, &map) == -1)
 		{
 			free(line);
+			ft_lstclear(&map, free);
 			ft_error("The map path is unreadable\n");
 		}
 		free(line);
 	}
+	if (list_to_grid(map, game) == -1)
+		ft_error("Failed to build map grid\n");
+	if (validate_grid(map, game) == -1)
+		ft_error("Invalid spaces in map\n");
 }
 
 int	parser(int argc, char **argv, t_game *game)

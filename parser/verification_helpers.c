@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 14:45:26 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 15:06:43 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	path_allocation(char **splitted, t_game *game)
 		game->map.east_texture_path = ft_strdup(splitted[1]);
 	else
 		return (error_message("Dupplicated Texture path line.\n"), -1);
-	if (game->map.north_texture_path == NULL
-		|| game->map.south_texture_path == NULL
-		|| game->map.west_texture_path == NULL
-		|| game->map.east_texture_path == NULL)
+	if ((splitted[0][0] == 'N' && game->map.north_texture_path == NULL)
+		|| (splitted[0][0] == 'S' && game->map.south_texture_path == NULL)
+		|| (splitted[0][0] == 'W' && game->map.west_texture_path == NULL)
+		|| (splitted[0][0] == 'E' && game->map.east_texture_path == NULL))
 		return (error_message("Memory allocation for Texture path "
 				"failed.\n"), -1);
 	return (0);
@@ -46,7 +46,7 @@ static int	check_rgb(char *rgb)
 		return (error_message("No or invalid color in the map.\n"), -1);
 	while (ft_isdigit(rgb[i]))
 		i++;
-	while (rgb[i] != ' ' || rgb[i] != '\t')
+	while (rgb[i] == ' ' || rgb[i] == '\t')
 		i++;
 	if (rgb[i] != '\0')
 		return (error_message("No or invalid color in the map.\n"), -1);
