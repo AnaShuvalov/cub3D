@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/26 17:06:10 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 14:42:50 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,8 @@ typedef struct s_game
 	t_keys		key; // current state of the keys
 	t_img		framebuffer; // buffer image used to draw off screen before pushing it onscreen 
 }	t_game;
+
+int		parser(int argc, char **argv, t_game *game);
+
 
 #endif

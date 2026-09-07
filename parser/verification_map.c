@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 13:50:41 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 14:47:53 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	verify_map(t_game *game, char *line)
 {
+	(void)game;
+	(void)line;
+
 	// char	**splitted;
 
 	// if (ft_strncmp(line, "NO ", 3) != 0 && ft_strncmp(line, "SO ", 3) != 0
@@ -38,5 +41,5 @@ int	verify_map(t_game *game, char *line)
 	// else
 	// 	return (error_message("Dupplicated Texture path line.\n"), -1);
 	// free_array(splitted);
-	// return (0);
+	return (0);
 }

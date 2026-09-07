@@ -6,13 +6,13 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 14:14:16 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 14:45:26 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	path_allocation(char **splitted, t_game *game)
+int	path_allocation(char **splitted, t_game *game)
 {
 	if (splitted[0][0] == 'N' && game->map.north_texture_path == NULL)
 		game->map.north_texture_path = ft_strdup(splitted[1]);
@@ -23,19 +23,14 @@ void	path_allocation(char **splitted, t_game *game)
 	else if (splitted[0][0] == 'E' && game->map.east_texture_path == NULL)
 		game->map.east_texture_path = ft_strdup(splitted[1]);
 	else
-	{
-		free_array(splitted);
 		return (error_message("Dupplicated Texture path line.\n"), -1);
-	}
 	if (game->map.north_texture_path == NULL
 		|| game->map.south_texture_path == NULL
 		|| game->map.west_texture_path == NULL
 		|| game->map.east_texture_path == NULL)
-	{
-		free_array(splitted);
 		return (error_message("Memory allocation for Texture path "
 				"failed.\n"), -1);
-	}
+	return (0);
 }
 
 static int	check_rgb(char *rgb)
@@ -45,28 +40,27 @@ static int	check_rgb(char *rgb)
 	if (rgb == NULL || rgb[0] == '\0')
 		return (error_message("No or invalid color in the map.\n"), -1);
 	i = 0;
-	while (rgb[i])
-	{
-		while (rgb[i] == ' ' || rgb[i] == '\t')
-			i++;
-		if (rgb[i] == '\0')
-			return (error_message("No or invalid color in the map.\n"), -1);
-		while (ft_isdigit(rgb[i]))
-			i++;
-		if (rgb[i] != ' ' && rgb[i] != '\t' && rgb[i] != '\0')
-			return (error_message("No or invalid color in the map.\n"), -1);
-	}
+	while (rgb[i] == ' ' || rgb[i] == '\t')
+		i++;
+	if (!ft_isdigit(rgb[i]))
+		return (error_message("No or invalid color in the map.\n"), -1);
+	while (ft_isdigit(rgb[i]))
+		i++;
+	while (rgb[i] != ' ' || rgb[i] != '\t')
+		i++;
+	if (rgb[i] != '\0')
+		return (error_message("No or invalid color in the map.\n"), -1);
 	return (0);
 }
 
-int	is_rgb(t_game *game, char *line, char **rgb)
+int	is_rgb(t_game *game, const char *line, char **rgb)
 {
 	int	i;
 	int	r;
 	int	g;
 	int	b;
 
-	if (rgb == NULL || rgb[0] == '\0' || rgb[1] == '\0' || rgb[2] == '\0')
+	if (rgb == NULL || rgb[0][0] == '\0' || rgb[1][0] == '\0' || rgb[2][0] == '\0')
 		return (error_message("No or invalid color in the map.\n"), -1);
 	i = 0;
 	while (rgb[i])
@@ -80,9 +74,9 @@ int	is_rgb(t_game *game, char *line, char **rgb)
 	b = ft_atoi(rgb[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (error_message("Invalid color in the map.\n"), -1);
-	if (line[0] == 'F' && game->map.floor_color == NULL)
+	if (line[0] == 'F' && game->map.floor_color == -1)
 		game->map.floor_color = ((r << 16) | (g << 8) | b);
-	else if (line[0] == 'C' && game->map.ceiling_color == NULL)
+	else if (line[0] == 'C' && game->map.ceiling_color == -1)
 		game->map.ceiling_color = ((r << 16) | (g << 8) | b);
 	else
 		return (error_message("Dupplicated Color line.\n"), -1);

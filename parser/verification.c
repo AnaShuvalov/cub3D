@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:58 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 14:10:11 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 14:28:26 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_path_validity(char *path)
 	return (0);
 }
 
-int	*verify_path(t_game *game, const char *line)
+int	verify_path(t_game *game, const char *line)
 {
 	char	**splitted;
 
@@ -63,7 +63,11 @@ int	*verify_path(t_game *game, const char *line)
 		return (error_message("Invalid Texture wording or path "
 				"does not exist.\n"), -1);
 	}
-	path_allocation(splitted, game);
+	if (path_allocation(splitted, game) == -1)
+	{
+		free_array(splitted);
+		return (-1);	
+	}
 	free_array(splitted);
 	return (0);
 }

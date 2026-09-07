@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 14:15:36 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 14:43:40 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static int	populate_game(t_game *game, char *line)
 {
-	char	*path;
-	int		color;
 	bool	inside_map;
 
 	inside_map = check_for_map(line);
@@ -26,7 +24,7 @@ static int	populate_game(t_game *game, char *line)
 		if (verify_path(game, line) == -1)
 			return (-1);
 	}
-	if (line[0] == 'F' || line[0] == 'C')
+	else if (line[0] == 'F' || line[0] == 'C')
 	{
 		if (verify_color(game, line) == -1)
 			return (-1);
