@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:58 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/28 17:59:10 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 14:10:11 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int	check_path_validity(char *path)
 	return (0);
 }
 
-char	*verify_path(t_game *game, const char *line)
+int	*verify_path(t_game *game, const char *line)
 {
 	char	**splitted;
 
 	if (ft_strncmp(line, "NO ", 3) != 0 && ft_strncmp(line, "SO ", 3) != 0
-		&& ft_strncmp(line, "WO ", 3) != 0 && ft_strncmp(line, "EO ", 3) != 0)
+		&& ft_strncmp(line, "WE ", 3) != 0 && ft_strncmp(line, "EA ", 3) != 0)
 		return (error_message("Invalid Texture line naming.\n"), -1);
 	splitted = ft_split(line, ' ');
 	if (splitted == NULL || splitted[0] == NULL || splitted[1] == NULL
@@ -63,16 +63,7 @@ char	*verify_path(t_game *game, const char *line)
 		return (error_message("Invalid Texture wording or path "
 				"does not exist.\n"), -1);
 	}
-	if (splitted[0][1] == 'N' && game->map.north_texture_path == NULL)
-		game->map.north_texture_path = splitted[1];
-	else if (splitted[0][1] == 'S' && game->map.south_texture_path == NULL)
-		game->map.south_texture_path = splitted[1];
-	else if (splitted[0][1] == 'W' && game->map.west_texture_path == NULL)
-		game->map.west_texture_path = splitted[1];
-	else if (splitted[0][1] == 'E' && game->map.east_texture_path == NULL)
-		game->map.east_texture_path = splitted[1];
-	else
-		return (error_message("Dupplicated Texture path line.\n"), -1);
+	path_allocation(splitted, game);
 	free_array(splitted);
 	return (0);
 }

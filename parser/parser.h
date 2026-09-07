@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:54 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/28 18:05:54 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 14:09:47 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void	free_array(char **array);
 bool	check_for_map(char *line);
 int		check_path_validity(char *path);
 int		is_rgb(t_game *game, char *line, char **rgb);
+void	path_allocation(char **splitted, t_game *game);
+
 
 #endif

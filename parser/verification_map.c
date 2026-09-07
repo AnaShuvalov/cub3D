@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/28 18:06:20 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 13:50:41 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	verify_map(t_game *game, char *line)
 	// char	**splitted;
 
 	// if (ft_strncmp(line, "NO ", 3) != 0 && ft_strncmp(line, "SO ", 3) != 0
-	// 	&& ft_strncmp(line, "WO ", 3) != 0 && ft_strncmp(line, "EO ", 3) != 0)
+	// 	&& ft_strncmp(line, "WE ", 3) != 0 && ft_strncmp(line, "EA ", 3) != 0)
 	// 	return (error_message("Invalid Texture line naming.\n"), -1);
 	// splitted = ft_split(line, ' ');
 	// if (splitted == NULL || splitted[0] == NULL || splitted[1] == NULL

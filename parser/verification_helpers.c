@@ -6,11 +6,37 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/28 17:54:16 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 14:14:16 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void	path_allocation(char **splitted, t_game *game)
+{
+	if (splitted[0][0] == 'N' && game->map.north_texture_path == NULL)
+		game->map.north_texture_path = ft_strdup(splitted[1]);
+	else if (splitted[0][0] == 'S' && game->map.south_texture_path == NULL)
+		game->map.south_texture_path = ft_strdup(splitted[1]);
+	else if (splitted[0][0] == 'W' && game->map.west_texture_path == NULL)
+		game->map.west_texture_path = ft_strdup(splitted[1]);
+	else if (splitted[0][0] == 'E' && game->map.east_texture_path == NULL)
+		game->map.east_texture_path = ft_strdup(splitted[1]);
+	else
+	{
+		free_array(splitted);
+		return (error_message("Dupplicated Texture path line.\n"), -1);
+	}
+	if (game->map.north_texture_path == NULL
+		|| game->map.south_texture_path == NULL
+		|| game->map.west_texture_path == NULL
+		|| game->map.east_texture_path == NULL)
+	{
+		free_array(splitted);
+		return (error_message("Memory allocation for Texture path "
+				"failed.\n"), -1);
+	}
+}
 
 static int	check_rgb(char *rgb)
 {
@@ -29,7 +55,6 @@ static int	check_rgb(char *rgb)
 			i++;
 		if (rgb[i] != ' ' && rgb[i] != '\t' && rgb[i] != '\0')
 			return (error_message("No or invalid color in the map.\n"), -1);
-		i++;
 	}
 	return (0);
 }

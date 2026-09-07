@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/28 18:04:42 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/07 14:15:36 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	populate_game(t_game *game, char *line)
 	}
 	if (line[0] == 'F' || line[0] == 'C')
 	{
-		if( verify_color(game, line) == -1)
+		if (verify_color(game, line) == -1)
 			return (-1);
 	}
 	else if (inside_map == 1)
@@ -58,12 +58,11 @@ static void	read_map(int fd, t_game *game)
 		if (line == NULL)
 			break ;
 		len = ft_strlen(line);
-		if (line > 0 && line[len - 1] == '\n')
+		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
 		if (populate_game(game, line) == -1)
 		{
 			free(line);
-			free(game);
 			ft_error("The map path is unreadable\n");
 		}
 		free(line);
