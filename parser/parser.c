@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 16:48:03 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:49:49 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,17 @@ static void	convert_map_to_list(int fd, t_game *game)
 		{
 			free(line);
 			ft_lstclear(&map, free);
+			free_game(game);
 			exit(1);
 		}
 		free(line);
 	}
 	if (list_to_grid(map, game) == -1)
+	{
+		ft_lstclear(&map, free);
+		free_game(game);
 		ft_error("Failed to build map grid\n");
+	}
 }
 
 static void	read_map(int fd, t_game *game)
@@ -78,9 +83,15 @@ static void	read_map(int fd, t_game *game)
 	}
 	convert_map_to_list(fd, game);
 	if (set_player(game) == -1)
+	{
+		free_game(game);
 		ft_error("Only one player spawn point per map is allowed.\n");
+	}
 	if (validate_grid(game) == -1)
-		ft_error("Invalid spaces in map\n");
+	{
+		free_game(game);
+		ft_error("Invalid map\n");
+	}
 }
 
 int	parser(int argc, char **argv, t_game *game)

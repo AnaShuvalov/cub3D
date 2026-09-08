@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 14:42:50 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:40:46 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_game
 }	t_game;
 
 int		parser(int argc, char **argv, t_game *game);
+void	free_game(t_game *game);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 16:39:36 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 16:41:06 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:15:05 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ static void	direction_horisontal(t_game *game, char direction)
 {
 	if (direction == 'W')
 	{
-		game->player.dir_x = 1;
-		game->player.dir_y = 0;
-		game->player.plane_x = 0;
-		game->player.plane_y = 0.66;
-	}
-	else if (direction == 'E')
-	{
 		game->player.dir_x = -1;
 		game->player.dir_y = 0;
 		game->player.plane_x = 0;
 		game->player.plane_y = -0.66;
+	}
+	else if (direction == 'E')
+	{
+		game->player.dir_x = 1;
+		game->player.dir_y = 0;
+		game->player.plane_x = 0;
+		game->player.plane_y = 0.66;
 	}
 }
 
