@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:58 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 15:08:02 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 12:58:25 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	verify_color(t_game *game, const char *line)
 	return (0);
 }
 
-int	check_path_validity(char *path)
+static int	check_path_validity(char *path)
 {
 	int	fd;
 
@@ -66,7 +66,7 @@ int	verify_path(t_game *game, const char *line)
 	if (path_allocation(splitted, game) == -1)
 	{
 		free_array(splitted);
-		return (-1);	
+		return (-1);
 	}
 	free_array(splitted);
 	return (0);

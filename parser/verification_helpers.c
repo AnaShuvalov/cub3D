@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 15:06:43 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 12:56:34 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,26 @@ int	path_allocation(char **splitted, t_game *game)
 	return (0);
 }
 
+static int	assign_colors(t_game *game, char **rgb, const char *line)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (error_message("Invalid color in the map.\n"), -1);
+	if (line[0] == 'F' && game->map.floor_color == -1)
+		game->map.floor_color = ((r << 16) | (g << 8) | b);
+	else if (line[0] == 'C' && game->map.ceiling_color == -1)
+		game->map.ceiling_color = ((r << 16) | (g << 8) | b);
+	else
+		return (error_message("Dupplicated Color line.\n"), -1);
+	return (0);
+}
+
 static int	check_rgb(char *rgb)
 {
 	int	i;
@@ -56,11 +76,9 @@ static int	check_rgb(char *rgb)
 int	is_rgb(t_game *game, const char *line, char **rgb)
 {
 	int	i;
-	int	r;
-	int	g;
-	int	b;
 
-	if (rgb == NULL || rgb[0][0] == '\0' || rgb[1][0] == '\0' || rgb[2][0] == '\0')
+	if (rgb == NULL || rgb[0][0] == '\0' || rgb[1][0] == '\0'
+			|| rgb[2][0] == '\0')
 		return (error_message("No or invalid color in the map.\n"), -1);
 	i = 0;
 	while (rgb[i])
@@ -69,16 +87,7 @@ int	is_rgb(t_game *game, const char *line, char **rgb)
 			return (-1);
 		i++;
 	}
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (error_message("Invalid color in the map.\n"), -1);
-	if (line[0] == 'F' && game->map.floor_color == -1)
-		game->map.floor_color = ((r << 16) | (g << 8) | b);
-	else if (line[0] == 'C' && game->map.ceiling_color == -1)
-		game->map.ceiling_color = ((r << 16) | (g << 8) | b);
-	else
-		return (error_message("Dupplicated Color line.\n"), -1);
+	if (assign_colors(game, rgb, line) == -1)
+		return (-1);
 	return (0);
 }

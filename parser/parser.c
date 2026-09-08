@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 16:24:50 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 12:59:10 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 	}
 	else if (check_for_map(line) == 1)
 	{
-		if (create_map_linked_list(game, line, map) == -1)
+		if (create_map_linked_list(line, map) == -1)
 			return (-1);
 	}
 	else
@@ -40,18 +40,12 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 	return (0);
 }
 
-static void	read_map(int fd, t_game *game)
+static void	convert_map_to_list(int fd, t_game *game)
 {
-	char	buffer[1];
-	char	*line;
 	int		len;
+	char	*line;
 	t_list	*map;
 
-	if (read(fd, buffer, 0) < 0)
-	{
-		close(fd);
-		ft_error("The map path is unreadable\n");
-	}
 	map = NULL;
 	while (1)
 	{
@@ -71,7 +65,20 @@ static void	read_map(int fd, t_game *game)
 	}
 	if (list_to_grid(map, game) == -1)
 		ft_error("Failed to build map grid\n");
-	if (validate_grid(map, game) == -1)
+}
+
+static void	read_map(int fd, t_game *game)
+{
+	char	buffer[1];
+
+	if (read(fd, buffer, 0) < 0)
+	{
+		close(fd);
+		ft_error("The map path is unreadable\n");
+	}
+	convert_map_to_list(fd, game);
+	set_player(game);
+	if (validate_grid(game) == -1)
 		ft_error("Invalid spaces in map\n");
 }
 
