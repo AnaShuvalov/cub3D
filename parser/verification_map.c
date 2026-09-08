@@ -6,18 +6,13 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 12:59:15 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 16:47:54 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 int	validate_grid(t_game *game)
-{
-	
-}
-
-void	set_player(t_game *game)
 {
 	
 }
@@ -67,4 +62,22 @@ int	create_map_linked_list(char *line, t_list **map)
 	}
 	ft_lstadd_back(map, new_node);
 	return (0);
+}
+
+bool	check_for_map(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (line == NULL || line[0] == '\0')
+		return (0);
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'W' && line[i] != 'E' && line[i] != ' '
+			&& line[i] != '\n' && line[i] != '\t' && line[i] != '\r')
+			return (0);
+		i++;
+	}
+	return (1);
 }

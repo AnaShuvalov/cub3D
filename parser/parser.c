@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 12:59:10 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 16:48:03 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	convert_map_to_list(int fd, t_game *game)
 		{
 			free(line);
 			ft_lstclear(&map, free);
-			ft_error("The map path is unreadable\n");
+			exit(1);
 		}
 		free(line);
 	}
@@ -77,7 +77,8 @@ static void	read_map(int fd, t_game *game)
 		ft_error("The map path is unreadable\n");
 	}
 	convert_map_to_list(fd, game);
-	set_player(game);
+	if (set_player(game) == -1)
+		ft_error("Only one player spawn point per map is allowed.\n");
 	if (validate_grid(game) == -1)
 		ft_error("Invalid spaces in map\n");
 }
@@ -88,7 +89,7 @@ int	parser(int argc, char **argv, t_game *game)
 
 	if (argc != 2)
 		ft_error("Input only one .cub map path.\n");
-	verification(argv[1]);
+	verify_map_pathname(argv[1]);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		ft_error("Check permissions for the map file.\n");

@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verification.c                                     :+:      :+:    :+:   */
+/*   verification_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:58 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 12:58:25 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 15:53:12 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	verify_color(t_game *game, const char *line)
+static int	path_allocation(char **splitted, t_game *game)
 {
-	char	**rgb;
-	char	*color;
-
-	if (ft_strncmp(line, "F ", 2) != 0 && ft_strncmp(line, "C ", 2) != 0)
-		return (error_message("Invalid Color line naming.\n"), -1);
-	color = (char *) line + 1;
-	while (*color == ' ' || *color == '\t')
-		color++;
-	rgb = ft_split(color, ',');
-	if (rgb == NULL || rgb[0] == NULL || rgb[1] == NULL
-		|| rgb[2] == NULL || rgb[3] != NULL)
-	{
-		free_array(rgb);
-		return (error_message("Invalid Color wording.\n"), -1);
-	}
-	if (is_rgb(game, line, rgb) == -1)
-	{
-		free_array(rgb);
-		return (-1);
-	}
-	free_array(rgb);
+	if (splitted[0][0] == 'N' && game->map.north_texture_path == NULL)
+		game->map.north_texture_path = ft_strdup(splitted[1]);
+	else if (splitted[0][0] == 'S' && game->map.south_texture_path == NULL)
+		game->map.south_texture_path = ft_strdup(splitted[1]);
+	else if (splitted[0][0] == 'W' && game->map.west_texture_path == NULL)
+		game->map.west_texture_path = ft_strdup(splitted[1]);
+	else if (splitted[0][0] == 'E' && game->map.east_texture_path == NULL)
+		game->map.east_texture_path = ft_strdup(splitted[1]);
+	else
+		return (error_message("Dupplicated Texture path line.\n"), -1);
+	if ((splitted[0][0] == 'N' && game->map.north_texture_path == NULL)
+		|| (splitted[0][0] == 'S' && game->map.south_texture_path == NULL)
+		|| (splitted[0][0] == 'W' && game->map.west_texture_path == NULL)
+		|| (splitted[0][0] == 'E' && game->map.east_texture_path == NULL))
+		return (error_message("Memory allocation for Texture path "
+				"failed.\n"), -1);
 	return (0);
 }
 
@@ -72,20 +67,7 @@ int	verify_path(t_game *game, const char *line)
 	return (0);
 }
 
-void	verify_metadata(t_game *game)
-{
-	if (game->map.north_texture_path == NULL
-		|| game->map.south_texture_path == NULL
-		|| game->map.west_texture_path == NULL
-		|| game->map.east_texture_path == NULL)
-		ft_error("Missing wall textures.\n");
-	if (game->map.floor_color == -1 || game->map.ceiling_color == -1)
-		ft_error("Missing floor or ceiling colors.\n");
-	if (game->map.grid == NULL)
-		ft_error("Missing map data.\n");
-}
-
-void	verification(char *filename)
+void	verify_map_pathname(char *filename)
 {
 	int	len;
 
