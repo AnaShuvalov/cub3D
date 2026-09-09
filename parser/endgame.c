@@ -6,11 +6,26 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 13:57:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/07 14:00:40 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 18:01:02 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void	free_array(char **array)
+{
+	int	i;
+
+	if (array == NULL || array[0] == NULL)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 void	free_game(t_game *game)
 {
