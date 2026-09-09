@@ -6,34 +6,33 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/28 18:04:42 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:49:49 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	populate_game(t_game *game, char *line)
+static int	populate_game(t_game *game, char *line, t_list **map)
 {
-	char	*path;
-	int		color;
-	bool	inside_map;
-
-	inside_map = check_for_map(line);
-	if (is_space_only(line) == 0 && inside_map == 0)
+	if (is_space_only(line) == 0)
+	{
+		if (*map != NULL)
+			return (error_message("Empty line inside the map.\n"), -1);
 		return (0);
+	}
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 	{
 		if (verify_path(game, line) == -1)
 			return (-1);
 	}
-	if (line[0] == 'F' || line[0] == 'C')
+	else if (line[0] == 'F' || line[0] == 'C')
 	{
-		if( verify_color(game, line) == -1)
+		if (verify_color(game, line) == -1)
 			return (-1);
 	}
-	else if (inside_map == 1)
+	else if (check_for_map(line) == 1)
 	{
-		if (verify_map(game, line) == -1)
+		if (create_map_linked_list(line, map) == -1)
 			return (-1);
 	}
 	else
@@ -41,32 +40,57 @@ static int	populate_game(t_game *game, char *line)
 	return (0);
 }
 
-static void	read_map(int fd, t_game *game)
+static void	convert_map_to_list(int fd, t_game *game)
 {
-	char	buffer[1];
-	char	*line;
 	int		len;
+	char	*line;
+	t_list	*map;
 
-	if (read(fd, buffer, 0) < 0)
-	{
-		close(fd);
-		ft_error("The map path is unreadable\n");
-	}
+	map = NULL;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		len = ft_strlen(line);
-		if (line > 0 && line[len - 1] == '\n')
+		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		if (populate_game(game, line) == -1)
+		if (populate_game(game, line, &map) == -1)
 		{
 			free(line);
-			free(game);
-			ft_error("The map path is unreadable\n");
+			ft_lstclear(&map, free);
+			free_game(game);
+			exit(1);
 		}
 		free(line);
+	}
+	if (list_to_grid(map, game) == -1)
+	{
+		ft_lstclear(&map, free);
+		free_game(game);
+		ft_error("Failed to build map grid\n");
+	}
+}
+
+static void	read_map(int fd, t_game *game)
+{
+	char	buffer[1];
+
+	if (read(fd, buffer, 0) < 0)
+	{
+		close(fd);
+		ft_error("The map path is unreadable\n");
+	}
+	convert_map_to_list(fd, game);
+	if (set_player(game) == -1)
+	{
+		free_game(game);
+		ft_error("Only one player spawn point per map is allowed.\n");
+	}
+	if (validate_grid(game) == -1)
+	{
+		free_game(game);
+		ft_error("Invalid map\n");
 	}
 }
 
@@ -76,7 +100,7 @@ int	parser(int argc, char **argv, t_game *game)
 
 	if (argc != 2)
 		ft_error("Input only one .cub map path.\n");
-	verification(argv[1]);
+	verify_map_pathname(argv[1]);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		ft_error("Check permissions for the map file.\n");

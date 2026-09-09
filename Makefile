@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/08/24 15:45:26 by anshuval         ###   ########.fr        #
+#    Updated: 2026/09/08 16:43:07 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,18 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 BASE_CFLAGS = -Wall -Werror -Wextra -g3
 
-PARSER =	
+PARSER =		main.c \
+				parser/parser.c \
+				parser/verification_colors.c \
+				parser/verification_data.c \
+				parser/verification_map.c \
+				parser/verification_path.c \
+				parser/verification_player.c \
+				parser/parser_helpers.c \
+				parser/all_about_errors.c \
+				parser/endgame.c \
+				get_next_line/get_next_line.c \
+				get_next_line/get_next_line_utils.c \
 			
 RAYCASTER =	
 
