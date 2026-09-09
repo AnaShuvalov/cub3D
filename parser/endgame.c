@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 13:57:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 18:01:02 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:03:34 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_array(char **array)
 {
 	int	i;
 
-	if (array == NULL || array[0] == NULL)
+	if (array == NULL)
 		return ;
 	i = 0;
 	while (array[i])

@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 17:49:49 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:15:47 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 		if (*map != NULL)
 			return (error_message("Empty line inside the map.\n"), -1);
 		return (0);
+	}
+	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E'
+		|| line[0] == 'F' || line[0] == 'C')
+	{
+		if (*map != NULL)
+			return (error_message("No viable data is allowed after map in "
+					".cub file.\n"), -1);
 	}
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 	{

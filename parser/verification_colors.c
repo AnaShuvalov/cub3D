@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 16:01:35 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:25:09 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,22 @@ static int	is_rgb(t_game *game, const char *line, char **rgb)
 	return (0);
 }
 
+static int	count_commas(char *color)
+{
+	int	i;
+	int	comma;
+
+	i = 0;
+	comma = 0;
+	while (color[i])
+	{
+		if (color[i] == ',')
+			comma++;
+		i++;
+	}
+	return (comma);
+}
+
 int	verify_color(t_game *game, const char *line)
 {
 	char	**rgb;
@@ -79,6 +95,9 @@ int	verify_color(t_game *game, const char *line)
 	if (ft_strncmp(line, "F ", 2) != 0 && ft_strncmp(line, "C ", 2) != 0)
 		return (error_message("Invalid Color line naming.\n"), -1);
 	color = (char *) line + 1;
+	if (count_commas(color) != 2)
+		return (error_message("RGB in the .cub file must be separated "
+				"by exactly two commas.\n"), -1);
 	while (*color == ' ' || *color == '\t')
 		color++;
 	rgb = ft_split(color, ',');
