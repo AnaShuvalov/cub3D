@@ -6,37 +6,116 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/08/28 18:06:20 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:37:41 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	verify_map(t_game *game, char *line)
+static int	is_enclosed_by_walls(t_game *game, int y, int x, int len)
 {
-	// char	**splitted;
+	int	above_row_len;
+	int	below_row_len;
 
-	// if (ft_strncmp(line, "NO ", 3) != 0 && ft_strncmp(line, "SO ", 3) != 0
-	// 	&& ft_strncmp(line, "WO ", 3) != 0 && ft_strncmp(line, "EO ", 3) != 0)
-	// 	return (error_message("Invalid Texture line naming.\n"), -1);
-	// splitted = ft_split(line, ' ');
-	// if (splitted == NULL || splitted[0] == NULL || splitted[1] == NULL
-	// 	|| splitted[2] != NULL || check_path_validity(splitted[1]) == -1)
-	// {
-	// 	free_array(splitted);
-	// 	return (error_message("Invalid Texture wording or path "
-	// 			"does not exist.\n"), -1);
-	// }
-	// if (splitted[0][1] == 'N' && game->map.north_texture_path == NULL)
-	// 	game->map.north_texture_path = splitted[1];
-	// else if (splitted[0][1] == 'S' && game->map.south_texture_path == NULL)
-	// 	game->map.south_texture_path = splitted[1];
-	// else if (splitted[0][1] == 'W' && game->map.west_texture_path == NULL)
-	// 	game->map.west_texture_path = splitted[1];
-	// else if (splitted[0][1] == 'E' && game->map.east_texture_path == NULL)
-	// 	game->map.east_texture_path = splitted[1];
-	// else
-	// 	return (error_message("Dupplicated Texture path line.\n"), -1);
-	// free_array(splitted);
-	// return (0);
+	if (y == 0 || y == game->map.height - 1 || x == 0 || x == len -1)
+		return (-1);
+	above_row_len = ft_strlen(game->map.grid[y - 1]);
+	below_row_len = ft_strlen(game->map.grid[y + 1]);
+	if (x >= above_row_len || game->map.grid[y - 1][x] == ' ')
+		return (-1);
+	if (x >= below_row_len || game->map.grid[y + 1][x] == ' ')
+		return (-1);
+	if (game->map.grid[y][x + 1] == ' ' || game->map.grid[y][x - 1] == ' ')
+		return (-1);
+	return (0);
+}
+
+int	validate_grid(t_game *game)
+{
+	int	x;
+	int	y;
+	int	len;
+
+	y = 0;
+	while (game->map.grid[y])
+	{
+		x = 0;
+		len = ft_strlen(game->map.grid[y]);
+		while (game->map.grid[y][x])
+		{
+			if (game->map.grid[y][x] == '0')
+			{
+				if (is_enclosed_by_walls(game, y, x, len) == -1)
+					return (-1);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+int	list_to_grid(t_list *map, t_game *game)
+{
+	int		i;
+	int		len;
+	t_list	*tmp;
+
+	if (map == NULL)
+		return (error_message("Missing map data in provided file.\n"), -1);
+	game->map.height = ft_lstsize(map);
+	game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
+	if (game->map.grid == NULL)
+		return (error_message("Memory allocation failed for map grid.\n"), -1);
+	game->map.width = 0;
+	i = 0;
+	while (map)
+	{
+		game->map.grid[i] = map->content;
+		len = ft_strlen(game->map.grid[i]);
+		if (len > game->map.width)
+			game->map.width = len;
+		tmp = map;
+		map = map->next;
+		free(tmp);
+		i++;
+	}
+	game->map.grid[i] = NULL;
+	return (0);
+}
+
+int	create_map_linked_list(char *line, t_list **map)
+{
+	t_list	*new_node;
+	char	*copied;
+
+	copied = ft_strdup(line);
+	if (copied == NULL)
+		return (-1);
+	new_node = ft_lstnew(copied);
+	if (new_node == NULL)
+	{
+		free(copied);
+		return (-1);
+	}
+	ft_lstadd_back(map, new_node);
+	return (0);
+}
+
+bool	check_for_map(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (line == NULL || line[0] == '\0')
+		return (0);
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'W' && line[i] != 'E' && line[i] != ' '
+			&& line[i] != '\n' && line[i] != '\t' && line[i] != '\r')
+			return (0);
+		i++;
+	}
+	return (1);
 }

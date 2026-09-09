@@ -9,3 +9,9 @@
 - [ ] do walking and collisions
 - [ ] render and display images
 
+- buffer between player and wall
+- protect corners
+- fisheye at first, must be hardcoded
+- raycast can 'glitch' through walls
+- 
+
