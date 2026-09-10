@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 18:27:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 18:01:25 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/10 16:10:22 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	is_space_only(char *line)
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\r')
-			return (-1);
+			return (NO);
 		i++;
 	}
-	return (0);
+	return (YES);
 }

@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:58 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/09 16:30:43 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:33:02 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static int	path_allocation(char **splitted, t_game *game)
 static int	check_path_validity(char *path)
 {
 	int	fd;
-	int	len;
 
 	if (path == NULL || path[0] == '\0')
 		return (-1);

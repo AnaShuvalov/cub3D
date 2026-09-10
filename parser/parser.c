@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/09 16:15:47 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/10 16:11:01 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,12 @@
 
 static int	populate_game(t_game *game, char *line, t_list **map)
 {
-	if (is_space_only(line) == 0)
-	{
-		if (*map != NULL)
-			return (error_message("Empty line inside the map.\n"), -1);
+	if (is_space_only(line) == YES && *map == NULL)
 		return (0);
-	}
-	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E'
-		|| line[0] == 'F' || line[0] == 'C')
-	{
-		if (*map != NULL)
-			return (error_message("No viable data is allowed after map in "
+	if (*map != NULL && (line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
+		|| line[0] == 'E' || line[0] == 'F' || line[0] == 'C'))
+		return (error_message("No viable data is allowed after map in "
 					".cub file.\n"), -1);
-	}
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 	{
 		if (verify_path(game, line) == -1)
@@ -37,7 +30,8 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 		if (verify_color(game, line) == -1)
 			return (-1);
 	}
-	else if (check_for_map(line) == 1)
+	else if (check_for_map(line) == 1
+		|| (is_space_only(line) == YES && *map != NULL))
 	{
 		if (create_map_linked_list(line, map) == -1)
 			return (-1);
@@ -70,6 +64,12 @@ static void	convert_map_to_list(int fd, t_game *game)
 			exit(1);
 		}
 		free(line);
+	}
+	if (empty_lines_in_map_linked_list(map) == -1)
+	{
+		ft_lstclear(&map, free);
+		free_game(game);
+		exit(1);
 	}
 	if (list_to_grid(map, game) == -1)
 	{

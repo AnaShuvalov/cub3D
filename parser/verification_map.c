@@ -6,11 +6,35 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 17:37:41 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/10 16:17:05 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+int	empty_lines_in_map_linked_list(t_list *map)
+{
+	t_list	*tmp;
+
+	while (map)
+	{
+		if (is_space_only(map->content) == NO)
+			map = map->next;
+		else
+		{
+			while (map)
+			{
+				if (is_space_only(map->content) == NO)
+					return (error_message("Empty lines inside map.\n"), -1);
+				tmp = map;
+				map = map->next;
+				ft_lstdelone(tmp, free);
+			}
+			return (-1);
+		}
+	}
+	return (0);
+}
 
 static int	is_enclosed_by_walls(t_game *game, int y, int x, int len)
 {
