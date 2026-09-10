@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/10 16:17:05 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/10 16:44:53 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,28 @@
 
 int	empty_lines_in_map_linked_list(t_list *map)
 {
-	t_list	*tmp;
+	t_list	*prev;
+	t_list	*to_check;
 
+	prev = NULL;
 	while (map)
 	{
-		if (is_space_only(map->content) == NO)
-			map = map->next;
-		else
+		if (is_space_only(map->content) == YES)
 		{
-			while (map)
+			to_check = map;
+			while (to_check)
 			{
-				if (is_space_only(map->content) == NO)
+				if (is_space_only(to_check->content) == NO)
 					return (error_message("Empty lines inside map.\n"), -1);
-				tmp = map;
-				map = map->next;
-				ft_lstdelone(tmp, free);
+				to_check = to_check->next;
 			}
-			return (-1);
+			if (prev)
+				prev->next = NULL;
+			ft_lstclear(&map, free);
+			return (0);
 		}
+		prev = map;
+		map = map->next;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/10 16:11:01 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/10 16:58:05 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 	if (is_space_only(line) == YES && *map == NULL)
 		return (0);
 	if (*map != NULL && (line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
-		|| line[0] == 'E' || line[0] == 'F' || line[0] == 'C'))
+			|| line[0] == 'E' || line[0] == 'F' || line[0] == 'C'))
 		return (error_message("No viable data is allowed after map in "
-					".cub file.\n"), -1);
+				".cub file.\n"), -1);
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 	{
 		if (verify_path(game, line) == -1)
@@ -39,6 +39,22 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 	else
 		return (error_message("Extra information in the .cub file.\n"), -1);
 	return (0);
+}
+
+void	check_and_convert_map_into_grid(t_list *map, t_game *game)
+{
+	if (empty_lines_in_map_linked_list(map) == -1)
+	{
+		ft_lstclear(&map, free);
+		free_game(game);
+		exit(1);
+	}
+	if (list_to_grid(map, game) == -1)
+	{
+		ft_lstclear(&map, free);
+		free_game(game);
+		ft_error("Failed to build map grid\n");
+	}
 }
 
 static void	convert_map_to_list(int fd, t_game *game)
@@ -65,18 +81,7 @@ static void	convert_map_to_list(int fd, t_game *game)
 		}
 		free(line);
 	}
-	if (empty_lines_in_map_linked_list(map) == -1)
-	{
-		ft_lstclear(&map, free);
-		free_game(game);
-		exit(1);
-	}
-	if (list_to_grid(map, game) == -1)
-	{
-		ft_lstclear(&map, free);
-		free_game(game);
-		ft_error("Failed to build map grid\n");
-	}
+	check_and_convert_map_into_grid(map, game);
 }
 
 static void	read_map(int fd, t_game *game)
