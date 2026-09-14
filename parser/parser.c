@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 13:24:16 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 15:42:21 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,24 @@ static void	verify_metadata(t_game *game)
 
 static int	populate_game(t_game *game, char *line, t_list **map)
 {
+	char	*start;
+
 	if (is_space_only(line) == YES && *map == NULL)
 		return (0);
-	if (*map != NULL && (line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
-			|| line[0] == 'E' || line[0] == 'F' || line[0] == 'C'))
-		return (error_message("No viable data is allowed after map in "
-				".cub file.\n"), -1);
-	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
-	{
-		if (verify_path(game, line) == -1)
-			return (-1);
-	}
-	else if (line[0] == 'F' || line[0] == 'C')
-	{
-		if (verify_color(game, line) == -1)
-			return (-1);
-	}
+	start = line;
+	while (*start == ' ' || *start == '\t')
+		start++;
+	if (*map != NULL && (start[0] == 'N' || start[0] == 'S' || start[0] == 'W'
+			|| start[0] == 'E' || start[0] == 'F' || start[0] == 'C'))
+		return (error_message("Map should be last info in file.\n"), -1);
+	if (start[0] == 'N' || start[0] == 'S'
+		|| start[0] == 'W' || start[0] == 'E')
+		return (verify_path(game, start) == -1);
+	else if (start[0] == 'F' || start[0] == 'C')
+		return (verify_color(game, start));
 	else if (check_for_map(line) == 1
 		|| (is_space_only(line) == YES && *map != NULL))
-	{
-		if (create_map_linked_list(line, map) == -1)
-			return (-1);
-	}
+		return (create_map_linked_list(line, map));
 	else
 		return (error_message("Extra information in the .cub file.\n"), -1);
 	return (0);
@@ -108,7 +104,7 @@ static void	read_map(int fd, t_game *game)
 	if (validate_grid(game) == -1)
 	{
 		free_game(game);
-		ft_error("Invalid map\n");
+		ft_error("Invalid map. Not enclosed by walls.\n");
 	}
 }
 

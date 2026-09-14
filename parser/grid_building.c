@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 09:59:16 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 13:07:50 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 15:42:08 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@ static int	is_enclosed_by_walls(t_game *game, int y, int x, int len)
 		return (-1);
 	above_row_len = ft_strlen(game->map.grid[y - 1]);
 	below_row_len = ft_strlen(game->map.grid[y + 1]);
-	if (x >= above_row_len || game->map.grid[y - 1][x] == ' ')
+	if (x >= above_row_len
+		|| game->map.grid[y - 1][x] == ' '
+		|| game->map.grid[y - 1][x] == '\t')
 		return (-1);
-	if (x >= below_row_len || game->map.grid[y + 1][x] == ' ')
+	if (x >= below_row_len
+		|| game->map.grid[y + 1][x] == ' '
+		|| game->map.grid[y + 1][x] == '\t')
 		return (-1);
-	if (game->map.grid[y][x + 1] == ' ' || game->map.grid[y][x - 1] == ' ')
+	if (game->map.grid[y][x + 1] == ' '
+		|| game->map.grid[y][x + 1] == '\t'
+		|| game->map.grid[y][x - 1] == ' '
+		|| game->map.grid[y][x - 1] == '\t')
 		return (-1);
 	return (0);
 }

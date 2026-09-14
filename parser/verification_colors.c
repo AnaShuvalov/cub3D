@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 13:39:55 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 14:43:21 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,23 @@ static int	assign_colors(t_game *game, char **rgb, const char *line)
 static int	check_rgb(char *rgb)
 {
 	int	i;
+	int	len;
 
 	if (rgb == NULL || rgb[0] == '\0')
 		return (error_message("No or invalid color in the map.\n"), -1);
 	i = 0;
+	len = 0;
 	while (rgb[i] == ' ' || rgb[i] == '\t')
 		i++;
 	if (!ft_isdigit(rgb[i]))
 		return (error_message("No or invalid color in the map.\n"), -1);
 	while (ft_isdigit(rgb[i]))
+	{
 		i++;
+		len++;
+	}
+	if (len > 3)
+		return (error_message("Invalid color in the map.\n"), -1);
 	while (rgb[i] == ' ' || rgb[i] == '\t')
 		i++;
 	if (rgb[i] != '\0')
