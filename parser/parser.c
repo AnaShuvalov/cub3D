@@ -6,11 +6,33 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 13:11:59 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 13:24:16 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+static void	verify_metadata(t_game *game)
+{
+	if (game->map.north_texture_path == NULL
+		|| game->map.south_texture_path == NULL
+		|| game->map.west_texture_path == NULL
+		|| game->map.east_texture_path == NULL)
+	{
+		free_game(game);
+		ft_error("Missing wall textures.\n");
+	}
+	if (game->map.floor_color == -1 || game->map.ceiling_color == -1)
+	{
+		free_game(game);
+		ft_error("Missing floor or ceiling colors.\n");
+	}
+	if (game->map.grid == NULL)
+	{
+		free_game(game);
+		ft_error("Missing map data.\n");
+	}
+}
 
 static int	populate_game(t_game *game, char *line, t_list **map)
 {

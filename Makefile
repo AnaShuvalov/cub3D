@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/14 13:09:52 by anshuval         ###   ########.fr        #
+#    Updated: 2026/09/14 13:28:32 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,11 @@ BASE_CFLAGS = -Wall -Werror -Wextra -g3
 PARSER =		main.c \
 				parser/parser.c \
 				parser/verification_colors.c \
-				parser/verification_data.c \
 				parser/verification_map.c \
 				parser/verification_path.c \
 				parser/verification_player.c \
 				parser/all_about_errors.c \
 				parser/grid_building.c \
-				parser/endgame.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
 			

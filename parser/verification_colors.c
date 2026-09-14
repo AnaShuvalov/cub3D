@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/09 16:25:09 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 13:39:55 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	assign_colors(t_game *game, char **rgb, const char *line)
 	else if (line[0] == 'C' && game->map.ceiling_color == -1)
 		game->map.ceiling_color = ((r << 16) | (g << 8) | b);
 	else
-		return (error_message("Dupplicated Color line.\n"), -1);
+		return (error_message("Duplicate Color line.\n"), -1);
 	return (0);
 }
 
