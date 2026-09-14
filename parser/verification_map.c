@@ -6,11 +6,25 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/10 16:44:53 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 13:11:51 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+int	is_space_only(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\r')
+			return (NO);
+		i++;
+	}
+	return (YES);
+}
 
 int	empty_lines_in_map_linked_list(t_list *map)
 {
@@ -37,78 +51,6 @@ int	empty_lines_in_map_linked_list(t_list *map)
 		prev = map;
 		map = map->next;
 	}
-	return (0);
-}
-
-static int	is_enclosed_by_walls(t_game *game, int y, int x, int len)
-{
-	int	above_row_len;
-	int	below_row_len;
-
-	if (y == 0 || y == game->map.height - 1 || x == 0 || x == len -1)
-		return (-1);
-	above_row_len = ft_strlen(game->map.grid[y - 1]);
-	below_row_len = ft_strlen(game->map.grid[y + 1]);
-	if (x >= above_row_len || game->map.grid[y - 1][x] == ' ')
-		return (-1);
-	if (x >= below_row_len || game->map.grid[y + 1][x] == ' ')
-		return (-1);
-	if (game->map.grid[y][x + 1] == ' ' || game->map.grid[y][x - 1] == ' ')
-		return (-1);
-	return (0);
-}
-
-int	validate_grid(t_game *game)
-{
-	int	x;
-	int	y;
-	int	len;
-
-	y = 0;
-	while (game->map.grid[y])
-	{
-		x = 0;
-		len = ft_strlen(game->map.grid[y]);
-		while (game->map.grid[y][x])
-		{
-			if (game->map.grid[y][x] == '0')
-			{
-				if (is_enclosed_by_walls(game, y, x, len) == -1)
-					return (-1);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
-
-int	list_to_grid(t_list *map, t_game *game)
-{
-	int		i;
-	int		len;
-	t_list	*tmp;
-
-	if (map == NULL)
-		return (error_message("Missing map data in provided file.\n"), -1);
-	game->map.height = ft_lstsize(map);
-	game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
-	if (game->map.grid == NULL)
-		return (error_message("Memory allocation failed for map grid.\n"), -1);
-	game->map.width = 0;
-	i = 0;
-	while (map)
-	{
-		game->map.grid[i] = map->content;
-		len = ft_strlen(game->map.grid[i]);
-		if (len > game->map.width)
-			game->map.width = len;
-		tmp = map;
-		map = map->next;
-		free(tmp);
-		i++;
-	}
-	game->map.grid[i] = NULL;
 	return (0);
 }
 
@@ -146,4 +88,20 @@ bool	check_for_map(char *line)
 		i++;
 	}
 	return (1);
+}
+
+void	check_and_convert_map_into_grid(t_list *map, t_game *game)
+{
+	if (empty_lines_in_map_linked_list(map) == -1)
+	{
+		ft_lstclear(&map, free);
+		free_game(game);
+		exit(1);
+	}
+	if (list_to_grid(map, game) == -1)
+	{
+		ft_lstclear(&map, free);
+		free_game(game);
+		ft_error("Failed to build map grid\n");
+	}
 }

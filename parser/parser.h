@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:54 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/10 16:19:05 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 13:12:11 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int		list_to_grid(t_list *map, t_game *game);
 int		set_player(t_game *game);
 int		validate_grid(t_game *game);
 int		empty_lines_in_map_linked_list(t_list *map);
+void	check_and_convert_map_into_grid(t_list *map, t_game *game);
 
 #endif

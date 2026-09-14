@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/10 16:58:05 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 13:11:59 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,6 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 	else
 		return (error_message("Extra information in the .cub file.\n"), -1);
 	return (0);
-}
-
-void	check_and_convert_map_into_grid(t_list *map, t_game *game)
-{
-	if (empty_lines_in_map_linked_list(map) == -1)
-	{
-		ft_lstclear(&map, free);
-		free_game(game);
-		exit(1);
-	}
-	if (list_to_grid(map, game) == -1)
-	{
-		ft_lstclear(&map, free);
-		free_game(game);
-		ft_error("Failed to build map grid\n");
-	}
 }
 
 static void	convert_map_to_list(int fd, t_game *game)
