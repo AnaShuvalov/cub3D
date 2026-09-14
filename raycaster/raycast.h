@@ -13,19 +13,7 @@
 #ifndef __RAYCAST_H__
 #define __RAYCAST_H__
 
-#include "cub3d.h"
+// #include "cub3d.h"
 #include "MLX42.h"
-
-int	main()
-{
-
-}
-
-// Creates a whole new image.
-mlx_image_t* mlx_new_image(mlx_t* mlx, uint16_t width, uint16_t height)
-{
-	
-}
-
 
 #endif
