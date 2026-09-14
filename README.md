@@ -72,6 +72,7 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 	├── README.md
 	├── includes/
 	│   └── cub3d.h
+	│   └── parser.h
 	├── libft/
 	├── gnl/
 	├── mlx/
@@ -83,10 +84,12 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 		├── main.c
 		├── parser/
 		│   ├── parser.c
-		│   ├── parse_metadata.c
-		│   ├── parse_map.c
-		│   ├── validate_grid.c
-		│   └── parser_utils.c
+		│   ├── all_about_errors.c
+		│   ├── grid_building.c
+		│   ├── verification_colors.c
+		│   ├── verification_map.c
+		│   ├── verification_path.c
+		│   └── verification_player.c
 		├── raycaster/
 		│   ├── raycaster.c
 		│   ├── dda.c

@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:58 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 14:58:25 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 15:58:42 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,7 @@ void	verify_map_pathname(char *filename)
 		ft_error("Invalid map path.\n");
 	if (ft_strncmp(&filename[len - 4], ".cub", 4) != 0)
 		ft_error("Map file must have a .cub extension.\n");
+	if (ft_strncmp(&filename[len - 5], "/.cub", 5) == 0)
+		ft_error("A hidden cub file is being passed instead of the "
+			".cub file.\n");
 }

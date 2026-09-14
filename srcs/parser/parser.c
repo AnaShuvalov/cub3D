@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 15:42:21 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 15:50:23 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 		return (error_message("Map should be last info in file.\n"), -1);
 	if (start[0] == 'N' || start[0] == 'S'
 		|| start[0] == 'W' || start[0] == 'E')
-		return (verify_path(game, start) == -1);
+		return (verify_path(game, start));
 	else if (start[0] == 'F' || start[0] == 'C')
 		return (verify_color(game, start));
 	else if (check_for_map(line) == 1
@@ -88,13 +88,6 @@ static void	convert_map_to_list(int fd, t_game *game)
 
 static void	read_map(int fd, t_game *game)
 {
-	char	buffer[1];
-
-	if (read(fd, buffer, 0) < 0)
-	{
-		close(fd);
-		ft_error("The map path is unreadable\n");
-	}
 	convert_map_to_list(fd, game);
 	if (set_player(game) == -1)
 	{

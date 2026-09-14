@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 13:27:22 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 16:19:09 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
-# include "get_next_line/get_next_line.h"
-# include "./libft/libft.h"
+# include "get_next_line.h"
+# include "libft.h"
 // # include "./minilibx-linux/mlx.h"
 
 # define KEY_ESC	65307

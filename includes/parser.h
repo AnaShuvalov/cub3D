@@ -6,14 +6,14 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:54 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 13:27:27 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 16:18:33 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "../cub3d.h"
+# include "cub3d.h"
 
 # define YES	1
 # define NO		0
