@@ -9,23 +9,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "raycast.h"
-#include "../MLX42/MLX42.h"
+#include "raycast.h"
 
-int main()
+void	myppixel(mlx_image_t *img, int x, int y, uint32_t color)
 {
-    printf("test\n");
-    int *mlx;
-    int *win;
+	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
+		return;
+	mlx_put_pixel(img, x, y, color);
+}
 
-    mlx = mlx_init();
-    if (!mlx)
-        return (1);
-    win = mlx_new_window(mlx, 800, 600, "Cub3D");
-    if (!win)
-        return (1);
-    mlx_loop(mlx);
+void	sqare(mlx_image_t *img, int start_x, int start_y, unint32_t color)
+{
+	int	x;
+	int	y;
 
-    return (0);
+	y = 0;
+	while (y < TILE)
+	{
+		x = 0;
+		while (x < TILE)
+		{
+			myppixel(img, start_x + x, start_y + y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
+int	main()
+{
+	printf("test\n");
+	mlx_t	*mlx;
+
+	mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", false);
+	if (!mlx)
+		return (1);
+	mlx_loop(mlx);
+
+	return (0);
 }
 
