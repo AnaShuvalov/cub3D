@@ -107,4 +107,7 @@ int		parser(int argc, char **argv, t_game *game);
 void	free_game(t_game *game);
 
 
+// RAYCASTER ///////////////////////////////
+int		start_game(t_game game);
+
 #endif

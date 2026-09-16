@@ -28,7 +28,7 @@ PARSER =		main.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
 			
-RAYCASTER =	
+RAYCASTER =		raycaster/raymain.c
 
 OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o)
 

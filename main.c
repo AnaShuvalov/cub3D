@@ -46,6 +46,8 @@ int	main(int argc, char **argv)
 		printf("Direction X: %.2f, Y: %.2f\n", game.player.dir_x, game.player.dir_y);
 		printf("Plane X: %.2f, Y: %.2f\n", game.player.plane_x, game.player.plane_y);
 	}
+	if (start_game(game))
+		return (1);
 	free_game(&game);
 	return (0);
 }

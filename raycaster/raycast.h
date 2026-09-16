@@ -19,9 +19,10 @@
 
 #define TILE 64
 
-#define CEILING	#55e4ff
-#define WALLS	#895544
-#define FLOOR	#56db32
+#define COLOR_CEILING		#55e4ff
+#define COLOR_WALLS			#895544
+#define COLOR_FLOOR			#56db32
+#define COLOR_PLAYER 		#cb137f
 
 
 
