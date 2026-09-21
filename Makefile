@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/21 14:51:56 by anshuval         ###   ########.fr        #
+#    Updated: 2026/09/21 14:55:54 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,14 +51,14 @@ endif
 
 BASE_CFLAGS = -Wall -Werror -Wextra -g3
 
-PARSER =		srcs/main.c \
-				srcs/parser/parser.c \
-				srcs/parser/verification_colors.c \
-				srcs/parser/verification_map.c \
-				srcs/parser/verification_path.c \
-				srcs/parser/verification_player.c \
-				srcs/parser/all_about_errors.c \
-				srcs/parser/grid_building.c \
+PARSER =		sources/main.c \
+				sources/parser/parser.c \
+				sources/parser/verification_colors.c \
+				sources/parser/verification_map.c \
+				sources/parser/verification_path.c \
+				sources/parser/verification_player.c \
+				sources/parser/all_about_errors.c \
+				sources/parser/grid_building.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
 			
