@@ -11,9 +11,9 @@
 # OBJ         = $(SRC:.c=.o)
 
 # # MLX42 specific paths and flags
-# MLX_DIR     = ../AAAAAAA/include/MLX42
+# MLX_DIR     = ../MLX42AA/include/MLX42
 # MLX_INC     = -I$(MLX_DIR)/include
-# MLX_LIB = -L../AAAAAAA/build -lmlx42 -lglfw -ldl -lGL -lm -lpthread
+# MLX_LIB = -L../MLX42AA/build -lmlx42 -lglfw -ldl -lGL -lm -lpthread
 
 # all: $(NAME)
 
