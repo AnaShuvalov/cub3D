@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/21 16:27:15 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/21 18:52:21 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,7 @@
 # include <stdbool.h>
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
-// # include "./minilibx-linux/mlx.h"
-
-# define KEY_ESC	65307
-# define KEY_W		119
-# define KEY_A		97
-# define KEY_S		115
-# define KEY_D		100
-# define KEY_LEFT	65361
-# define KEY_RIGHT	65363
+# include "MLX42/MLX42.h"
 
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
@@ -107,12 +99,15 @@ typedef struct s_game
 int		parser(int argc, char **argv, t_game *game);
 void	free_game(t_game *game);
 void	free_array(char **array);
-
+void	error_message(char *s);
 
 // RAYCASTER ///////////////////////////////
 int		start_game(t_game game);
 
 // HOOKS ////////////////////
-int	key_reaction(int key, t_game *game);
+void	key_reaction(mlx_key_data_t keydata, void* param);
+void	close_game(t_game *game);
+void	close_hook(void *param);
+void	exit_on_error(t_game *game, char *s);
 
 #endif
