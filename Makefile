@@ -12,9 +12,6 @@
 
 # NEW MAKEFILE WITH WORKING MLX LINKING
 
-# ==============================================================================
-# 1. GLOBAL SETTINGS & COLORS (Added for clean terminal output)
-# ==============================================================================
 MAKEFLAGS += --silent --no-print-directory
 
 GREEN := \033[0;32m
@@ -31,9 +28,6 @@ MLX_DIR = ./includes/MLX42
 MLX_LIB = $(MLX_DIR)/build/libmlx42.a
 MLX_INC = -I$(MLX_DIR)/include
 
-# ==============================================================================
-# 2. OS DETECTION & FLAGS
-# ==============================================================================
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Darwin)
@@ -67,26 +61,20 @@ OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o)
 CC = cc
 RM = rm -rf
 
-# ==============================================================================
-# 3. TARGETS
-# ==============================================================================
 all: $(NAME)
 
-# --- Final Linking ---
 $(NAME): $(OBJECTS) $(LIBFT) $(MLX_LIB)
 	@printf "$(YELLOW)⠋$(NC) Linking $(NAME)...%30s\r" ""
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) -o $(NAME) >/dev/null 2>&1 && \
 		printf "$(GREEN)✔$(NC) Linked $(NAME) successfully!%12s\n" "" || \
 		(printf "\n$(RED)✖ ERROR linking $(NAME)$(NC)\n" && exit 1)
 
-# --- Libft Build ---
 $(LIBFT):
 	@printf "$(YELLOW)⠋$(NC) Building libft...%30s\r" ""
 	@$(MAKE) -s -C $(LIBFT_DIR) >/dev/null 2>&1 && \
 		printf "$(GREEN)✔$(NC) Built libft successfully%16s\n" "" || \
 		(printf "\n$(RED)✖ ERROR building libft$(NC)\n" && exit 1)
 
-# --- MLX42 Build ---
 $(MLX_LIB):
 	@printf "$(YELLOW)⠋$(NC) Configuring MLX42...%26s\r" ""
 	@cmake $(MLX_DIR) -B $(MLX_DIR)/build >/dev/null 2>&1 && \
@@ -97,14 +85,12 @@ $(MLX_LIB):
 		printf "$(GREEN)✔$(NC) Compiled MLX42%32s\n" "" || \
 		(printf "\n$(RED)✖ ERROR compiling MLX42$(NC)\n" && exit 1)
 
-# --- C to Object Compilation (The main source of clutter) ---
 %.o: %.c 
 	@printf "$(YELLOW)⠋$(NC) Compiling: %-35s\r" "$<"
 	@$(CC) $(CFLAGS) -c $< -o $@ >/dev/null 2>&1 && \
 		printf "$(GREEN)✔$(NC) Compiled:  %-35s\n" "$<" || \
 		(printf "\n$(RED)✖ ERROR compiling: %s$(NC)\n" "$<" && exit 1)
 
-# --- Cleanup ---
 clean:
 	@printf "$(YELLOW)⠋$(NC) Cleaning object files...%20s\r" ""
 	@$(RM) $(OBJECTS)
