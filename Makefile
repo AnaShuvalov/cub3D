@@ -14,11 +14,11 @@
 
 NAME = cub3d
 
-LIBFT_DIR = ./libft
+LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # MLX42 paths
-MLX_DIR = ./MLX42
+MLX_DIR = ./includes/MLX42
 MLX_LIB = $(MLX_DIR)/build/libmlx42.a
 MLX_INC = -I$(MLX_DIR)/include
 
@@ -49,7 +49,7 @@ else
 				-ldl -lGL -lm -lpthread
 endif
 
-INCLUDES = -Iincludes -Ilibft -Iget_next_line
+INCLUDES = -Iincludes -I$(LIBFT_DIR) -Iincludes/get_next_line
 
 BASE_CFLAGS = -Wall -Werror -Wextra -g3
 
@@ -61,8 +61,8 @@ PARSER =		sources/main.c \
 				sources/parser/verification_player.c \
 				sources/parser/all_about_errors.c \
 				sources/parser/grid_building.c \
-				get_next_line/get_next_line.c \
-				get_next_line/get_next_line_utils.c \
+				includes/get_next_line/get_next_line.c \
+				includes/get_next_line/get_next_line_utils.c \
 			
 RAYCASTER =		sources/raycaster/raymain.c
 
@@ -94,11 +94,11 @@ $(MLX_LIB):
 
 clean:
 	$(RM) $(OBJECTS)
-	$(RM) $(MLX_BUILD)
+	$(RM) $(MLX_DIR)/build
 
 fclean:
 	$(RM) $(NAME) $(OBJECTS)
-	$(RM) $(MLX_BUILD)
+	$(RM) $(MLX_DIR)/build
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re:

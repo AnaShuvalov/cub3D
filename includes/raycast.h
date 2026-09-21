@@ -13,8 +13,7 @@
 #ifndef __RAYCAST_H__
 #define __RAYCAST_H__
 
-#include "../cub3d.h"
-// #include "../MLX42AA/include/MLX42/MLX42.h"
+#include "../includes/cub3d.h"
 #include "MLX42/MLX42.h"
 
 #define TILE 64

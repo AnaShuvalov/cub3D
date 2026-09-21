@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
-# include "get_next_line.h"
-# include "libft.h"
+# include "get_next_line/get_next_line.h"
+# include "libft/libft.h"
 // # include "./minilibx-linux/mlx.h"
 
 # define KEY_ESC	65307
