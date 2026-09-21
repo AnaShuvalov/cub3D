@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/21 14:55:54 by anshuval         ###   ########.fr        #
+#    Updated: 2026/09/21 15:12:53 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ else
 				-ldl -lGL -lm -lpthread
 endif
 
+INCLUDES = -Iincludes -Ilibft -Iget_next_line
+
 BASE_CFLAGS = -Wall -Werror -Wextra -g3
 
 PARSER =		sources/main.c \
@@ -62,7 +64,7 @@ PARSER =		sources/main.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
 			
-RAYCASTER =		raycaster/raymain.c
+RAYCASTER =		sources/raycaster/raymain.c
 
 OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o)
 
@@ -71,7 +73,7 @@ CC = cc
 # SANITIZE_FLAGS = -fsanitize=address -fno-omit-frame-pointer -fsanitize-recover=all
 # $(SANITIZE_FLAGS)
 
-CFLAGS = $(BASE_CFLAGS) $(MLX_INC)
+CFLAGS = $(BASE_CFLAGS) $(INCLUDES) $(MLX_INC)
 
 RM = rm -rf
 
