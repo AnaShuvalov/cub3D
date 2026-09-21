@@ -6,35 +6,54 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 17:49:49 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 15:50:23 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+static void	verify_metadata(t_game *game)
+{
+	if (game->map.north_texture_path == NULL
+		|| game->map.south_texture_path == NULL
+		|| game->map.west_texture_path == NULL
+		|| game->map.east_texture_path == NULL)
+	{
+		free_game(game);
+		ft_error("Missing wall textures.\n");
+	}
+	if (game->map.floor_color == -1 || game->map.ceiling_color == -1)
+	{
+		free_game(game);
+		ft_error("Missing floor or ceiling colors.\n");
+	}
+	if (game->map.grid == NULL)
+	{
+		free_game(game);
+		ft_error("Missing map data.\n");
+	}
+}
+
 static int	populate_game(t_game *game, char *line, t_list **map)
 {
-	if (is_space_only(line) == 0)
-	{
-		if (*map != NULL)
-			return (error_message("Empty line inside the map.\n"), -1);
+	char	*start;
+
+	if (is_space_only(line) == YES && *map == NULL)
 		return (0);
-	}
-	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
-	{
-		if (verify_path(game, line) == -1)
-			return (-1);
-	}
-	else if (line[0] == 'F' || line[0] == 'C')
-	{
-		if (verify_color(game, line) == -1)
-			return (-1);
-	}
-	else if (check_for_map(line) == 1)
-	{
-		if (create_map_linked_list(line, map) == -1)
-			return (-1);
-	}
+	start = line;
+	while (*start == ' ' || *start == '\t')
+		start++;
+	if (*map != NULL && (start[0] == 'N' || start[0] == 'S' || start[0] == 'W'
+			|| start[0] == 'E' || start[0] == 'F' || start[0] == 'C'))
+		return (error_message("Map should be last info in file.\n"), -1);
+	if (start[0] == 'N' || start[0] == 'S'
+		|| start[0] == 'W' || start[0] == 'E')
+		return (verify_path(game, start));
+	else if (start[0] == 'F' || start[0] == 'C')
+		return (verify_color(game, start));
+	else if (check_for_map(line) == 1
+		|| (is_space_only(line) == YES && *map != NULL))
+		return (create_map_linked_list(line, map));
 	else
 		return (error_message("Extra information in the .cub file.\n"), -1);
 	return (0);
@@ -64,23 +83,11 @@ static void	convert_map_to_list(int fd, t_game *game)
 		}
 		free(line);
 	}
-	if (list_to_grid(map, game) == -1)
-	{
-		ft_lstclear(&map, free);
-		free_game(game);
-		ft_error("Failed to build map grid\n");
-	}
+	check_and_convert_map_into_grid(map, game);
 }
 
 static void	read_map(int fd, t_game *game)
 {
-	char	buffer[1];
-
-	if (read(fd, buffer, 0) < 0)
-	{
-		close(fd);
-		ft_error("The map path is unreadable\n");
-	}
 	convert_map_to_list(fd, game);
 	if (set_player(game) == -1)
 	{
@@ -90,7 +97,7 @@ static void	read_map(int fd, t_game *game)
 	if (validate_grid(game) == -1)
 	{
 		free_game(game);
-		ft_error("Invalid map\n");
+		ft_error("Invalid map. Not enclosed by walls.\n");
 	}
 }
 

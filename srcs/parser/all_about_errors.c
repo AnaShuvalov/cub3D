@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   endgame.c                                          :+:      :+:    :+:   */
+/*   all_about_errors.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/07 13:57:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 18:01:02 by anshuval         ###   ########.fr       */
+/*   Created: 2026/08/25 18:26:47 by anshuval          #+#    #+#             */
+/*   Updated: 2026/09/14 13:28:14 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_array(char **array)
 {
 	int	i;
 
-	if (array == NULL || array[0] == NULL)
+	if (array == NULL)
 		return ;
 	i = 0;
 	while (array[i])
@@ -27,18 +27,15 @@ void	free_array(char **array)
 	free(array);
 }
 
-void	free_game(t_game *game)
+void	error_message(char *s)
 {
-	if (game == NULL)
-		return ;
-	if (game->map.north_texture_path)
-		free(game->map.north_texture_path);
-	if (game->map.south_texture_path)
-		free(game->map.south_texture_path);
-	if (game->map.west_texture_path)
-		free(game->map.west_texture_path);
-	if (game->map.east_texture_path)
-		free(game->map.east_texture_path);
-	if (game->map.grid)
-		free_array(game->map.grid);
+	write (2, "Error\n", 6);
+	if (s)
+		ft_putstr_fd(s, 2);
+}
+
+void	ft_error(char *s)
+{
+	error_message(s);
+	exit(1);
 }

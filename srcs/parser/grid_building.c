@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verification_map.c                                 :+:      :+:    :+:   */
+/*   grid_building.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 17:37:41 by anshuval         ###   ########.fr       */
+/*   Created: 2026/09/11 09:59:16 by anshuval          #+#    #+#             */
+/*   Updated: 2026/09/14 15:42:08 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@ static int	is_enclosed_by_walls(t_game *game, int y, int x, int len)
 		return (-1);
 	above_row_len = ft_strlen(game->map.grid[y - 1]);
 	below_row_len = ft_strlen(game->map.grid[y + 1]);
-	if (x >= above_row_len || game->map.grid[y - 1][x] == ' ')
+	if (x >= above_row_len
+		|| game->map.grid[y - 1][x] == ' '
+		|| game->map.grid[y - 1][x] == '\t')
 		return (-1);
-	if (x >= below_row_len || game->map.grid[y + 1][x] == ' ')
+	if (x >= below_row_len
+		|| game->map.grid[y + 1][x] == ' '
+		|| game->map.grid[y + 1][x] == '\t')
 		return (-1);
-	if (game->map.grid[y][x + 1] == ' ' || game->map.grid[y][x - 1] == ' ')
+	if (game->map.grid[y][x + 1] == ' '
+		|| game->map.grid[y][x + 1] == '\t'
+		|| game->map.grid[y][x - 1] == ' '
+		|| game->map.grid[y][x - 1] == '\t')
 		return (-1);
 	return (0);
 }
@@ -82,40 +89,4 @@ int	list_to_grid(t_list *map, t_game *game)
 	}
 	game->map.grid[i] = NULL;
 	return (0);
-}
-
-int	create_map_linked_list(char *line, t_list **map)
-{
-	t_list	*new_node;
-	char	*copied;
-
-	copied = ft_strdup(line);
-	if (copied == NULL)
-		return (-1);
-	new_node = ft_lstnew(copied);
-	if (new_node == NULL)
-	{
-		free(copied);
-		return (-1);
-	}
-	ft_lstadd_back(map, new_node);
-	return (0);
-}
-
-bool	check_for_map(char *line)
-{
-	int	i;
-
-	i = 0;
-	if (line == NULL || line[0] == '\0')
-		return (0);
-	while (line[i])
-	{
-		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
-			&& line[i] != 'W' && line[i] != 'E' && line[i] != ' '
-			&& line[i] != '\n' && line[i] != '\t' && line[i] != '\r')
-			return (0);
-		i++;
-	}
-	return (1);
 }

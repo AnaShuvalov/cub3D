@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/21 12:57:45 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/21 14:52:35 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_game(t_game *game)
+{
+	if (game == NULL)
+		return ;
+	if (game->map.north_texture_path)
+		free(game->map.north_texture_path);
+	if (game->map.south_texture_path)
+		free(game->map.south_texture_path);
+	if (game->map.west_texture_path)
+		free(game->map.west_texture_path);
+	if (game->map.east_texture_path)
+		free(game->map.east_texture_path);
+	if (game->map.grid)
+		free_array(game->map.grid);
+}
 
 static void	init_game(t_game *game)
 {

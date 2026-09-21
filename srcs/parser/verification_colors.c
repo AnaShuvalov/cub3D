@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 16:01:35 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/14 14:43:21 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,30 @@ static int	assign_colors(t_game *game, char **rgb, const char *line)
 	else if (line[0] == 'C' && game->map.ceiling_color == -1)
 		game->map.ceiling_color = ((r << 16) | (g << 8) | b);
 	else
-		return (error_message("Dupplicated Color line.\n"), -1);
+		return (error_message("Duplicate Color line.\n"), -1);
 	return (0);
 }
 
 static int	check_rgb(char *rgb)
 {
 	int	i;
+	int	len;
 
 	if (rgb == NULL || rgb[0] == '\0')
 		return (error_message("No or invalid color in the map.\n"), -1);
 	i = 0;
+	len = 0;
 	while (rgb[i] == ' ' || rgb[i] == '\t')
 		i++;
 	if (!ft_isdigit(rgb[i]))
 		return (error_message("No or invalid color in the map.\n"), -1);
 	while (ft_isdigit(rgb[i]))
+	{
 		i++;
+		len++;
+	}
+	if (len > 3)
+		return (error_message("Invalid color in the map.\n"), -1);
 	while (rgb[i] == ' ' || rgb[i] == '\t')
 		i++;
 	if (rgb[i] != '\0')
@@ -71,6 +78,22 @@ static int	is_rgb(t_game *game, const char *line, char **rgb)
 	return (0);
 }
 
+static int	count_commas(char *color)
+{
+	int	i;
+	int	comma;
+
+	i = 0;
+	comma = 0;
+	while (color[i])
+	{
+		if (color[i] == ',')
+			comma++;
+		i++;
+	}
+	return (comma);
+}
+
 int	verify_color(t_game *game, const char *line)
 {
 	char	**rgb;
@@ -79,6 +102,9 @@ int	verify_color(t_game *game, const char *line)
 	if (ft_strncmp(line, "F ", 2) != 0 && ft_strncmp(line, "C ", 2) != 0)
 		return (error_message("Invalid Color line naming.\n"), -1);
 	color = (char *) line + 1;
+	if (count_commas(color) != 2)
+		return (error_message("RGB in the .cub file must be separated "
+				"by exactly two commas.\n"), -1);
 	while (*color == ' ' || *color == '\t')
 		color++;
 	rgb = ft_split(color, ',');
