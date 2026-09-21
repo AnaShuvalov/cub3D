@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/21 16:02:28 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:07:44 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,20 @@ void	free_game(t_game *game)
 		free_array(game->map.grid);
 }
 
-// void	close_game(t_game *game)
-// {
-// 	if (game->framebuffer)
-// }
+void	close_game(t_game *game)
+{
+	if (game->framebuffer.img_ptr)
+		mlx_free_image(game->framebuffer.img_ptr);
+	if (game->win_ptr)
+		mlx_close_window(game->win_ptr);
+	if (game->mlx_ptr)
+	{
+		mlx_terminate(game->mlx_ptr);
+		free(game->mlx_ptr);
+	}
+	free_game(game);
+	exit(0);
+}
 
 static void	init_game(t_game *game)
 {
@@ -69,6 +79,8 @@ int	main(int argc, char **argv)
 	}
 	if (start_game(game))
 		return (1);
-	free_game(&game);
+	// add the function for closing the window with a mouse click
+	mlx_key_hook(game.win_ptr, key_reaction, game);
+	close_game(&game);
 	return (0);
 }

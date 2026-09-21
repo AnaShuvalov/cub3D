@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/21 15:12:53 by anshuval         ###   ########.fr        #
+#    Updated: 2026/09/21 16:11:13 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,11 @@ PARSER =		sources/main.c \
 				includes/get_next_line/get_next_line_utils.c
 			
 RAYCASTER =		sources/raycaster/raymain.c
-OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o)
+
+HOOKS =			sources/hooks/key_events.c \
+				sources/hooks/close_events.c
+
+OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o) $(HOOKS:.c=.o)
 
 CC = cc
 RM = rm -rf

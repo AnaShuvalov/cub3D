@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 16:19:09 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/21 16:27:15 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_game
 	t_img		framebuffer; // buffer image used to draw off screen before pushing it onscreen 
 }	t_game;
 
+// PARSER /////////////////////
 int		parser(int argc, char **argv, t_game *game);
 void	free_game(t_game *game);
 void	free_array(char **array);
@@ -110,5 +111,8 @@ void	free_array(char **array);
 
 // RAYCASTER ///////////////////////////////
 int		start_game(t_game game);
+
+// HOOKS ////////////////////
+int	key_reaction(int key, t_game *game);
 
 #endif
