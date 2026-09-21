@@ -74,13 +74,13 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 	│   └── cub3d.h
 	│   └── parser.h
 	├── libft/
-	├── gnl/
-	├── mlx/
+	├── get_next_line/
+	├── MLX42/
 	├── maps/
 	│   ├── valid/
 	│   └── invalid/
 	├── textures/
-	└── srcs/
+	└── sources/
 		├── main.c
 		├── parser/
 		│   ├── parser.c
@@ -98,7 +98,7 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 		│   ├── draw_frame.c
 		│   └── image_buffer.c
 		└── hooks/
-			├── keyboard_events.c
+			├── key_events.c
 			└── close_events.c
 
 ## Installation & Compilation
