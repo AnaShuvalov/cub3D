@@ -37,7 +37,6 @@ static void	init_game(t_game *game)
 
 int	main(int argc, char **argv)
 {
-	printf("DEBUG: Starting the program in main.c\n");
 	t_game	game;
 
 	init_game(&game);

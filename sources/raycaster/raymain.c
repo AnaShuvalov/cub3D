@@ -36,34 +36,6 @@ static void	draw_square(mlx_image_t *img, int start_x, int start_y, uint32_t col
 	}
 }
 
-// static void	draw_map(mlx_image_t *img, char **map)
-// {
-// 	int			row;
-// 	int			col;
-// 	uint32_t	color;
-
-// 	row = 0;
-// 	col = 0;
-// 	while (map[row][col] != '\0')
-// 	{
-// 		col = 0;
-// 		{
-// 			if (map[row][col] == '1')
-// 				color = COLOR_WALLS;
-// 			else if (map[row][col] == 'N' || map[row][col] == 'S' 
-// 					|| map[row][col] == 'E' || map[row][col] == 'W')
-// 					color = COLOR_PLAYER;
-// 			else
-// 				color = COLOR_PLAYER;
-
-// 			draw_square(img, col * TILE, row * TILE, color);
-// 			col++;
-// 		}	
-// 		row++;
-// 	}
-// }
-
-// included checking for NULL termination in the map
 static void	draw_map(mlx_image_t *img, char **map)
 {
 	int	row;
@@ -71,10 +43,10 @@ static void	draw_map(mlx_image_t *img, char **map)
 	uint32_t color;
 
 	row = 0;
-	while (map[row])  // ← Check if row exists
+	while (map[row])
 	{
 		col = 0;
-		while (map[row][col])  // ← Check if character exists
+		while (map[row][col])
 		{
 			if (map[row][col] == '1')
 				color = COLOR_WALLS;
