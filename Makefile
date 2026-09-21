@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/14 16:17:56 by anshuval         ###   ########.fr        #
+#    Updated: 2026/09/14 16:54:27 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,17 @@ NAME = cub3d
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-INCLUDES = -Iincludes -Ilibft -Iget_next_line
+MLX_PATH = ./MLX42/
+MLX_BUILD = $(MLX_PATH)build/
+MLX_NAME = libmlx42.a
+MLX = $(MLX_BUILD)$(MLX_NAME)
+
+CC = cc
+INCLUDES = -Iincludes -Ilibft -Iget_next_line -I$(MLX_PATH)include
 
 BASE_CFLAGS = -Wall -Werror -Wextra -g3 $(INCLUDES)
+CFLAGS = $(BASE_CFLAGS)
+MLXFLAGS = -L$(MLX_BUILD) -lmlx42 -ldl -lglfw -pthread -lm
 
 PARSER =		srcs/main.c \
 				srcs/parser/parser.c \
@@ -34,33 +42,30 @@ RAYCASTER =
 
 OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o)
 
-CC = cc
-
-CFLAGS = $(BASE_CFLAGS)
-
-MLX_PATH = ./minilibx-linux/
-MLX_NAME = libmlx.a
-MLX = $(MLX_PATH)$(MLX_NAME)
-MLXFLAGS = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm -lz
-
 RM = rm -rf
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJECTS) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
+
+$(MLX):
+	cmake -B $(MLX_BUILD) $(MLX_PATH)
+	cmake --build $(MLX_BUILD) -j4
 
 %.o: %.c 
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJECTS)
+	$(RM) $(MLX_BUILD)
 
 fclean:
 	$(RM) $(NAME) $(OBJECTS)
+	$(RM) $(MLX_BUILD)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re:
