@@ -116,8 +116,8 @@ re:
 #
 #	• 'uname -s' is the shell command to detect the operating system name (for MacOS it's Darwin)
 #	• $(shell ...) performs a shell command and stores it's output in the UNAME_S variable
-#	• ifeq (A, B) is a conditional saying "if A equals B perform the following action", like if 
-#		but shorter
+#	• ifeq (A, B) is a conditional saying "if A equals B perform the following action", like the if
+#		condition but shorter
 #	• endif closes the block and is playing the role of a closing curly bracket '}', since
 #		Makefiles don't use those
 #	
