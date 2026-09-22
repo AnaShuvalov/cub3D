@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 16:19:09 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/22 11:54:27 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
+#include "MLX42/MLX42.h"
 // # include "./minilibx-linux/mlx.h"
 
 # define KEY_ESC	65307
@@ -52,13 +53,16 @@ typedef struct s_keys
 // Used to store the information of the framebuffer before loading it to the screen
 typedef struct s_img
 {
-	void	*img_ptr; // pointer to the mlx image object
-	char	*address; // the starting memory address for the image pixels
-	int		bpp; // bits per pixel. how many bits per color each pixel uses (usually 32)
-	int		line_len; // the size in bytes of one horizontal line of pixels 
-	int		endian; // how colors are structured
-	int		width; // the width of the image in pixels
-	int		height; // the height of the image in pixels
+	mlx_image_t	*image;
+	int			width; // the width of the image in pixels
+	int			height; // the height of the image in pixels
+
+	// the following are useless since we're using the MLX42 and not MiniLibX
+		// void	*img_ptr; // pointer to the mlx image object
+		// char	*address; // the starting memory address for the image pixels
+		// int		bpp; // bits per pixel. how many bits per color each pixel uses (usually 32)
+		// int		line_len; // the size in bytes of one horizontal line of pixels 
+		// int		endian; // how colors are structured
 }	t_img;
 
 // Player state for movement and raycasting
@@ -95,12 +99,18 @@ typedef struct s_map
 // main game struct
 typedef struct s_game
 {
-	void		*mlx_ptr; // mlx library pointer
-	void		*win_ptr; // mlx window pointer
+	// should be mlx_t	*mlx as a context pointer, not mlx_ptr or win_ptr
+	mlx_t	*mlx;
+	// void		*mlx_ptr; // mlx library pointer
+	// void		*win_ptr; // mlx window pointer
+
 	t_map		map; // parsed map with textures and colors
 	t_player	player; // player position and direction vectors
 	t_keys		key; // current state of the keys
-	t_img		framebuffer; // buffer image used to draw off screen before pushing it onscreen 
+	
+	// should be mlx_image_t	*framebuffer not t_img because mlx_image_t is the frame buffer
+	// t_img		framebuffer; // buffer image used to draw off screen before pushing it onscreen
+	mlx_image_t	*framebuffer;
 }	t_game;
 
 int		parser(int argc, char **argv, t_game *game);
@@ -109,6 +119,6 @@ void	free_array(char **array);
 
 
 // RAYCASTER ///////////////////////////////
-int		start_game(t_game game);
+int		start_game(t_game *game);
 
 #endif

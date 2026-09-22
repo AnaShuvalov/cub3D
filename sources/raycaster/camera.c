@@ -1,0 +1,67 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/22 14:15:13 by olmatske          #+#    #+#             */
+/*   Updated: 2026/09/22 15:07:26 by olmatske         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "raycast.h"
+
+// DDA stands for Digital Differential Analysis
+void	perform_dda(char **map, t_ray *ray)
+{
+	while (ray->wall_hit == 0)
+	{
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		if (map[ray->map_x][ray->map_y] > 0)
+			ray->wall_hit = 1;
+	}
+	if (ray->side == 0)
+		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
+	else
+		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
+}
+
+void	init_dda_vars(t_ray *ray)
+{
+	ray->perp_wall_dist = 0;
+	ray->line_height = 0;
+	ray->draw_start = 0;
+	ray->draw_end = 0;
+	ray->wall_hit = 0;
+	ray->side = 0;
+}
+
+void	draw_wall_slice(t_game *game, t_ray *ray, int x)
+{
+	int			y;
+	uint32_t		color;
+
+	y = 0;
+	color = COLOR_WALLS;
+
+	// ray->draw_start = (int)(WIN_HEIGHT / ray->)
+
+	while (y >= ray->draw_start && y < ray->draw_end)
+	{
+		mlx_put_pixel(game->framebuffer, (uint32_t)x, (uint32_t)y, color);
+		y++;
+	}
+
+}
