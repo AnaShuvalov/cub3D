@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 15:42:32 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/21 17:48:25 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/22 15:41:16 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	close_game(t_game *game)
 {
 	if (game == NULL)
 		return ;
-	if (game->mlx_ptr)
-		mlx_terminate(game->mlx_ptr);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
 	free_game(game);
 	exit(0);
 }

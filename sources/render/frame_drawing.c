@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:27:12 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/22 14:58:04 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/22 15:41:46 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,13 @@ static void	draw_map(mlx_image_t *img, t_game *game)
 
 int	start_game(t_game *game)
 {
-	mlx_image_t	*img;
-	mlx_t		*mlx;
-
-	mlx = game->mlx_ptr;
-	img = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!img)
+	game->framebuffer = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!game->framebuffer)
 		return (1);
-	if (mlx_image_to_window(mlx, img, 0, 0) == -1)
+	if (mlx_image_to_window(game->mlx, game->framebuffer, 0, 0) == -1)
 		return (1);
-	draw_map(img, game);
-	mlx_loop(mlx);
+	draw_map(game->framebuffer, game);
+	mlx_loop_hook(game->mlx, render_frame, game);
+	mlx_loop(game->mlx);
 	return (0);
 }

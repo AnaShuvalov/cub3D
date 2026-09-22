@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/22 15:22:17 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/22 15:41:02 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ int	main(int argc, char **argv)
 	// 	printf("Direction X: %.2f, Y: %.2f\n", game.player.dir_x, game.player.dir_y);
 	// 	printf("Plane X: %.2f, Y: %.2f\n", game.player.plane_x, game.player.plane_y);
 	// }
-	game.mlx_ptr = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", false);
-	if (game.mlx_ptr == NULL)
+	game.mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", false);
+	if (game.mlx == NULL)
 	{
 		free_game(&game);
 		return (1);
 	}
-	mlx_close_hook(game.mlx_ptr, close_hook, &game);
-	mlx_key_hook(game.mlx_ptr, key_reaction, &game);
+	mlx_close_hook(game.mlx, close_hook, &game);
+	mlx_key_hook(game.mlx, key_reaction, &game);
 	if (start_game(&game) != 0)
 	{
 		close_game(&game);
