@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/22 14:22:43 by olmatske         ###   ########.fr        #
+#    Updated: 2026/09/22 15:20:41 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,14 @@ RAYCASTER =		sources/raycaster/raymain.c \
 				sources/raycaster/camera.c
 
 
-OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o)
+
+HOOKS =			sources/hooks/key_events.c \
+				sources/hooks/close_events.c
+
+RENDER =		sources/render/frame_drawing.c \
+				sources/render/framebuffer.c
+
+OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o) $(HOOKS:.c=.o) $(RENDER:.c=.o)
 
 CC = cc
 RM = rm -rf

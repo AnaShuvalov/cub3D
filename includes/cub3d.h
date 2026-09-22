@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/22 11:54:27 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/22 15:36:26 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,7 @@
 # include <stdbool.h>
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
-#include "MLX42/MLX42.h"
-// # include "./minilibx-linux/mlx.h"
-
-# define KEY_ESC	65307
-# define KEY_W		119
-# define KEY_A		97
-# define KEY_S		115
-# define KEY_D		100
-# define KEY_LEFT	65361
-# define KEY_RIGHT	65363
+# include "MLX42/MLX42.h"
 
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
@@ -57,12 +48,6 @@ typedef struct s_img
 	int			width; // the width of the image in pixels
 	int			height; // the height of the image in pixels
 
-	// the following are useless since we're using the MLX42 and not MiniLibX
-		// void	*img_ptr; // pointer to the mlx image object
-		// char	*address; // the starting memory address for the image pixels
-		// int		bpp; // bits per pixel. how many bits per color each pixel uses (usually 32)
-		// int		line_len; // the size in bytes of one horizontal line of pixels 
-		// int		endian; // how colors are structured
 }	t_img;
 
 // Player state for movement and raycasting
@@ -101,24 +86,27 @@ typedef struct s_game
 {
 	// should be mlx_t	*mlx as a context pointer, not mlx_ptr or win_ptr
 	mlx_t	*mlx;
-	// void		*mlx_ptr; // mlx library pointer
-	// void		*win_ptr; // mlx window pointer
-
 	t_map		map; // parsed map with textures and colors
 	t_player	player; // player position and direction vectors
 	t_keys		key; // current state of the keys
-	
 	// should be mlx_image_t	*framebuffer not t_img because mlx_image_t is the frame buffer
 	// t_img		framebuffer; // buffer image used to draw off screen before pushing it onscreen
 	mlx_image_t	*framebuffer;
 }	t_game;
 
+// PARSER /////////////////////
 int		parser(int argc, char **argv, t_game *game);
 void	free_game(t_game *game);
 void	free_array(char **array);
-
+void	error_message(char *s);
 
 // RAYCASTER ///////////////////////////////
 int		start_game(t_game *game);
+
+// HOOKS ////////////////////
+void	key_reaction(mlx_key_data_t keydata, void* param);
+void	close_game(t_game *game);
+void	close_hook(void *param);
+void	exit_on_error(t_game *game, char *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:54 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 16:18:33 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:42:02 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 int		parser(int argc, char **argv, t_game *game);
 void	verify_map_pathname(char *filename);
 void	ft_error(char *s);
-void	error_message(char *s);
 int		verify_path(t_game *game, const char *line);
 int		verify_color(t_game *game, const char *line);
 int		create_map_linked_list(char *line, t_list **map);

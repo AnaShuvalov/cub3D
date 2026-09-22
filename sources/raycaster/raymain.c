@@ -9,8 +9,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycast.h"
+// #include "raycast.h"
 
+// static void	myppixel(mlx_image_t *img, int x, int y, uint32_t color)
+// {
+// 	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
+// 		return;
+// 	mlx_put_pixel(img, x, y, color);
+// }
 // static void	myppixel(mlx_image_t *img, int x, int y, uint32_t color)
 // {
 // 	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
@@ -22,7 +28,23 @@
 // {
 // 	int	x;
 // 	int	y;
+// static void	draw_square(mlx_image_t *img, int start_x, int start_y, uint32_t color)
+// {
+// 	int	x;
+// 	int	y;
 
+// 	y = 0;
+// 	while (y < TILE)
+// 	{
+// 		x = 0;
+// 		while (x < TILE)
+// 		{
+// 			myppixel(img, start_x + x, start_y + y, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 // 	y = 0;
 // 	while (y < TILE)
 // 	{
@@ -41,7 +63,25 @@
 // 	int	row;
 // 	int	col;
 // 	uint32_t color;
+// static void	draw_map(mlx_image_t *img, char **map)
+// {
+// 	int	row;
+// 	int	col;
+// 	uint32_t color;
 
+// 	row = 0;
+// 	while (map[row])
+// 	{
+// 		col = 0;
+// 		while (map[row][col])
+// 		{
+// 			if (map[row][col] == '1')
+// 				color = COLOR_WALLS;
+// 			else if (map[row][col] == 'N' || map[row][col] == 'S' 
+// 					|| map[row][col] == 'E' || map[row][col] == 'W')
+// 				color = COLOR_PLAYER;
+// 			else
+// 				color = COLOR_FLOOR;
 // 	row = 0;
 // 	while (map[row])
 // 	{
@@ -62,6 +102,12 @@
 // 		row++;
 // 	}
 // }
+// 			draw_square(img, col * TILE, row * TILE, color);
+// 			col++;
+// 		}	
+// 		row++;
+// 	}
+// }
 
 int	start_game(t_game *game)
 {
@@ -69,16 +115,16 @@ int	start_game(t_game *game)
 	mlx_t	*mlx;
 	mlx_image_t *img;
 
-	mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", false);
-	if (!mlx)
-		return (1);
+// 	mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", false);
+// 	if (!mlx)
+// 		return (1);
 
-	img = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!img)
-		return (1);
+// 	img = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
+// 	if (!img)
+// 		return (1);
 	
-	if (mlx_image_to_window(mlx, img, 0, 0) == -1)
-		return (1);
+// 	if (mlx_image_to_window(mlx, img, 0, 0) == -1)
+// 		return (1);
 
 	// draw_map(img, game.map.grid);
 
@@ -87,7 +133,7 @@ int	start_game(t_game *game)
 	mlx_loop_hook(mlx, render_frame, game);
 	mlx_loop(mlx);
 
-	printf("finish\n");
-	return (0);
-}
+// 	printf("finish\n");
+// 	return (0);
+// }
 
