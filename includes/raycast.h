@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/22 11:36:19 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/22 14:21:11 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct	s_ray {
 
 // FUNCTIONS ///////////////////////////////////////////////////////////////////
 void	render_frame(void	*param);
-
+void	perform_dda(char **map, t_ray *ray);
 
 
 #endif

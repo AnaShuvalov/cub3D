@@ -6,7 +6,7 @@
 #    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/22 12:00:35 by olmatske         ###   ########.fr        #
+#    Updated: 2026/09/22 14:22:43 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,8 @@ PARSER =		sources/main.c \
 				includes/get_next_line/get_next_line_utils.c
 			
 RAYCASTER =		sources/raycaster/raymain.c \
-				sources/raycaster/raycast.c
+				sources/raycaster/raycast.c \
+				sources/raycaster/camera.c
 
 
 OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o)

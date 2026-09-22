@@ -1,5 +1,14 @@
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/22 14:15:09 by olmatske          #+#    #+#             */
+/*   Updated: 2026/09/22 14:32:02 by olmatske         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "raycast.h"
 
@@ -79,8 +88,8 @@ void	render_frame(void	*param)
 	while (x < WIN_WIDTH)
 	{
 		init_ray(&ray, &game->player, x);
-		// perform_dda(&game->map, &ray);
-		// draw_wall_slice(game, &ray, x);
+		perform_dda(game->map.grid, &ray);
+		draw_wall_slice(game, &ray, x);
 		x++;
 	}
 }
