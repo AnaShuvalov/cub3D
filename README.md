@@ -95,8 +95,8 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 		│   ├── dda.c
 		│   └── texture_mapping.c
 		├── render/
-		│   ├── draw_frame.c
-		│   └── image_buffer.c
+		│   ├── frame_drawing.c
+		│   └── framebuffer.c
 		└── hooks/
 			├── key_events.c
 			└── close_events.c

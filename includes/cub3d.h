@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/21 18:52:21 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/22 14:47:15 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	free_array(char **array);
 void	error_message(char *s);
 
 // RAYCASTER ///////////////////////////////
-int		start_game(t_game game);
+int		start_game(t_game *game);
 
 // HOOKS ////////////////////
 void	key_reaction(mlx_key_data_t keydata, void* param);
