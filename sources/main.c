@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/22 15:11:44 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/22 15:13:52 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ void	free_game(t_game *game)
 	if (game->map.grid)
 		free_array(game->map.grid);
 }
-
-// void	close_game(t_game *game)
-// {
-// 	if (game->framebuffer)
-// }
 
 static void	init_game(t_game *game)
 {
@@ -69,7 +64,6 @@ int	main(int argc, char **argv)
 	}
 	if (start_game(&game))
 		return (1);
-	render_frame()
 	free_game(&game);
 	return (0);
 }
