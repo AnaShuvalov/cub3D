@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/21 15:12:53 by anshuval         ###   ########.fr        #
+#    Updated: 2026/09/22 12:00:35 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # NEW MAKEFILE WITH WORKING MLX LINKING
 
-MAKEFLAGS += --silent --no-print-directory
+MAKEFLAGS += --no-print-directory
 
 GREEN := \033[0;32m
 RED   := \033[0;31m
@@ -55,7 +55,10 @@ PARSER =		sources/main.c \
 				includes/get_next_line/get_next_line.c \
 				includes/get_next_line/get_next_line_utils.c
 			
-RAYCASTER =		sources/raycaster/raymain.c
+RAYCASTER =		sources/raycaster/raymain.c \
+				sources/raycaster/raycast.c
+
+
 OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o)
 
 CC = cc
@@ -64,48 +67,38 @@ RM = rm -rf
 all: $(NAME)
 
 $(NAME): $(OBJECTS) $(LIBFT) $(MLX_LIB)
-	@printf "$(YELLOW)⠋$(NC) Linking $(NAME)...%30s\r" ""
-	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) -o $(NAME) >/dev/null 2>&1 && \
-		printf "$(GREEN)✔$(NC) Linked $(NAME) successfully!%12s\n" "" || \
-		(printf "\n$(RED)✖ ERROR linking $(NAME)$(NC)\n" && exit 1)
+	@printf "$(YELLOW)⠋$(NC) Linking $(NAME)...\n"
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 $(LIBFT):
-	@printf "$(YELLOW)⠋$(NC) Building libft...%30s\r" ""
-	@$(MAKE) -s -C $(LIBFT_DIR) >/dev/null 2>&1 && \
-		printf "$(GREEN)✔$(NC) Built libft successfully%16s\n" "" || \
-		(printf "\n$(RED)✖ ERROR building libft$(NC)\n" && exit 1)
+	@printf "$(YELLOW)⠋$(NC) Building libft...\n"
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX_LIB):
-	@printf "$(YELLOW)⠋$(NC) Configuring MLX42...%26s\r" ""
-	@cmake $(MLX_DIR) -B $(MLX_DIR)/build >/dev/null 2>&1 && \
-		printf "$(GREEN)✔$(NC) Configured MLX42%30s\n" "" || \
-		(printf "\n$(RED)✖ ERROR configuring MLX42$(NC)\n" && exit 1)
-	@printf "$(YELLOW)⠋$(NC) Compiling MLX42...%28s\r" ""
-	@$(MAKE) -s -C $(MLX_DIR)/build >/dev/null 2>&1 && \
-		printf "$(GREEN)✔$(NC) Compiled MLX42%32s\n" "" || \
-		(printf "\n$(RED)✖ ERROR compiling MLX42$(NC)\n" && exit 1)
+	@printf "$(YELLOW)⠋$(NC) Configuring MLX42...\n"
+	cmake $(MLX_DIR) -B $(MLX_DIR)/build
+	@printf "$(YELLOW)⠋$(NC) Compiling MLX42...\n"
+	$(MAKE) -C $(MLX_DIR)/build
 
 %.o: %.c 
-	@printf "$(YELLOW)⠋$(NC) Compiling: %-35s\r" "$<"
-	@$(CC) $(CFLAGS) -c $< -o $@ >/dev/null 2>&1 && \
-		printf "$(GREEN)✔$(NC) Compiled:  %-35s\n" "$<" || \
-		(printf "\n$(RED)✖ ERROR compiling: %s$(NC)\n" "$<" && exit 1)
+	@printf "$(YELLOW)⠋$(NC) Compiling: %s\n" "$<"
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@printf "$(YELLOW)⠋$(NC) Cleaning object files...%20s\r" ""
-	@$(RM) $(OBJECTS)
-	@$(RM) $(MLX_DIR)/build
-	@printf "$(GREEN)✔$(NC) Cleaned object files%26s\n" ""
+	@printf "$(YELLOW)⠋$(NC) Cleaning object files...\n"
+	$(RM) $(OBJECTS)
+	$(RM) $(MLX_DIR)/build
+	@printf "$(GREEN)✔$(NC) Cleaned object files\n"
 
 fclean: clean
-	@printf "$(YELLOW)⠋$(NC) Removing $(NAME) and libft...%14s\r" ""
-	@$(RM) $(NAME)
-	@$(MAKE) -s -C $(LIBFT_DIR) fclean >/dev/null 2>&1
-	@printf "$(GREEN)✔$(NC) Full clean complete%27s\n" ""
+	@printf "$(YELLOW)⠋$(NC) Removing $(NAME) and libft...\n"
+	$(RM) $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	@printf "$(GREEN)✔$(NC) Full clean complete\n"
 
 re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	$(MAKE) fclean
+	$(MAKE) all
 
 .PHONY: all clean fclean re
 

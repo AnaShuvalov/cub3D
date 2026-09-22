@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/21 14:52:35 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/22 11:47:52 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 void	free_game(t_game *game)
 {
@@ -62,7 +62,7 @@ int	main(int argc, char **argv)
 		printf("Direction X: %.2f, Y: %.2f\n", game.player.dir_x, game.player.dir_y);
 		printf("Plane X: %.2f, Y: %.2f\n", game.player.plane_x, game.player.plane_y);
 	}
-	if (start_game(game))
+	if (start_game(&game))
 		return (1);
 	free_game(&game);
 	return (0);

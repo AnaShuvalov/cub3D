@@ -11,59 +11,59 @@
 
 #include "raycast.h"
 
-static void	myppixel(mlx_image_t *img, int x, int y, uint32_t color)
-{
-	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
-		return;
-	mlx_put_pixel(img, x, y, color);
-}
+// static void	myppixel(mlx_image_t *img, int x, int y, uint32_t color)
+// {
+// 	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
+// 		return;
+// 	mlx_put_pixel(img, x, y, color);
+// }
 
-static void	draw_square(mlx_image_t *img, int start_x, int start_y, uint32_t color)
-{
-	int	x;
-	int	y;
+// static void	draw_square(mlx_image_t *img, int start_x, int start_y, uint32_t color)
+// {
+// 	int	x;
+// 	int	y;
 
-	y = 0;
-	while (y < TILE)
-	{
-		x = 0;
-		while (x < TILE)
-		{
-			myppixel(img, start_x + x, start_y + y, color);
-			x++;
-		}
-		y++;
-	}
-}
+// 	y = 0;
+// 	while (y < TILE)
+// 	{
+// 		x = 0;
+// 		while (x < TILE)
+// 		{
+// 			myppixel(img, start_x + x, start_y + y, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
-static void	draw_map(mlx_image_t *img, char **map)
-{
-	int	row;
-	int	col;
-	uint32_t color;
+// static void	draw_map(mlx_image_t *img, char **map)
+// {
+// 	int	row;
+// 	int	col;
+// 	uint32_t color;
 
-	row = 0;
-	while (map[row])
-	{
-		col = 0;
-		while (map[row][col])
-		{
-			if (map[row][col] == '1')
-				color = COLOR_WALLS;
-			else if (map[row][col] == 'N' || map[row][col] == 'S' 
-					|| map[row][col] == 'E' || map[row][col] == 'W')
-				color = COLOR_PLAYER;
-			else
-				color = COLOR_FLOOR;
+// 	row = 0;
+// 	while (map[row])
+// 	{
+// 		col = 0;
+// 		while (map[row][col])
+// 		{
+// 			if (map[row][col] == '1')
+// 				color = COLOR_WALLS;
+// 			else if (map[row][col] == 'N' || map[row][col] == 'S' 
+// 					|| map[row][col] == 'E' || map[row][col] == 'W')
+// 				color = COLOR_PLAYER;
+// 			else
+// 				color = COLOR_FLOOR;
 
-			draw_square(img, col * TILE, row * TILE, color);
-			col++;
-		}	
-		row++;
-	}
-}
+// 			draw_square(img, col * TILE, row * TILE, color);
+// 			col++;
+// 		}	
+// 		row++;
+// 	}
+// }
 
-int	start_game(t_game game)
+int	start_game(t_game *game)
 {
 	printf("start\n");
 	mlx_t	*mlx;
@@ -80,8 +80,11 @@ int	start_game(t_game game)
 	if (mlx_image_to_window(mlx, img, 0, 0) == -1)
 		return (1);
 
-	draw_map(img, game.map.grid);
+	// draw_map(img, game.map.grid);
 
+	game->mlx = mlx;
+	game->framebuffer = img;
+	mlx_loop_hook(mlx, render_frame, game);
 	mlx_loop(mlx);
 
 	printf("finish\n");
