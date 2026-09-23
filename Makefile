@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/22 15:20:41 by anshuval         ###   ########.fr        #
+#    Updated: 2026/09/23 15:24:33 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,10 +64,12 @@ RAYCASTER =		sources/raycaster/raymain.c \
 HOOKS =			sources/hooks/key_events.c \
 				sources/hooks/close_events.c
 
-RENDER =		sources/render/frame_drawing.c \
-				sources/render/framebuffer.c
+RENDER =		sources/render/frame.c
 
-OBJECTS = $(PARSER:.c=.o) $(RAYCASTER:.c=.o) $(HOOKS:.c=.o) $(RENDER:.c=.o)
+SRCS = $(PARSER) $(RAYCASTER) $(HOOKS) $(RENDER)
+
+OBJ_DIR = obj
+OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 CC = cc
 RM = rm -rf
@@ -76,25 +78,25 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS) $(LIBFT) $(MLX_LIB)
 	@printf "$(YELLOW)⠋$(NC) Linking $(NAME)...\n"
-	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 $(LIBFT):
 	@printf "$(YELLOW)⠋$(NC) Building libft...\n"
-	$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX_LIB):
 	@printf "$(YELLOW)⠋$(NC) Configuring MLX42...\n"
 	cmake $(MLX_DIR) -B $(MLX_DIR)/build
 	@printf "$(YELLOW)⠋$(NC) Compiling MLX42...\n"
-	$(MAKE) -C $(MLX_DIR)/build
+	@$(MAKE) -C $(MLX_DIR)/build
 
-%.o: %.c 
-	@printf "$(YELLOW)⠋$(NC) Compiling: %s\n" "$<"
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: %.c 
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@printf "$(YELLOW)⠋$(NC) Cleaning object files...\n"
-	$(RM) $(OBJECTS)
+	$(RM) $(OBJ_DIR)
 	$(RM) $(MLX_DIR)/build
 	@printf "$(GREEN)✔$(NC) Cleaned object files\n"
 

@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 15:42:36 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/21 19:05:14 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 15:05:02 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	on_press(mlx_key_data_t key, t_game *game)
 		game->key.right = true;
 }
 
-void	key_reaction(mlx_key_data_t keydata, void* param)
+void	key_reaction(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 

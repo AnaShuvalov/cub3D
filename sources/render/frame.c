@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frame_drawing.c                                    :+:      :+:    :+:   */
+/*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:27:12 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/22 15:41:46 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 15:10:32 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 static void	myppixel(mlx_image_t *img, int x, int y, uint32_t color)
 {
 	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
-		return;
+		return ;
 	mlx_put_pixel(img, x, y, color);
 }
 
@@ -46,9 +46,9 @@ static void	draw_square(mlx_image_t *img, int start_x, int start_y, uint32_t col
 
 static void	draw_map(mlx_image_t *img, t_game *game)
 {
-	int	row;
-	int	col;
-	uint32_t color;
+	int			row;
+	int			col;
+	uint32_t	color;
 
 	row = 0;
 	while (game->map.grid[row])
@@ -56,7 +56,8 @@ static void	draw_map(mlx_image_t *img, t_game *game)
 		col = 0;
 		while (game->map.grid[row][col])
 		{
-			if (row == (int)game->player.pos_y && col == (int)game->player.pos_x)
+			if (row == (int)game->player.pos_y
+				&& col == (int)game->player.pos_x)
 				color = COLOR_PLAYER;
 			else if (game->map.grid[row][col] == '1')
 				color = COLOR_WALLS;
@@ -66,7 +67,7 @@ static void	draw_map(mlx_image_t *img, t_game *game)
 				color = COLOR_SPACE;
 			draw_square(img, col * TILE, row * TILE, color);
 			col++;
-		}	
+		}
 		row++;
 	}
 }
