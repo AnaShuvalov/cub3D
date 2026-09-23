@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 17:00:21 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 17:07:14 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 
 static void	convert_map_to_list(int fd, t_game *game)
 {
-	int		len;
 	char	*line;
 	t_list	*map;
 
