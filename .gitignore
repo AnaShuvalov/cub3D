@@ -3,3 +3,4 @@ a.out
 .DS_STORE
 *.o
 *.a
+obj

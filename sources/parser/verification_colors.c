@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 14:43:21 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:46:38 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	check_rgb(char *rgb)
 		return (error_message("No or invalid color in the map.\n"), -1);
 	i = 0;
 	len = 0;
-	while (rgb[i] == ' ' || rgb[i] == '\t')
+	while (rgb[i] == ' ')
 		i++;
 	if (!ft_isdigit(rgb[i]))
 		return (error_message("No or invalid color in the map.\n"), -1);
@@ -52,7 +52,7 @@ static int	check_rgb(char *rgb)
 	}
 	if (len > 3)
 		return (error_message("Invalid color in the map.\n"), -1);
-	while (rgb[i] == ' ' || rgb[i] == '\t')
+	while (rgb[i] == ' ')
 		i++;
 	if (rgb[i] != '\0')
 		return (error_message("No or invalid color in the map.\n"), -1);
@@ -105,7 +105,7 @@ int	verify_color(t_game *game, const char *line)
 	if (count_commas(color) != 2)
 		return (error_message("RGB in the .cub file must be separated "
 				"by exactly two commas.\n"), -1);
-	while (*color == ' ' || *color == '\t')
+	while (*color == ' ')
 		color++;
 	rgb = ft_split(color, ',');
 	if (rgb == NULL || rgb[0] == NULL || rgb[1] == NULL

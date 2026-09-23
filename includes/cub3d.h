@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 12:39:46 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/23 17:25:52 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,8 @@ void	key_reaction(mlx_key_data_t keydata, void* param);
 void	close_game(t_game *game);
 void	close_hook(void *param);
 void	exit_on_error(t_game *game, char *s);
+
+// RENDER ///////////////////
+void	render_frame(void	*param);
 
 #endif

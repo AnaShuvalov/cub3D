@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 15:50:23 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 17:07:14 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 	if (is_space_only(line) == YES && *map == NULL)
 		return (0);
 	start = line;
-	while (*start == ' ' || *start == '\t')
+	while (*start == ' ')
 		start++;
 	if (*map != NULL && (start[0] == 'N' || start[0] == 'S' || start[0] == 'W'
 			|| start[0] == 'E' || start[0] == 'F' || start[0] == 'C'))
@@ -61,7 +61,6 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 
 static void	convert_map_to_list(int fd, t_game *game)
 {
-	int		len;
 	char	*line;
 	t_list	*map;
 
@@ -71,9 +70,7 @@ static void	convert_map_to_list(int fd, t_game *game)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		len = ft_strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-			line[len - 1] = '\0';
+		replace_with_spaces(line);
 		if (populate_game(game, line, &map) == -1)
 		{
 			free(line);
