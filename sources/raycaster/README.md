@@ -2,12 +2,12 @@
 
 ### Roadmap
 
-- [ ] get MiniLibx started
-- [ ] get a window to start
-- [ ] turn intput into a map
-- [ ] do walls
-- [ ] do walking and collisions
-- [ ] render and display images
+- [ ] movement (vector with normalization, meaning the speed is the same)
+- [ ] wall collisiion
+- [ ] shader
+- [ ] figure out how to implement textures and if it's worth it
+
+
 
 - buffer between player and wall
 - protect corners

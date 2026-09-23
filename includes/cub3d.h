@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 17:25:52 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/23 21:11:05 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,23 @@ typedef struct s_map
 	t_img	east_texture; // loaded MLX image for east wall
 }	t_map;
 
+typedef	struct s_light
+{
+	double	light_fade;
+	double	min_brightness;
+	double	max_brightness;
+}	t_light;
+
 // main game struct
 typedef struct s_game
 {
-	// should be mlx_t	*mlx as a context pointer, not mlx_ptr or win_ptr
 	mlx_t		*mlx;
 	t_map		map; // parsed map with textures and colors
 	t_player	player; // player position and direction vectors
 	t_keys		key; // current state of the keys
-	// should be mlx_image_t	*framebuffer not t_img because mlx_image_t is the frame buffer
-	// t_img		framebuffer; // buffer image used to draw off screen before pushing it onscreen
 	mlx_image_t	*framebuffer;
+	mlx_image_t	*background;
+	t_light		light;
 }	t_game;
 
 // PARSER /////////////////////

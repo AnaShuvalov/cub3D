@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 14:43:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/23 14:47:32 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/23 21:16:13 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	draw_wall_slice(t_game *game, t_ray *ray, int x)
 	}
 }
 
+// try to make it in one image, one half floor, the other ceiling
 void	draw_floor_and_ceiling(t_game *game)
 {
 	int	x;
@@ -47,7 +48,7 @@ void	draw_floor_and_ceiling(t_game *game)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			mlx_put_pixel(game->framebuffer, x, y, COLOR_CEILING);
+			mlx_put_pixel(game->background, x, y, COLOR_CEILING);
 			x++;
 		}
 		y++;
@@ -58,7 +59,7 @@ void	draw_floor_and_ceiling(t_game *game)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			mlx_put_pixel(game->framebuffer, x, y, COLOR_FLOOR);
+			mlx_put_pixel(game->background, x, y, COLOR_FLOOR);
 			x++;
 		}
 		y++;
