@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:27:12 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 17:29:28 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/23 17:34:13 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@ static void	myppixel(mlx_image_t *img, int x, int y, uint32_t color)
 	mlx_put_pixel(img, x, y, color);
 }
 
-// static void	draw_square(mlx_image_t *img, int start_x, int start_y, uint32_t color)
-// {
-// 	int	x;
-// 	int	y;
+static void	draw_square(mlx_image_t *img, int start_x, int start_y, uint32_t color)
+{
+	int	x;
+	int	y;
 
-// 	y = 0;
-// 	while (y < TILE)
-// 	{
-// 		x = 0;
-// 		while (x < TILE)
-// 		{
-// 			myppixel(img, start_x + x, start_y + y, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
+	y = 0;
+	while (y < TILE)
+	{
+		x = 0;
+		while (x < TILE)
+		{
+			myppixel(img, start_x + x, start_y + y, color);
+			x++;
+		}
+		y++;
+	}
+}
 
 static void	draw_map(mlx_image_t *img, t_game *game)
 {

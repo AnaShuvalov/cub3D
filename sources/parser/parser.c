@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 17:07:14 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 17:19:26 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,12 @@ static void	convert_map_to_list(int fd, t_game *game)
 			free(line);
 			ft_lstclear(&map, free);
 			free_game(game);
+			close(fd);
 			exit(1);
 		}
 		free(line);
 	}
+	close(fd);
 	check_and_convert_map_into_grid(map, game);
 }
 
@@ -109,7 +111,6 @@ int	parser(int argc, char **argv, t_game *game)
 	if (fd < 0)
 		ft_error("Check permissions for the map file.\n");
 	read_map(fd, game);
-	close(fd);
 	verify_metadata(game);
 	return (0);
 }
