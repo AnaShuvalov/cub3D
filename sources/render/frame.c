@@ -6,12 +6,13 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:27:12 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 17:34:13 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 18:30:40 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#define TILE 64
+#define TILE 10
+#define PADDING 20
 
 #define COLOR_CEILING		0x55e4ffFF
 #define COLOR_WALLS			0x895544FF
@@ -48,13 +49,15 @@ static void	draw_map(mlx_image_t *img, t_game *game)
 {
 	int			row;
 	int			col;
+	int			allignment_x;
 	uint32_t	color;
 
+	allignment_x = WIN_WIDTH - (game->map.width * TILE);
 	row = 0;
-	while (game->map.grid[row])
+	while (row < game->map.height)
 	{
 		col = 0;
-		while (game->map.grid[row][col])
+		while (col < game->map.width)
 		{
 			if (row == (int)game->player.pos_y
 				&& col == (int)game->player.pos_x)
@@ -65,11 +68,20 @@ static void	draw_map(mlx_image_t *img, t_game *game)
 				color = COLOR_FLOOR;
 			else
 				color = COLOR_SPACE;
-			draw_square(img, col * TILE, row * TILE, color);
+			draw_square(img, allignment_x + (col * TILE), row * TILE, color);
 			col++;
 		}
 		row++;
 	}
+}
+
+static void	game_loop(void *param)
+{
+	t_game	*game;
+
+	game = param;
+	render_frame(game);
+	draw_map(game->framebuffer, game);
 }
 
 int	start_game(t_game *game)
@@ -79,8 +91,7 @@ int	start_game(t_game *game)
 		return (1);
 	if (mlx_image_to_window(game->mlx, game->framebuffer, 0, 0) == -1)
 		return (1);
-	draw_map(game->framebuffer, game);
-	mlx_loop_hook(game->mlx, render_frame, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
 	return (0);
 }
