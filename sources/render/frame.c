@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:27:12 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 18:30:40 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 19:04:13 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,7 @@
 #define COLOR_PLAYER 		0xcb137fFF
 #define COLOR_SPACE 		0xf7f7f7FF
 
-static void	myppixel(mlx_image_t *img, int x, int y, uint32_t color)
-{
-	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
-		return ;
-	mlx_put_pixel(img, x, y, color);
-}
-
-static void	draw_square(mlx_image_t *img, int start_x, int start_y, uint32_t color)
+static void	minimap(mlx_image_t *img, int start_x, int start_y, uint32_t color)
 {
 	int	x;
 	int	y;
@@ -38,37 +31,49 @@ static void	draw_square(mlx_image_t *img, int start_x, int start_y, uint32_t col
 		x = 0;
 		while (x < TILE)
 		{
-			myppixel(img, start_x + x, start_y + y, color);
+			if (start_x + x >= 0 && start_y + y >= 0
+				&& start_x + x < WIN_WIDTH && start_y + y < WIN_HEIGHT)
+				mlx_put_pixel(img, x, y, color);
 			x++;
 		}
 		y++;
 	}
 }
 
+static uint32_t	get_colors(t_game *game, int col, int row, int len)
+{
+	uint32_t	color;
+
+	if (col < len && (row == (int)game->player.pos_y
+			&& col == (int)game->player.pos_x))
+		color = COLOR_PLAYER;
+	else if (col < len && game->map.grid[row][col] == '1')
+		color = COLOR_WALLS;
+	else if (col < len && game->map.grid[row][col] == '0')
+		color = COLOR_FLOOR;
+	else
+		color = COLOR_SPACE;
+	return (color);
+}
+
 static void	draw_map(mlx_image_t *img, t_game *game)
 {
 	int			row;
 	int			col;
-	int			allignment_x;
+	int			len;
+	int			allign_right;
 	uint32_t	color;
 
-	allignment_x = WIN_WIDTH - (game->map.width * TILE);
+	allign_right = WIN_WIDTH - (game->map.width * TILE);
 	row = 0;
 	while (row < game->map.height)
 	{
 		col = 0;
+		len = (int)ft_strlen(game->map.grid[row]);
 		while (col < game->map.width)
 		{
-			if (row == (int)game->player.pos_y
-				&& col == (int)game->player.pos_x)
-				color = COLOR_PLAYER;
-			else if (game->map.grid[row][col] == '1')
-				color = COLOR_WALLS;
-			else if (game->map.grid[row][col] == '0')
-				color = COLOR_FLOOR;
-			else
-				color = COLOR_SPACE;
-			draw_square(img, allignment_x + (col * TILE), row * TILE, color);
+			color = get_colors(game, col, row, len);
+			minimap(img, allign_right + (col * TILE), row * TILE, color);
 			col++;
 		}
 		row++;
