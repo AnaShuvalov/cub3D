@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 13:11:51 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 17:01:48 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_space_only(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\r')
+		if (line[i] != ' ')
 			return (NO);
 		i++;
 	}
@@ -83,7 +83,7 @@ bool	check_for_map(char *line)
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'W' && line[i] != 'E' && line[i] != ' '
-			&& line[i] != '\n' && line[i] != '\t' && line[i] != '\r')
+			&& line[i] != '\n')
 			return (0);
 		i++;
 	}

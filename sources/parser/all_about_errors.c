@@ -6,11 +6,33 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:26:47 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/14 13:28:14 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:56:44 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void	replace_with_spaces(char *line)
+{
+	int		i;
+	int		len;
+
+	if (line == NULL)
+		return ;
+	len = ft_strlen(line);
+	while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r'))
+	{
+		len--;
+		line[len] = '\0';
+	}
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\t')
+			line[i] = ' ';
+		i++;
+	}
+}
 
 void	free_array(char **array)
 {
