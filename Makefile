@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/23 16:15:02 by anshuval         ###   ########.fr        #
+#    Updated: 2026/09/23 17:31:52 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ PARSER =		sources/main.c \
 			
 RAYCASTER =		sources/raycaster/raymain.c \
 				sources/raycaster/raycast.c \
-				sources/raycaster/camera.c
+				sources/raycaster/camera.c \
+				sources/raycaster/graphics.c
 
 
 
