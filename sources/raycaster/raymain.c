@@ -109,11 +109,11 @@
 // 	}
 // }
 
-int	start_game(t_game *game)
-{
-	printf("start\n");
-	mlx_t	*mlx;
-	mlx_image_t *img;
+// int	start_game(t_game *game)
+// {
+// 	printf("start\n");
+// 	mlx_t	*mlx;
+// 	mlx_image_t *img;
 
 // 	mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", false);
 // 	if (!mlx)
@@ -128,10 +128,10 @@ int	start_game(t_game *game)
 
 	// draw_map(img, game.map.grid);
 
-	game->mlx = mlx;
-	game->framebuffer = img;
-	mlx_loop_hook(mlx, render_frame, game);
-	mlx_loop(mlx);
+	// game->mlx = mlx;
+	// game->framebuffer = img;
+	// mlx_loop_hook(mlx, render_frame, game);
+	// mlx_loop(mlx);
 
 // 	printf("finish\n");
 // 	return (0);

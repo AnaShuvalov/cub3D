@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/22 15:36:26 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/23 12:39:46 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct s_map
 typedef struct s_game
 {
 	// should be mlx_t	*mlx as a context pointer, not mlx_ptr or win_ptr
-	mlx_t	*mlx;
+	mlx_t		*mlx;
 	t_map		map; // parsed map with textures and colors
 	t_player	player; // player position and direction vectors
 	t_keys		key; // current state of the keys
@@ -101,6 +101,7 @@ void	free_array(char **array);
 void	error_message(char *s);
 
 // RAYCASTER ///////////////////////////////
+void	render_frame(void	*param);
 int		start_game(t_game *game);
 
 // HOOKS ////////////////////

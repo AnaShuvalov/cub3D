@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:09 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/22 14:32:02 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/23 12:01:59 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ static void	init_ray_direction(t_ray *ray, t_player *player, int x)
 
 	camera_x = 2 * x / (double)WIN_WIDTH - 1.0;
 	ray->ray_dir_x = player->dir_x + player->plane_x * camera_x;
-
+	ray->ray_dir_y = player->dir_y + player->plane_y * camera_x;
 }
 
-// Calculates how far ray travels to cross one cell
 // 1e30 is 1 times 10^30 because otherwise it'd go to infinity
 // which we can't use in calulation here. Large enough to never
 // cause problems, small enough to not overflow
 // fabs stands for "floating-point absolute value", basically from -1 to (+)1 etc
+
+// Calculates how far ray travels to cross one cell
 static void	init_delta_dist(t_ray *ray)
 {
 	if (ray->ray_dir_x == 0)
