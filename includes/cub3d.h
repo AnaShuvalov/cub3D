@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 17:25:52 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/23 19:45:06 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@
 
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
+
+# define MINIMAP_TILE 10
+# define MINIMAP_PADDING 10
+
+# define MINIMAP_WALLS		0x483329FF
+# define MINIMAP_FLOOR		0x3d4a3eFF
+# define MINIMAP_PLAYER 	0x39ff14FF
+# define MINIMAP_SPACE 		0x666666AA
+# define MINIMAP_COMPASS	0xFFFFFFFF
+
+# define COLOR_CEILING		0x55e4ffFF
+# define COLOR_WALLS		0x895544FF
+# define COLOR_FLOOR		0x56db32FF
+# define COLOR_PLAYER 		0xcb137fFF
 
 // Key movemment flags - used for smooth wlaking and fluid movement.
 // If a key is pressed the bool is set to TRUE. When the key is released,
@@ -112,5 +126,6 @@ void	exit_on_error(t_game *game, char *s);
 
 // RENDER ///////////////////
 void	render_frame(void	*param);
+void	draw_map(mlx_image_t *img, t_game *game);
 
 #endif
