@@ -15,3 +15,9 @@
 - raycast can 'glitch' through walls
 - 
 
+
+PARSER:
+- there's a parser directory with only objects, do we need that?
+- there's object files in the /sources/parser directory, are they supposed to be there?
+- is main.o supposed to go in the working directory or in the obj directory?
+

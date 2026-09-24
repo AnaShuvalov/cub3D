@@ -6,16 +6,50 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 14:43:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/23 21:16:13 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/24 13:58:53 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 
+static double	calculate_brightness(t_game *game, t_ray *ray)
+{
+	double	brightness;
+	double	distance_factor;
+
+	distance_factor = 1.0 + (ray->perp_wall_dist * game->light.light_falloff);
+	brightness = game->light.max_brightness / distance_factor;
+
+	if (brightness < game->light.min_brightness)
+		brightness = game->light.min_brightness;
+
+	return (brightness);
+}
+
+static	uint32_t	darken_color(uint32_t color, double	brightness)
+{
+	int	r;
+	int	g;
+	int	b;
+	int	a;
+
+	r = (color >> 24) & 0xFF;
+	g = (color >> 16) & 0xFF;
+	b = (color >> 8) & 0xFF;
+	a = color & 0xFF;
+
+	r = (int)(r * brightness);
+	g = (int)(g * brightness);
+	b = (int)(b * brightness);
+
+	return (((uint32_t)r << 24) | ((uint32_t)g << 16) | ((uint32_t)b << 8) | a);
+}
+
 void	draw_wall_slice(t_game *game, t_ray *ray, int x)
 {
 	int			y;
-	uint32_t		color;
+	uint32_t	color;
+	double		brightness;
 
 	color = COLOR_WALLS;
 
@@ -28,8 +62,11 @@ void	draw_wall_slice(t_game *game, t_ray *ray, int x)
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
 
+	brightness = calculate_brightness(game, ray);
+	color = darken_color(COLOR_WALLS, brightness);
+
 	y = ray->draw_start;
-	while (y >= ray->draw_start && y < ray->draw_end)
+	while (y < ray->draw_end)
 	{
 		mlx_put_pixel(game->framebuffer, (uint32_t)x, (uint32_t)y, color);
 		y++;

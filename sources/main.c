@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 21:11:22 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/24 14:02:02 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	init_game(t_game *game)
 	game->map.floor_color = -1;
 	game->map.ceiling_color = -1;
 
-	game->light.light_fade = 0.1;
-	game->light.min_brightness = 0.2;
+	game->light.light_falloff = 0.2;
+	game->light.min_brightness = 0.1;
 	game->light.max_brightness = 1.0;
 }
 

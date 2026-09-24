@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 21:11:05 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/24 13:33:56 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_map
 
 typedef	struct s_light
 {
-	double	light_fade;
+	double	light_falloff;
 	double	min_brightness;
 	double	max_brightness;
 }	t_light;
