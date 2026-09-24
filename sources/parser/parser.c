@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 17:19:26 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/24 15:02:59 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	verify_metadata(t_game *game)
 		free_game(game);
 		ft_error("Missing wall textures.\n");
 	}
-	if (game->map.floor_color == -1 || game->map.ceiling_color == -1)
+	if (game->map.floor_color == ERROR || game->map.ceiling_color == ERROR)
 	{
 		free_game(game);
 		ft_error("Missing floor or ceiling colors.\n");
@@ -38,25 +38,25 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 {
 	char	*start;
 
-	if (is_space_only(line) == YES && *map == NULL)
-		return (0);
+	if (is_space_only(line) == OK && *map == NULL)
+		return (OK);
 	start = line;
 	while (*start == ' ')
 		start++;
 	if (*map != NULL && (start[0] == 'N' || start[0] == 'S' || start[0] == 'W'
 			|| start[0] == 'E' || start[0] == 'F' || start[0] == 'C'))
-		return (error_message("Map should be last info in file.\n"), -1);
+		return (error_message("Map should be last info in file.\n"), ERROR);
 	if (start[0] == 'N' || start[0] == 'S'
 		|| start[0] == 'W' || start[0] == 'E')
 		return (verify_path(game, start));
 	else if (start[0] == 'F' || start[0] == 'C')
 		return (verify_color(game, start));
-	else if (check_for_map(line) == 1
-		|| (is_space_only(line) == YES && *map != NULL))
+	else if (check_for_map(line) == OK
+		|| (is_space_only(line) == OK && *map != NULL))
 		return (create_map_linked_list(line, map));
 	else
-		return (error_message("Extra information in the .cub file.\n"), -1);
-	return (0);
+		return (error_message("Extra information in the .cub file.\n"), ERROR);
+	return (OK);
 }
 
 static void	convert_map_to_list(int fd, t_game *game)
@@ -71,7 +71,7 @@ static void	convert_map_to_list(int fd, t_game *game)
 		if (line == NULL)
 			break ;
 		replace_with_spaces(line);
-		if (populate_game(game, line, &map) == -1)
+		if (populate_game(game, line, &map) == ERROR)
 		{
 			free(line);
 			ft_lstclear(&map, free);
@@ -88,12 +88,12 @@ static void	convert_map_to_list(int fd, t_game *game)
 static void	read_map(int fd, t_game *game)
 {
 	convert_map_to_list(fd, game);
-	if (set_player(game) == -1)
+	if (set_player(game) == ERROR)
 	{
 		free_game(game);
 		ft_error("Only one player spawn point per map is allowed.\n");
 	}
-	if (validate_grid(game) == -1)
+	if (validate_grid(game) == ERROR)
 	{
 		free_game(game);
 		ft_error("Invalid map. Not enclosed by walls.\n");
@@ -112,5 +112,5 @@ int	parser(int argc, char **argv, t_game *game)
 		ft_error("Check permissions for the map file.\n");
 	read_map(fd, game);
 	verify_metadata(game);
-	return (0);
+	return (OK);
 }

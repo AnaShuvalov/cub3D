@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 17:01:48 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/24 14:56:12 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	is_space_only(char *line)
 	while (line[i])
 	{
 		if (line[i] != ' ')
-			return (NO);
+			return (ERROR);
 		i++;
 	}
-	return (YES);
+	return (OK);
 }
 
 int	empty_lines_in_map_linked_list(t_list *map)
@@ -34,24 +34,24 @@ int	empty_lines_in_map_linked_list(t_list *map)
 	prev = NULL;
 	while (map)
 	{
-		if (is_space_only(map->content) == YES)
+		if (is_space_only(map->content) == OK)
 		{
 			to_check = map;
 			while (to_check)
 			{
-				if (is_space_only(to_check->content) == NO)
-					return (error_message("Empty lines inside map.\n"), -1);
+				if (is_space_only(to_check->content) == ERROR)
+					return (error_message("Empty lines inside map.\n"), ERROR);
 				to_check = to_check->next;
 			}
 			if (prev)
 				prev->next = NULL;
 			ft_lstclear(&map, free);
-			return (0);
+			return (OK);
 		}
 		prev = map;
 		map = map->next;
 	}
-	return (0);
+	return (OK);
 }
 
 int	create_map_linked_list(char *line, t_list **map)
@@ -61,44 +61,44 @@ int	create_map_linked_list(char *line, t_list **map)
 
 	copied = ft_strdup(line);
 	if (copied == NULL)
-		return (-1);
+		return (ERROR);
 	new_node = ft_lstnew(copied);
 	if (new_node == NULL)
 	{
 		free(copied);
-		return (-1);
+		return (ERROR);
 	}
 	ft_lstadd_back(map, new_node);
-	return (0);
+	return (OK);
 }
 
-bool	check_for_map(char *line)
+int	check_for_map(char *line)
 {
 	int	i;
 
 	i = 0;
 	if (line == NULL || line[0] == '\0')
-		return (0);
+		return (ERROR);
 	while (line[i])
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'W' && line[i] != 'E' && line[i] != ' '
 			&& line[i] != '\n')
-			return (0);
+			return (ERROR);
 		i++;
 	}
-	return (1);
+	return (OK);
 }
 
 void	check_and_convert_map_into_grid(t_list *map, t_game *game)
 {
-	if (empty_lines_in_map_linked_list(map) == -1)
+	if (empty_lines_in_map_linked_list(map) == ERROR)
 	{
 		ft_lstclear(&map, free);
 		free_game(game);
 		exit(1);
 	}
-	if (list_to_grid(map, game) == -1)
+	if (list_to_grid(map, game) == ERROR)
 	{
 		ft_lstclear(&map, free);
 		free_game(game);

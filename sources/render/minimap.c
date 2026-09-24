@@ -6,16 +6,16 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 19:43:41 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 19:50:33 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/24 15:00:18 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static minimap_compass(mlx_image_t *img, t_game *game)
-{
+// static minimap_compass(mlx_image_t *img, t_game *game)
+// {
 	
-}
+// }
 
 static void	minimap(mlx_image_t *img, int start_x, int start_y, uint32_t color)
 {
@@ -79,5 +79,5 @@ void	draw_map(mlx_image_t *img, t_game *game)
 		}
 		row++;
 	}
-	minimap_compass(img, game);
+	// minimap_compass(img, game);
 }

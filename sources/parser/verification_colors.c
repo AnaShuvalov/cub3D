@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 16:46:38 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/24 14:54:17 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static int	assign_colors(t_game *game, char **rgb, const char *line)
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (error_message("Invalid color in the map.\n"), -1);
-	if (line[0] == 'F' && game->map.floor_color == -1)
+		return (error_message("Invalid color in the map.\n"), ERROR);
+	if (line[0] == 'F' && game->map.floor_color == ERROR)
 		game->map.floor_color = ((r << 16) | (g << 8) | b);
-	else if (line[0] == 'C' && game->map.ceiling_color == -1)
+	else if (line[0] == 'C' && game->map.ceiling_color == ERROR)
 		game->map.ceiling_color = ((r << 16) | (g << 8) | b);
 	else
-		return (error_message("Duplicate Color line.\n"), -1);
-	return (0);
+		return (error_message("Duplicate Color line.\n"), ERROR);
+	return (OK);
 }
 
 static int	check_rgb(char *rgb)
@@ -38,25 +38,25 @@ static int	check_rgb(char *rgb)
 	int	len;
 
 	if (rgb == NULL || rgb[0] == '\0')
-		return (error_message("No or invalid color in the map.\n"), -1);
+		return (error_message("No or invalid color in the map.\n"), ERROR);
 	i = 0;
 	len = 0;
 	while (rgb[i] == ' ')
 		i++;
 	if (!ft_isdigit(rgb[i]))
-		return (error_message("No or invalid color in the map.\n"), -1);
+		return (error_message("No or invalid color in the map.\n"), ERROR);
 	while (ft_isdigit(rgb[i]))
 	{
 		i++;
 		len++;
 	}
 	if (len > 3)
-		return (error_message("Invalid color in the map.\n"), -1);
+		return (error_message("Invalid color in the map.\n"), ERROR);
 	while (rgb[i] == ' ')
 		i++;
 	if (rgb[i] != '\0')
-		return (error_message("No or invalid color in the map.\n"), -1);
-	return (0);
+		return (error_message("No or invalid color in the map.\n"), ERROR);
+	return (OK);
 }
 
 static int	is_rgb(t_game *game, const char *line, char **rgb)
@@ -65,17 +65,17 @@ static int	is_rgb(t_game *game, const char *line, char **rgb)
 
 	if (rgb == NULL || rgb[0][0] == '\0' || rgb[1][0] == '\0'
 			|| rgb[2][0] == '\0')
-		return (error_message("No or invalid color in the map.\n"), -1);
+		return (error_message("No or invalid color in the map.\n"), ERROR);
 	i = 0;
 	while (rgb[i])
 	{
-		if (check_rgb(rgb[i]) == -1)
-			return (-1);
+		if (check_rgb(rgb[i]) == ERROR)
+			return (ERROR);
 		i++;
 	}
-	if (assign_colors(game, rgb, line) == -1)
-		return (-1);
-	return (0);
+	if (assign_colors(game, rgb, line) == ERROR)
+		return (ERROR);
+	return (OK);
 }
 
 static int	count_commas(char *color)
@@ -100,11 +100,11 @@ int	verify_color(t_game *game, const char *line)
 	char	*color;
 
 	if (ft_strncmp(line, "F ", 2) != 0 && ft_strncmp(line, "C ", 2) != 0)
-		return (error_message("Invalid Color line naming.\n"), -1);
+		return (error_message("Invalid Color line naming.\n"), ERROR);
 	color = (char *) line + 1;
 	if (count_commas(color) != 2)
 		return (error_message("RGB in the .cub file must be separated "
-				"by exactly two commas.\n"), -1);
+				"by exactly two commas.\n"), ERROR);
 	while (*color == ' ')
 		color++;
 	rgb = ft_split(color, ',');
@@ -112,13 +112,13 @@ int	verify_color(t_game *game, const char *line)
 		|| rgb[2] == NULL || rgb[3] != NULL)
 	{
 		free_array(rgb);
-		return (error_message("Invalid Color wording.\n"), -1);
+		return (error_message("Invalid Color wording.\n"), ERROR);
 	}
-	if (is_rgb(game, line, rgb) == -1)
+	if (is_rgb(game, line, rgb) == ERROR)
 	{
 		free_array(rgb);
-		return (-1);
+		return (ERROR);
 	}
 	free_array(rgb);
-	return (0);
+	return (OK);
 }
