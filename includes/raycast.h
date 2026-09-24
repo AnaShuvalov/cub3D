@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/24 14:07:53 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/24 17:08:06 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct	s_ray {
 	double	delta_dist_x;	// distance the ray has to travel across 1 grid unit
 	double	delta_dist_y;
 	int		wall_hit;
-	int		side;		// -1 or 1 depending on W,E,S,N (x and y axis n stuff)
+	int		side;			// 0 or 1 depending on W,E,S,N (x and y axis n stuff)
 	double	perp_wall_dist;	// perpendicular wall dist to avoid fisheye
 	int		line_height;	// height of the wall to draw
 	int		draw_start;		// lowest pixel to start drawing
@@ -53,5 +53,6 @@ void	perform_dda(char **map, t_ray *ray);
 void	init_dda_vars(t_ray *ray);
 void	draw_wall_slice(t_game *game, t_ray *ray, int x);
 void	draw_floor_and_ceiling(t_game *game);
+void	direction_handler(t_game *game);
 
 #endif
