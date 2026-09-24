@@ -6,16 +6,35 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 19:43:41 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/24 15:00:18 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/24 16:52:19 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// static minimap_compass(mlx_image_t *img, t_game *game)
-// {
-	
-// }
+static void	minimap_compass(mlx_image_t *img, t_game *game, int minimap)
+{
+	int	dot_x;
+	int	dot_y;
+	int	x;
+	int	y;
+
+	dot_x =  (int)(minimap + ((game->player.pos_x + game->player.dir_x)
+		* MINIMAP_TILE)) - 1;
+	dot_y =  (int)(MINIMAP_PADDING + ((game->player.pos_y + game->player.dir_y)
+		* MINIMAP_TILE)) - 1;
+	y = 0;
+	while (y < MINIMAP_DOT_SIZE)
+	{
+		x = 0;
+		while (x < MINIMAP_DOT_SIZE)
+		{
+			mlx_put_pixel(img, dot_x + x, dot_y + y, MINIMAP_COMPASS);
+			x++;
+		}
+		y++;
+	}
+}
 
 static void	minimap(mlx_image_t *img, int start_x, int start_y, uint32_t color)
 {
@@ -79,5 +98,5 @@ void	draw_map(mlx_image_t *img, t_game *game)
 		}
 		row++;
 	}
-	// minimap_compass(img, game);
+	minimap_compass(img, game, allign_right);
 }
