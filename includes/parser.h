@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:54 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 16:52:38 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/24 14:54:44 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "cub3d.h"
 
-# define YES	1
-# define NO		0
+# define OK		0
+# define ERROR	-1
 
 int		parser(int argc, char **argv, t_game *game);
 void	verify_map_pathname(char *filename);
@@ -25,7 +25,7 @@ int		verify_path(t_game *game, const char *line);
 int		verify_color(t_game *game, const char *line);
 int		create_map_linked_list(char *line, t_list **map);
 int		is_space_only(char *line);
-bool	check_for_map(char *line);
+int		check_for_map(char *line);
 int		list_to_grid(t_list *map, t_game *game);
 int		set_player(t_game *game);
 int		validate_grid(t_game *game);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/23 17:31:52 by olmatske         ###   ########.fr        #
+#    Updated: 2026/09/23 19:44:44 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ RAYCASTER =		sources/raycaster/raymain.c \
 HOOKS =			sources/hooks/key_events.c \
 				sources/hooks/close_events.c
 
-RENDER =		sources/render/frame.c
+RENDER =		sources/render/frame.c \
+				sources/render/minimap.c
 
 SRCS = $(PARSER) $(RAYCASTER) $(HOOKS) $(RENDER)
 

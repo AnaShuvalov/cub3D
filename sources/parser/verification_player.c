@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 16:39:36 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/08 17:15:05 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/24 14:57:30 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int	set_player(t_game *game)
 		y++;
 	}
 	if (count != 1)
-		return (-1);
-	return (0);
+		return (ERROR);
+	return (OK);
 }
