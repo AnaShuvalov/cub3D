@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 19:43:41 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/24 16:52:19 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/25 15:53:52 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	minimap_compass(mlx_image_t *img, t_game *game, int minimap)
 	int	x;
 	int	y;
 
-	dot_x =  (int)(minimap + ((game->player.pos_x + game->player.dir_x)
-		* MINIMAP_TILE)) - 1;
-	dot_y =  (int)(MINIMAP_PADDING + ((game->player.pos_y + game->player.dir_y)
-		* MINIMAP_TILE)) - 1;
+	dot_x = (int)(minimap + ((game->player.pos_x + game->player.dir_x)
+				* MINIMAP_TILE)) - 1;
+	dot_y = (int)(MINIMAP_PADDING + ((game->player.pos_y + game->player.dir_y)
+				* MINIMAP_TILE)) - 1;
 	y = 0;
 	while (y < MINIMAP_DOT_SIZE)
 	{

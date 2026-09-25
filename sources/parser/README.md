@@ -8,3 +8,5 @@
 [x] if there is an empty line and there is no other characteres till the end of the file than the empty lines can be ignored
 [ ] if i still stick to the linked list after this - delete the nodes with the empty lines
 [ ] 
+
+## help with the raycasting - the colors of the walls should be different for every wall
