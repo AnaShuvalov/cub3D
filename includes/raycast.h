@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/24 17:08:06 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/25 22:20:34 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void	init_dda_vars(t_ray *ray);
 void	draw_wall_slice(t_game *game, t_ray *ray, int x);
 void	draw_floor_and_ceiling(t_game *game);
 void	direction_handler(t_game *game);
+void	clear_framebuffer(t_game *game);
 
 #endif

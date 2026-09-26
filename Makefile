@@ -6,7 +6,7 @@
 #    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/24 16:21:12 by olmatske         ###   ########.fr        #
+#    Updated: 2026/09/25 22:20:00 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,7 @@ PARSER =		sources/main.c \
 				includes/get_next_line/get_next_line.c \
 				includes/get_next_line/get_next_line_utils.c
 			
-RAYCASTER =		sources/raycaster/raymain.c \
-				sources/raycaster/raycast.c \
+RAYCASTER =		sources/raycaster/raycast.c \
 				sources/raycaster/camera.c \
 				sources/raycaster/graphics.c \
 				sources/raycaster/orientation.c
