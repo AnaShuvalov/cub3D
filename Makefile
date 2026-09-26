@@ -6,7 +6,7 @@
 #    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/25 22:20:00 by olmatske         ###   ########.fr        #
+#    Updated: 2026/09/26 21:55:15 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ PARSER =		sources/main.c \
 RAYCASTER =		sources/raycaster/raycast.c \
 				sources/raycaster/camera.c \
 				sources/raycaster/graphics.c \
-				sources/raycaster/orientation.c
+				sources/raycaster/orientation.c \
+				sources/raycaster/wallcolors.c
 
 
 HOOKS =			sources/hooks/key_events.c \
