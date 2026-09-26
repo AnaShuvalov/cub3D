@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 14:43:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/25 16:02:52 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/26 21:42:45 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	clear_framebuffer(t_game *game)
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
-		while (WIN_WIDTH)
+		while (x < WIN_WIDTH)
 		{
-			mlx_put_pixel(game->framebuffer, x, y, 0x000000FF);
+			mlx_put_pixel(game->framebuffer, x, y, 0x00000000);
 			x++;
 		}
 		y++;
