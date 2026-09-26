@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/26 23:28:19 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/26 23:45:55 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	walk_forward_backward(t_game *game)
 	}
 	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y + move_y))
 		game->player.pos_x += move_x;
-	if (!is_wall(game, game->player.pos_x, game->player.pos_y))
+	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y + move_y))
 		game->player.pos_y += move_y;
 }
 
