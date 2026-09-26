@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/26 23:45:55 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/26 23:51:46 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_wall(t_game *game, double x, double y)
 	map_y = (int)y;
 	if (map_y < 0 || map_y >= game->map.height || map_x < 0 || map_x >= game->map.width)
 		return (1);
-	if (game->map.grid[map_y][map_x] > '0')
+	if (game->map.grid[map_y][map_x] != '0')
 		return (1);
 	return (0);
 }
