@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 14:43:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/26 21:42:45 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/26 22:04:52 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	draw_wall_slice(t_game *game, t_ray *ray, int x)
 	uint32_t	color;
 	double		brightness;
 
-	color = COLOR_WALLS;
+	color = get_wall_color(ray);
 
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
@@ -63,7 +63,7 @@ void	draw_wall_slice(t_game *game, t_ray *ray, int x)
 		ray->draw_end = WIN_HEIGHT - 1;
 
 	brightness = calculate_brightness(game, ray);
-	color = darken_color(COLOR_WALLS, brightness);
+	color = darken_color(get_wall_color(ray), brightness);
 
 	y = ray->draw_start;
 	while (y < ray->draw_end)
