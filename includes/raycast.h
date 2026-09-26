@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/24 14:07:53 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/25 17:46:59 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	perform_dda(char **map, t_ray *ray);
 void	init_dda_vars(t_ray *ray);
 void	draw_wall_slice(t_game *game, t_ray *ray, int x);
 void	draw_floor_and_ceiling(t_game *game);
+uint32_t	get_wall_color(t_ray *ray);
 
 #endif
