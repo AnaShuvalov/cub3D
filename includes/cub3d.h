@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/24 16:50:02 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/26 21:53:37 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,7 @@ void	exit_on_error(t_game *game, char *s);
 // RENDER ///////////////////
 void	render_frame(void	*param);
 void	draw_map(mlx_image_t *img, t_game *game);
+void	draw_floor_and_ceiling(t_game *game);
 
 #endif
+

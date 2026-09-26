@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:09 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/23 14:49:00 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/26 21:42:34 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	render_frame(void	*param)
 
 	// drawing floor + ceiling function here at some point
 	draw_floor_and_ceiling(game);
+	direction_handler(game);
+	clear_framebuffer(game);
 
 	while (x < WIN_WIDTH)
 	{
@@ -95,4 +97,3 @@ void	render_frame(void	*param)
 		x++;
 	}
 }
-

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/25 17:46:59 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/26 21:54:05 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef __RAYCAST_H__
 #define __RAYCAST_H__
@@ -38,7 +39,7 @@ typedef struct	s_ray {
 	double	delta_dist_x;	// distance the ray has to travel across 1 grid unit
 	double	delta_dist_y;
 	int		wall_hit;
-	int		side;		// -1 or 1 depending on W,E,S,N (x and y axis n stuff)
+	int		side;			// 0 or 1 depending on W,E,S,N (x and y axis n stuff)
 	double	perp_wall_dist;	// perpendicular wall dist to avoid fisheye
 	int		line_height;	// height of the wall to draw
 	int		draw_start;		// lowest pixel to start drawing
@@ -54,5 +55,7 @@ void	init_dda_vars(t_ray *ray);
 void	draw_wall_slice(t_game *game, t_ray *ray, int x);
 void	draw_floor_and_ceiling(t_game *game);
 uint32_t	get_wall_color(t_ray *ray);
+void	direction_handler(t_game *game);
+void	clear_framebuffer(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 14:43:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/24 13:58:53 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/26 21:42:45 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,24 @@ void	draw_wall_slice(t_game *game, t_ray *ray, int x)
 	while (y < ray->draw_end)
 	{
 		mlx_put_pixel(game->framebuffer, (uint32_t)x, (uint32_t)y, color);
+		y++;
+	}
+}
+
+void	clear_framebuffer(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			mlx_put_pixel(game->framebuffer, x, y, 0x00000000);
+			x++;
+		}
 		y++;
 	}
 }
