@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:13 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/23 14:44:16 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/26 23:59:18 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	perform_dda(char **map, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1; // hit y axis
 		}
-		if (map[ray->map_y][ray->map_x] > '0')
+		if (map[ray->map_y][ray->map_x] != '0') //  Access BEFORE checking bounds or smth
 			ray->wall_hit = 1;
 		if (ray->map_y < 0 || ray->map_x < 0)
 			break;
