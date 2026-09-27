@@ -10,3 +10,9 @@
 [ ] 
 
 ## help with the raycasting - the colors of the walls should be different for every wall
+## to do after vacation
+[ ] the player square is overlapping wit he walls till it hits the middle of the square.
+[ ] check the minimap file - the functions are duplicated for sme pointrs. check the math (minimap compass get player and minimap)
+[ ] check the minimap player size
+[ ] why the view dot drwas an oval (up and down more than left and right) and not a circle
+[ ] make the empty space between the vie dot and the player square less
