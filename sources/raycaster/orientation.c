@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/27 16:36:33 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/27 17:15:55 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,21 @@ static void	walk_forward_backward(t_game *game)
 		move_x -= game->player.dir_x * MOVEMENT_SPEED;
 		move_y -= game->player.dir_y * MOVEMENT_SPEED;
 	}
-	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y + move_y))
+	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y))
 		game->player.pos_x += move_x;
-	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y + move_y))
+	if (!is_wall(game, game->player.pos_x, game->player.pos_y + move_y))
 		game->player.pos_y += move_y;
 }
+
+// static void	strafe_left_right(t_game *game)
+// {
+// 	double	move_x;
+// 	double	move_y;
+
+// 	move_x = 0;
+// 	move_y = 0;
+
+// }
 
 void	direction_handler(t_game *game)
 {

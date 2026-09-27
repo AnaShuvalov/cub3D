@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:09 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/26 22:15:34 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/09/27 17:13:29 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static void	init_step(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (player->pos_x + 1.0 - ray->map_x) * ray->delta_dist_x;
+		// ray->side_dist_x = (player->pos_x + 1.0 - ray->map_x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x) * ray->delta_dist_x;
 	}
 	if (ray->ray_dir_y < 0)
 	{
@@ -61,7 +62,8 @@ static void	init_step(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (player->pos_y + 1.0 - ray->map_y) * ray->delta_dist_y;
+		// ray->side_dist_y = (player->pos_y + 1.0 - ray->map_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
 	}
 }
 
@@ -83,6 +85,13 @@ void	render_frame(void	*param)
 
 	game = (t_game *)param;
 	x = 0;
+
+	// static int frame_count = 0;
+	// if (frame_count == 0)
+	// {
+	// 	printf("Player dir: (%.2f, %.2f)\n", game->player.dir_x, game->player.dir_y);
+	// 	printf("Player plane: (%.2f, %.2f)\n", game->player.plane_x, game->player.plane_y);
+	// }
 
 	// drawing floor + ceiling function here at some point
 	direction_handler(game);
