@@ -91,7 +91,7 @@ void	render_frame(void	*param)
 	while (x < WIN_WIDTH)
 	{
 		init_ray(&ray, &game->player, x);
-		perform_dda(game->map.grid, &ray);
+		perform_dda(game, &ray);
 		draw_wall_slice(game, &ray, x);
 		x++;
 	}

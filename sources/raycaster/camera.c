@@ -12,8 +12,17 @@
 
 #include "raycast.h"
 
+static int	hit_wall(t_map *map, int x, int y)
+{
+	if (x < 0 || y < 0 || y >= map->height || x >= map->width)
+		return (1);
+	if (!map->grid[y] || x >= (int)ft_strlen(map->grid[y]))
+		return (1);
+	return (map->grid[y][x] != '0');
+}
+
 // DDA stands for Digital Differential Analysis
-void	perform_dda(char **map, t_ray *ray)
+void	perform_dda(t_game *game, t_ray *ray)
 {
 	while (ray->wall_hit == 0)
 	{
@@ -29,10 +38,8 @@ void	perform_dda(char **map, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1; // hit y axis
 		}
-		if (map[ray->map_y][ray->map_x] != '0') //  Access BEFORE checking bounds or smth
+		if (hit_wall(&game->map, ray->map_x, ray->map_y))
 			ray->wall_hit = 1;
-		if (ray->map_y < 0 || ray->map_x < 0)
-			break;
 	}
 	if (ray->side == 0)
 		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);

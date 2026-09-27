@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/27 00:04:35 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/27 16:36:33 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ static int	is_wall(t_game *game, double x, double y)
 
 	map_x = (int)x;
 	map_y = (int)y;
-	if (map_y < 0 || map_y >= game->map.height || map_x < 0)
+	if (x < 0 || y < 0 || map_y >= game->map.height || map_x >= game->map.width)
 		return (1);
 	if (!game->map.grid[map_y])
+		return (1);
+	if (map_x >= (int)ft_strlen(game->map.grid[map_y]))
 		return (1);
 	if (game->map.grid[map_y][map_x] != '0')
 		return (1);
@@ -56,8 +58,8 @@ static void	walk_forward_backward(t_game *game)
 	}
 	if (game->key.s)
 	{
-		move_x = -game->player.dir_x * MOVEMENT_SPEED;
-		move_y = -game->player.dir_y * MOVEMENT_SPEED;
+		move_x -= game->player.dir_x * MOVEMENT_SPEED;
+		move_y -= game->player.dir_y * MOVEMENT_SPEED;
 	}
 	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y + move_y))
 		game->player.pos_x += move_x;
