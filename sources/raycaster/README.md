@@ -3,9 +3,10 @@
 ### Roadmap
 
 - [X] movement (vector with normalization, meaning the speed is the same)
-- [ ] vector addition -> movement speed and rotational speed
-- [ ] wall collisiion
+- [X] vector addition -> movement speed and rotational speed
+- [X] wall collisiion
 - [X] shader
+- [ ] hook up textures
 
 
 

@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:09 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/27 17:13:29 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/27 17:32:34 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,6 @@ void	render_frame(void	*param)
 
 	game = (t_game *)param;
 	x = 0;
-
-	// static int frame_count = 0;
-	// if (frame_count == 0)
-	// {
-	// 	printf("Player dir: (%.2f, %.2f)\n", game->player.dir_x, game->player.dir_y);
-	// 	printf("Player plane: (%.2f, %.2f)\n", game->player.plane_x, game->player.plane_y);
-	// }
 
 	// drawing floor + ceiling function here at some point
 	direction_handler(game);

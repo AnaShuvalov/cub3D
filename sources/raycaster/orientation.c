@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/27 17:15:55 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/09/27 17:36:20 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,22 @@ static int	is_wall(t_game *game, double x, double y)
 	if (map_x >= (int)ft_strlen(game->map.grid[map_y]))
 		return (1);
 	if (game->map.grid[map_y][map_x] != '0')
+		return (1);
+	return (0);
+}
+
+static int	check_collision(t_game *game, double x, double y)
+{
+	double	radius;
+
+	radius = 0.01;
+	if (is_wall(game, x - radius, y - radius))
+		return (1);
+	if (is_wall(game, x + radius, y - radius))
+		return (1);
+	if (is_wall(game, x - radius, y + radius))
+		return (1);
+	if (is_wall(game, x + radius, y + radius))
 		return (1);
 	return (0);
 }
@@ -61,21 +77,34 @@ static void	walk_forward_backward(t_game *game)
 		move_x -= game->player.dir_x * MOVEMENT_SPEED;
 		move_y -= game->player.dir_y * MOVEMENT_SPEED;
 	}
+	if (!check_collision(game, game->player.pos_x + move_x, game->player.pos_y))
+		game->player.pos_x += move_x;
+	if (!check_collision(game, game->player.pos_x, game->player.pos_y + move_y))
+		game->player.pos_y += move_y;
+}
+
+static void	strafe_left_right(t_game *game)
+{
+	double	move_x;
+	double	move_y;
+
+	move_x = 0;
+	move_y = 0;
+	if (game->key.a)
+	{
+		move_x = -game->player.plane_x * MOVEMENT_SPEED;
+		move_y = -game->player.plane_y * MOVEMENT_SPEED;
+	}
+	if (game->key.d)
+	{
+		move_x = game->player.plane_x * MOVEMENT_SPEED;
+		move_y = game->player.plane_y * MOVEMENT_SPEED;
+	}
 	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y))
 		game->player.pos_x += move_x;
 	if (!is_wall(game, game->player.pos_x, game->player.pos_y + move_y))
 		game->player.pos_y += move_y;
 }
-
-// static void	strafe_left_right(t_game *game)
-// {
-// 	double	move_x;
-// 	double	move_y;
-
-// 	move_x = 0;
-// 	move_y = 0;
-
-// }
 
 void	direction_handler(t_game *game)
 {
@@ -85,4 +114,6 @@ void	direction_handler(t_game *game)
 		rotate_player(&game->player, -ROTATION_SPEED);
 	if (game->key.w || game->key.s)
 		walk_forward_backward(game);
+	if (game->key.a || game->key.d)
+		strafe_left_right(game);
 }
