@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/27 17:27:44 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/03 21:26:36 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #define COLOR_FLOOR			0x56db32FF
 #define COLOR_PLAYER 		0xcb137fFF
 
-#define	MOVEMENT_SPEED	0.05
-#define	ROTATION_SPEED	0.05
+#define	MOVEMENT_SPEED	0.03
+#define	ROTATION_SPEED	0.04
 
 typedef struct	s_ray {
 	double	ray_dir_x;

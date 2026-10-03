@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/27 17:36:20 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/03 21:24:50 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,6 @@ static int	is_wall(t_game *game, double x, double y)
 	if (map_x >= (int)ft_strlen(game->map.grid[map_y]))
 		return (1);
 	if (game->map.grid[map_y][map_x] != '0')
-		return (1);
-	return (0);
-}
-
-static int	check_collision(t_game *game, double x, double y)
-{
-	double	radius;
-
-	radius = 0.01;
-	if (is_wall(game, x - radius, y - radius))
-		return (1);
-	if (is_wall(game, x + radius, y - radius))
-		return (1);
-	if (is_wall(game, x - radius, y + radius))
-		return (1);
-	if (is_wall(game, x + radius, y + radius))
 		return (1);
 	return (0);
 }
@@ -77,9 +61,9 @@ static void	walk_forward_backward(t_game *game)
 		move_x -= game->player.dir_x * MOVEMENT_SPEED;
 		move_y -= game->player.dir_y * MOVEMENT_SPEED;
 	}
-	if (!check_collision(game, game->player.pos_x + move_x, game->player.pos_y))
+	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y))
 		game->player.pos_x += move_x;
-	if (!check_collision(game, game->player.pos_x, game->player.pos_y + move_y))
+	if (!is_wall(game, game->player.pos_x, game->player.pos_y + move_y))
 		game->player.pos_y += move_y;
 }
 

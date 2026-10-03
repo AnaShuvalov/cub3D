@@ -7,6 +7,7 @@
 - [X] wall collisiion
 - [X] shader
 - [ ] hook up textures
+- [ ] sticky walls
 
 
 
