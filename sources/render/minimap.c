@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 19:43:41 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/07 14:25:50 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/07 14:58:38 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static void	draw(mlx_image_t *img, int start_x, int start_y, uint32_t color)
 	int	y;
 	int	size;
 
-	if (color == MINIMAP_PLAYER)
-		size = MINIMAP_PLAYER_SIZE;
-	else if (color == MINIMAP_COMPASS)
+	if (color == MINIMAP_COMPASS)
 		size = MINIMAP_COMPASS_SIZE;
 	else
 		size = MINIMAP_TILE_SIZE;
@@ -30,9 +28,7 @@ static void	draw(mlx_image_t *img, int start_x, int start_y, uint32_t color)
 		x = 0;
 		while (x < size)
 		{
-			if (start_x + x >= 0 && start_y + y >= 0
-				&& start_x + x < WIN_WIDTH && start_y + y < WIN_HEIGHT)
-				mlx_put_pixel(img, start_x + x, start_y + y, color);
+			mlx_put_pixel(img, start_x + x, start_y + y, color);
 			x++;
 		}
 		y++;
@@ -41,13 +37,15 @@ static void	draw(mlx_image_t *img, int start_x, int start_y, uint32_t color)
 
 static void	minimap_compass(mlx_image_t *img, t_game *game, int allignment)
 {
-	int	dot_x;
-	int	dot_y;
+	int		dot_x;
+	int		dot_y;
+	double	x;
+	double	y;
 
-	dot_x = (int)(allignment + ((game->player.pos_x + game->player.dir_x)
-				* MINIMAP_TILE_SIZE)) - 1;
-	dot_y = (int)(PADDING + ((game->player.pos_y + game->player.dir_y)
-				* MINIMAP_TILE_SIZE)) - 1;
+	x = allignment + (game->player.pos_x * MINIMAP_TILE_SIZE);
+	y = PADDING + (game->player.pos_y * MINIMAP_TILE_SIZE);
+	dot_x = (int)(x + (game->player.dir_x * 5.0)) - (MINIMAP_COMPASS_SIZE / 2);
+	dot_y = (int)(y + (game->player.dir_y * 5.0)) - (MINIMAP_COMPASS_SIZE / 2);
 	draw(img, dot_x, dot_y, MINIMAP_COMPASS);
 }
 
@@ -55,12 +53,25 @@ static void	get_player(mlx_image_t *img, t_game *game, int allignment)
 {
 	int	player_x;
 	int	player_y;
+	int	x;
+	int	y;
+	int	radius;
 
-	player_x = (int)(allignment + (game->player.pos_x * MINIMAP_TILE_SIZE))
-		- (MINIMAP_PLAYER_SIZE / 2);
-	player_y = (int)(PADDING + (game->player.pos_y * MINIMAP_TILE_SIZE))
-		- (MINIMAP_PLAYER_SIZE / 2);
-	draw(img, player_x, player_y, MINIMAP_PLAYER);
+	radius = MINIMAP_PLAYER_SIZE / 2;
+	player_x = (int)(allignment + (game->player.pos_x * MINIMAP_TILE_SIZE));
+	player_y = (int)(PADDING + (game->player.pos_y * MINIMAP_TILE_SIZE));
+	y = -radius;
+	while (y <= radius)
+	{
+		x = -radius;
+		while (x <= radius)
+		{
+			if ((x * x) + (y * y) <= (radius * radius) + 1)
+				mlx_put_pixel(img, player_x + x, player_y + y, MINIMAP_PLAYER);
+			x++;
+		}
+		y++;
+	}
 }
 
 static uint32_t	get_colors(t_game *game, int col, int row, int len)
