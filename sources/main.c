@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/07 14:27:24 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/07 16:47:33 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	free_game(t_game *game)
 		free(game->map.east_texture_path);
 	if (game->map.grid)
 		free_array(game->map.grid);
+	ft_bzero(&game->map, sizeof(t_map));
 }
 
 static void	init_game(t_game *game)
