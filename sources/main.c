@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/26 21:31:35 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/05 15:43:02 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	free_game(t_game *game)
 {
 	if (game == NULL)
 		return ;
-	if (game->map.north_texture_path)
-		free(game->map.north_texture_path);
-	if (game->map.south_texture_path)
-		free(game->map.south_texture_path);
-	if (game->map.west_texture_path)
-		free(game->map.west_texture_path);
-	if (game->map.east_texture_path)
-		free(game->map.east_texture_path);
+	if (game->map.north_texture)
+		free(game->map.north_texture);
+	if (game->map.south_texture)
+		free(game->map.south_texture);
+	if (game->map.west_texture)
+		free(game->map.west_texture);
+	if (game->map.east_texture)
+		free(game->map.east_texture);
 	if (game->map.grid)
 		free_array(game->map.grid);
 }

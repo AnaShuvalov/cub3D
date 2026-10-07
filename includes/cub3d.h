@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/26 21:53:37 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/07 13:14:29 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ typedef struct s_map
 	char	*east_texture_path; // path to east texture from the .cub file
 	int		floor_color; // floor color converted to int (hex format)
 	int		ceiling_color; // ceiling color converted to int (hex format)
-	t_img	north_texture; // loaded MLX image for north wall
-	t_img	south_texture; // loaded MLX image for south wall
-	t_img	west_texture; // loaded MLX image for west wall
-	t_img	east_texture; // loaded MLX image for east wall
+	mlx_texture_t	*north_texture; // loaded MLX image for north wall
+	mlx_texture_t	*south_texture; // loaded MLX image for south wall
+	mlx_texture_t	*west_texture; // loaded MLX image for west wall
+	mlx_texture_t	*east_texture; // loaded MLX image for east wall
 }	t_map;
 
 typedef	struct s_light
@@ -124,6 +124,7 @@ void	error_message(char *s);
 // RAYCASTER ///////////////////////////////
 void	render_frame(void	*param);
 int		start_game(t_game *game);
+int		load_textures(t_map *map);
 
 // HOOKS ////////////////////
 void	key_reaction(mlx_key_data_t keydata, void* param);

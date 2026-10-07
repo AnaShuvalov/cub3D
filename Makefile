@@ -6,7 +6,7 @@
 #    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/09/26 21:55:15 by olmatske         ###   ########.fr        #
+#    Updated: 2026/10/07 13:15:59 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ RAYCASTER =		sources/raycaster/raycast.c \
 				sources/raycaster/camera.c \
 				sources/raycaster/graphics.c \
 				sources/raycaster/orientation.c \
-				sources/raycaster/wallcolors.c
+				sources/raycaster/wallcolors.c \
+				sources/raycaster/textures.c
 
 
 HOOKS =			sources/hooks/key_events.c \

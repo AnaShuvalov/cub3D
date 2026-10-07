@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/03 21:26:36 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/07 13:14:38 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void		draw_floor_and_ceiling(t_game *game);
 void		direction_handler(t_game *game);
 void		clear_framebuffer(t_game *game);
 uint32_t	get_wall_color(t_ray *ray);
+int		load_textures(t_map *map);
 
 #endif
