@@ -7,8 +7,8 @@
 - [X] wall collisiion
 - [X] shader
 - [ ] hook up textures
-- [ ] sticky walls
-
+- [X] sticky walls
+- [ ] is there a check for textures?
 
 
 - buffer between player and wall

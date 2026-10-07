@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/07 13:14:38 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/07 17:47:01 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,20 @@ typedef struct	s_ray {
 	int		line_height;	// height of the wall to draw
 	int		draw_start;		// lowest pixel to start drawing
 	int		draw_end;		// highest pixel to stop drawing
+	int		texture_x;
 }	t_ray;
 
 
 // FUNCTIONS ///////////////////////////////////////////////////////////////////
-void		render_frame(void	*param);
-void		perform_dda(t_game *game, t_ray *ray);
-void		init_dda_vars(t_ray *ray);
-void		draw_wall_slice(t_game *game, t_ray *ray, int x);
-void		draw_floor_and_ceiling(t_game *game);
-void		direction_handler(t_game *game);
-void		clear_framebuffer(t_game *game);
-uint32_t	get_wall_color(t_ray *ray);
-int		load_textures(t_map *map);
-
+void			render_frame(void	*param);
+void			perform_dda(t_game *game, t_ray *ray);
+void			init_dda_vars(t_ray *ray);
+void			draw_wall_slice(t_game *game, t_ray *ray, int x);
+void			draw_floor_and_ceiling(t_game *game);
+void			direction_handler(t_game *game);
+void			clear_framebuffer(t_game *game);
+uint32_t		get_wall_color(t_ray *ray);
+int				load_textures(t_map *map);
+mlx_texture_t	*get_texture(t_ray *ray, t_game *game);
+uint32_t		get_texture_pixel(mlx_texture_t *texture, int x, int y);
 #endif

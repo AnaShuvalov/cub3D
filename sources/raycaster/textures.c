@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 14:05:37 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/07 13:28:52 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/07 17:42:19 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,97 @@ int	load_textures(t_map *map)
 	return (0);
 }
 
-uint32_t	get_texture(t_ray *ray, t_game *game)
+uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y)
 {
-	uint32_t	texture;
+	int		i;
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+	uint8_t	a;
+
+	if (x < 0)
+		x = 0;
+	if (x >= (int)texture->width)
+		x = (int)texture->width - 1;
+	if (y < 0)
+		y = 0;
+	if (y >= (int)texture->height)
+		y = (int)texture->height - 1;
+
+	i = (y * (int)texture->width + x) * (int)texture->bytes_per_pixel;
+	r = texture->pixels[i + 0];
+	g = texture->pixels[i + 1];
+	b = texture->pixels[i + 2];
+	a = texture->pixels[i + 3];
+
+	return (((uint32_t)r << 24) | ((uint32_t)g << 16) | ((uint32_t)b << 8) | a);
+}
+
+mlx_texture_t	*get_texture(t_ray *ray, t_game *game)
+{
+	mlx_texture_t	*texture;
 
 	if (ray->side == 0) // the ray hit the vertical axis which is left or right side of the wall
 	{
 		if (ray->step_x > 0)
-			texture = game->map.texture_west;
+			texture = game->map.west_texture;
 		else
-			texture = game->map.texture_east;
+			texture = game->map.east_texture;
 	}
 	else
 	{
 		if (ray->step_y > 0)
-			texture = game->map.texture_north;
+			texture = game->map.north_texture;
 		else
-			texture = game->map.texture_south;
+			texture = game->map.south_texture;
 	}
 	return (texture);
 }
 
+// try to make it in one image, one half floor, the other ceiling
+void	draw_floor_and_ceiling(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < WIN_HEIGHT / 2)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			mlx_put_pixel(game->background, x, y, COLOR_CEILING);
+			x++;
+		}
+		y++;
+	}
+	y = WIN_HEIGHT / 2;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			mlx_put_pixel(game->background, x, y, COLOR_FLOOR);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	clear_framebuffer(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			mlx_put_pixel(game->framebuffer, x, y, 0x00000000);
+			x++;
+		}
+		y++;
+	}
+}
