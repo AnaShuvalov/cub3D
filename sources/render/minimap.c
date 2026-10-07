@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 19:43:41 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/07 14:58:38 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/07 15:43:03 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ static void	draw(mlx_image_t *img, int start_x, int start_y, uint32_t color)
 
 static void	minimap_compass(mlx_image_t *img, t_game *game, int allignment)
 {
+	int		x;
+	int		y;
 	int		dot_x;
 	int		dot_y;
-	double	x;
-	double	y;
 
-	x = allignment + (game->player.pos_x * MINIMAP_TILE_SIZE);
-	y = PADDING + (game->player.pos_y * MINIMAP_TILE_SIZE);
-	dot_x = (int)(x + (game->player.dir_x * 5.0)) - (MINIMAP_COMPASS_SIZE / 2);
-	dot_y = (int)(y + (game->player.dir_y * 5.0)) - (MINIMAP_COMPASS_SIZE / 2);
+	x = (int)(allignment + (game->player.pos_x * MINIMAP_TILE_SIZE));
+	y = (int)(PADDING + (game->player.pos_y * MINIMAP_TILE_SIZE));
+	dot_x = x + (int)round(game->player.dir_x * MINIMAP_TILE_SIZE);
+	dot_y = y + (int)round(game->player.dir_y * MINIMAP_TILE_SIZE);
 	draw(img, dot_x, dot_y, MINIMAP_COMPASS);
 }
 

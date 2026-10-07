@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/07 14:29:49 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/07 15:14:44 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 # define MINIMAP_TILE_SIZE 		10
 # define MINIMAP_PLAYER_SIZE	4
-# define MINIMAP_COMPASS_SIZE	2
+# define MINIMAP_COMPASS_SIZE	1
 # define PADDING 				10
 
 # define MINIMAP_WALLS			0x483329FF
