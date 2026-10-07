@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/27 19:28:43 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/07 14:29:49 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
 
-# define MINIMAP_TILE 			10
+# define MINIMAP_TILE_SIZE 		10
 # define MINIMAP_PLAYER_SIZE	4
-# define MINIMAP_DOT_SIZE		2
+# define MINIMAP_COMPASS_SIZE	2
 # define PADDING 				10
 
 # define MINIMAP_WALLS			0x483329FF
@@ -63,7 +63,6 @@ typedef struct s_img
 	mlx_image_t	*image;
 	int			width; // the width of the image in pixels
 	int			height; // the height of the image in pixels
-
 }	t_img;
 
 // Player state for movement and raycasting
@@ -97,7 +96,7 @@ typedef struct s_map
 	t_img	east_texture; // loaded MLX image for east wall
 }	t_map;
 
-typedef	struct s_light
+typedef struct s_light
 {
 	double	light_falloff;
 	double	min_brightness;
@@ -127,7 +126,7 @@ void	render_frame(void	*param);
 int		start_game(t_game *game);
 
 // HOOKS ////////////////////
-void	key_reaction(mlx_key_data_t keydata, void* param);
+void	key_reaction(mlx_key_data_t keydata, void *param);
 void	close_game(t_game *game);
 void	close_hook(void *param);
 void	exit_on_error(t_game *game, char *s);
@@ -138,4 +137,3 @@ void	draw_map(mlx_image_t *img, t_game *game);
 void	draw_floor_and_ceiling(t_game *game);
 
 #endif
-
