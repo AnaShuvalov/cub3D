@@ -6,10 +6,11 @@
 - [X] vector addition -> movement speed and rotational speed
 - [X] wall collisiion
 - [X] shader
-- [ ] hook up textures
+- [x] hook up textures
 - [X] sticky walls
-- [ ] is there a check for textures?
-
+- [X] is there a check for textures?
+- [ ] hook up floor and ceiling colors from map sruct
+- [ ] why does the camera/view slow down when I get closer to the walls?
 
 - buffer between player and wall
 - protect corners

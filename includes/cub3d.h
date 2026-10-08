@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/10/07 13:14:29 by olmatske         ###   ########.fr       */
-=======
-/*   Updated: 2026/10/07 15:14:44 by anshuval         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2026/10/08 14:56:08 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
