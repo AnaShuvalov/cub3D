@@ -16,7 +16,7 @@ The project was split into two categories:
 ## Features
 **Real-time Raycasting**: Smooth first-person camera movement and rotation.
 
-**Directional Wall Textures**: Dynamic orientation mapping displaying unique .xpm textures for North, South, East, and West wall faces.
+**Directional Wall Textures**: Dynamic orientation mapping displaying unique .png textures for North, South, East, and West wall faces.
 
 **Customizable Environments**: Solid ceiling and floor colors parsed from standard RGB values.
 
@@ -29,10 +29,10 @@ The project was split into two categories:
 ## Scene File Specifications (.cub)
 A scene file must contain 6 metadata identifiers followed by the grid layout:
 
-	NO ./textures/north.xpm
-	SO ./textures/south.xpm
-	WE ./textures/west.xpm
-	EA ./textures/east.xpm
+	NO ./textures/north.png
+	SO ./textures/south.png
+	WE ./textures/west.png
+	EA ./textures/east.png
 
 	F 220,100,0
 	C 225,30,0
@@ -45,13 +45,13 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 	111111111111111111111
 
 ## Metadata Identifiers
-	NO <path>: Path to North wall .xpm texture.
+	NO <path>: Path to North wall .png texture.
 
-	SO <path>: Path to South wall .xpm texture.
+	SO <path>: Path to South wall .png texture.
 
-	WE <path>: Path to West wall .xpm texture.
+	WE <path>: Path to West wall .png texture.
 
-	EA <path>: Path to East wall .xpm texture.
+	EA <path>: Path to East wall .png texture.
 
 	F <R,G,B>: Floor color (0 to 255 per channel).
 
@@ -73,9 +73,10 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 	├── includes/
 	│   └── cub3d.h
 	│   └── parser.h
-	├── libft/
-	├── get_next_line/
-	├── MLX42/
+	│   └── raycaster.h
+	│   └── libft/
+	│   └── get_next_line/
+	│   └── MLX42/
 	├── maps/
 	│   ├── valid/
 	│   └── invalid/
@@ -91,15 +92,17 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 		│   ├── verification_path.c
 		│   └── verification_player.c
 		├── raycaster/
-		│   ├── raycaster.c
-		│   ├── dda.c
-		│   └── texture_mapping.c
+		│   ├── raycast.c
+		│   ├── camera.c
+		│   ├── graphcs.c
+		│   ├── orientation.c		
+		│   ├── wallcolors.c
 		├── render/
-		│   ├── frame_drawing.c
-		│   └── framebuffer.c
+		│   ├── frame.c
+		│   └── minimap.c
 		└── hooks/
-			├── key_events.c
-			└── close_events.c
+			├── close_events.c
+			└── key_events.c
 
 ## Installation & Compilation
 	git clone <repository_url> cub3d
@@ -121,4 +124,4 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 Run the executable with a single .cub map file as an argument:
 
 	Bash
-	./cub3D maps/valid/subject_map.cub
+	./cub3D maps/(in)valid/subject_map.cub

@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:58 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/24 14:57:08 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/07 16:32:28 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,22 @@ static int	path_allocation(char **splitted, t_game *game)
 static int	check_path_validity(char *path)
 {
 	int		fd;
+	int		len;
 	char	buffer[1];
 
 	if (path == NULL || path[0] == '\0')
-		return (ERROR);
+		return (error_message("No Texture file.\n"), ERROR);
+	len = ft_strlen(path);
+	if (len < 5 || ft_strncmp(&path[len - 4], ".png", 4) != 0)
+		return (error_message("Texture has to be a .png file.\n"), ERROR);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (ERROR);
-	if (read(fd, buffer, 1) < 0)
+		return (error_message("Texture file does not exist or "
+			"no permission.\n"), ERROR);
+	if (read(fd, buffer, 1) <= 0)
 	{
 		close(fd);
-		return (ERROR);
+		return (error_message("Texture file is empty.\n"), ERROR);
 	}
 	close(fd);
 	return (OK);
@@ -69,7 +74,7 @@ int	verify_path(t_game *game, const char *line)
 	if (check_path_validity(splitted[1]) == ERROR)
 	{
 		free_array(splitted);
-		return (error_message("Invalid texture path.\n"), ERROR);
+		return (ERROR);
 	}
 	if (path_allocation(splitted, game) == ERROR)
 	{

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/10/07 13:14:29 by olmatske         ###   ########.fr       */
+=======
+/*   Updated: 2026/10/07 15:14:44 by anshuval         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +30,21 @@
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
 
-# define MINIMAP_TILE 		10
-# define MINIMAP_PADDING 	10
-# define MINIMAP_DOT_SIZE	2
+# define MINIMAP_TILE_SIZE 		10
+# define MINIMAP_PLAYER_SIZE	4
+# define MINIMAP_COMPASS_SIZE	1
+# define PADDING 				10
 
-# define MINIMAP_WALLS		0x483329FF
-# define MINIMAP_FLOOR		0x3d4a3eFF
-# define MINIMAP_PLAYER 	0x39ff14FF
-# define MINIMAP_SPACE 		0x666666AA
-# define MINIMAP_COMPASS	0xFFFFFFAA
+# define MINIMAP_WALLS			0x483329FF
+# define MINIMAP_FLOOR			0x3d4a3eFF
+# define MINIMAP_PLAYER 		0x39ff14FF
+# define MINIMAP_SPACE 			0x666666AA
+# define MINIMAP_COMPASS		0xFFFFFFAA
 
-# define COLOR_CEILING		0x55e4ffFF
-# define COLOR_WALLS		0x895544FF
-# define COLOR_FLOOR		0x56db32FF
-# define COLOR_PLAYER 		0xcb137fFF
+# define COLOR_CEILING			0x55e4ffFF
+# define COLOR_WALLS			0x895544FF
+# define COLOR_FLOOR			0x56db32FF
+# define COLOR_PLAYER 			0xcb137fFF
 
 // Key movemment flags - used for smooth wlaking and fluid movement.
 // If a key is pressed the bool is set to TRUE. When the key is released,
@@ -62,7 +67,6 @@ typedef struct s_img
 	mlx_image_t	*image;
 	int			width; // the width of the image in pixels
 	int			height; // the height of the image in pixels
-
 }	t_img;
 
 // Player state for movement and raycasting
@@ -96,7 +100,7 @@ typedef struct s_map
 	mlx_texture_t	*east_texture; // loaded MLX image for east wall
 }	t_map;
 
-typedef	struct s_light
+typedef struct s_light
 {
 	double	light_falloff;
 	double	min_brightness;
@@ -127,7 +131,7 @@ int		start_game(t_game *game);
 int		load_textures(t_map *map);
 
 // HOOKS ////////////////////
-void	key_reaction(mlx_key_data_t keydata, void* param);
+void	key_reaction(mlx_key_data_t keydata, void *param);
 void	close_game(t_game *game);
 void	close_hook(void *param);
 void	exit_on_error(t_game *game, char *s);
@@ -138,4 +142,3 @@ void	draw_map(mlx_image_t *img, t_game *game);
 void	draw_floor_and_ceiling(t_game *game);
 
 #endif
-

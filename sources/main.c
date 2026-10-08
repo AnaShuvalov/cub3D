@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/05 15:43:02 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/08 14:54:23 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	free_game(t_game *game)
 		free(game->map.east_texture);
 	if (game->map.grid)
 		free_array(game->map.grid);
+	ft_bzero(&game->map, sizeof(t_map));
 }
 
 static void	init_game(t_game *game)
@@ -33,7 +34,6 @@ static void	init_game(t_game *game)
 	ft_bzero(game, sizeof(t_game));
 	game->map.floor_color = -1;
 	game->map.ceiling_color = -1;
-
 	game->light.light_falloff = 0.2;
 	game->light.min_brightness = 0.1;
 	game->light.max_brightness = 1.0;
@@ -62,24 +62,3 @@ int	main(int argc, char **argv)
 	close_game(&game);
 	return (0);
 }
-
-	// printf("North: %s\n", game.map.north_texture_path);
-	// printf("South: %s\n", game.map.south_texture_path);
-	// printf("West: %s\n", game.map.west_texture_path);
-	// printf("East: %s\n", game.map.east_texture_path);
-	// printf("Floor: %d %d %d\n", (game.map.floor_color / 65536) % 256, (game.map.floor_color / 256) % 256, game.map.floor_color % 256);
-	// printf("Ceiling: %d %d %d\n", (game.map.ceiling_color / 65536) % 256, (game.map.ceiling_color / 256) % 256, game.map.ceiling_color % 256);
-	// if (game.map.grid)
-	// {
-	// 	int i = 0;
-	// 	printf("Grid\n");
-	// 	while (game.map.grid[i])
-	// 	{
-	// 		printf("Row %d: %s\n", i, game.map.grid[i]);
-	// 		i++;
-	// 	}
-	// 	printf("Player info\n");
-	// 	printf("Position X: %.2f, Y: %.2f\n", game.player.pos_x, game.player.pos_y);
-	// 	printf("Direction X: %.2f, Y: %.2f\n", game.player.dir_x, game.player.dir_y);
-	// 	printf("Plane X: %.2f, Y: %.2f\n", game.player.plane_x, game.player.plane_y);
-	// }

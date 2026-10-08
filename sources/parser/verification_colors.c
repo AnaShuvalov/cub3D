@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/24 14:54:17 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/07 16:12:09 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static int	assign_colors(t_game *game, char **rgb, const char *line)
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (error_message("Invalid color in the map.\n"), ERROR);
 	if (line[0] == 'F' && game->map.floor_color == ERROR)
-		game->map.floor_color = ((r << 16) | (g << 8) | b);
+		game->map.floor_color = ((r << 24) | (g << 16) | (b << 8) | 0xFF);
 	else if (line[0] == 'C' && game->map.ceiling_color == ERROR)
-		game->map.ceiling_color = ((r << 16) | (g << 8) | b);
+		game->map.ceiling_color = ((r << 24) | (g << 16) | (b << 8) | 0xFF);
 	else
 		return (error_message("Duplicate Color line.\n"), ERROR);
 	return (OK);
