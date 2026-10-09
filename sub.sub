@@ -1,14 +1,36 @@
 {
 	ignore_lglfw_leaks
 	Memcheck:Leak
-	match-leak-kinds:possible,reachable,indirect
+	match-leak-kinds:all
 	...
-	obj:*/libglfw.so*
+	obj:*/libglfw*
 }
 {
 	ignore_opengl_leaks
 	Memcheck:Leak
-	match-leak-kinds:possible,reachable,indirect
+	match-leak-kinds:all
 	...
-	obj:*/libGL.so*
+	obj:*/libGL*
 }
+{
+	ignore_dri_graphics_leaks
+	Memcheck:Leak
+	match-leak-kinds:all
+	...
+	obj:*/dri*
+}
+{
+	ignore_glibc_dl_open
+	Memcheck:Leak
+	match-leak-kinds:all
+	...
+	fun:*dl*
+}
+{
+	ignore_glibc_dl_read
+	Memcheck:Addr8
+
+	...
+	fun:*dl*
+}
+

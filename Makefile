@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/09 13:47:18 by anshuval         ###   ########.fr        #
+#    Updated: 2026/10/09 15:43:17 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ MLX_INC = -I$(MLX_DIR)/include
 
 SUPP_FILE = sub.sub
 VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=$(SUPP_FILE)
-
+MAP ?= maps/valid/minimal.cub
 
 UNAME_S := $(shell uname -s)
 
@@ -122,11 +122,18 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-valgrind: fclean
-	$(MAKE) SANITIZE= all
-	valgrind $(VALGRIND_FLAGS) ./$(NAME)
+valgrind: $(NAME)
+	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(MAP)
 
-.PHONY: all clean fclean re
+valgrind_all: $(NAME)
+	@for map in maps/invalid/*.cub; do \
+		echo "\n"; \
+		echo "Testing $$map"; \
+		echo "\n"; \
+		valgrind $(VALGRIND_FLAGS) ./$(NAME) $$map; \
+	done
+
+.PHONY: all clean fclean re valgrind
 
 
 

@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 16:22:35 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/07 16:12:09 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/09 15:30:09 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static int	assign_colors(t_game *game, char **rgb, const char *line)
 {
-	int	r;
-	int	g;
-	int	b;
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
 
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	r = (uint32_t)ft_atoi(rgb[0]);
+	g = (uint32_t)ft_atoi(rgb[1]);
+	b = (uint32_t)ft_atoi(rgb[2]);
+	if (r > 255 || g > 255 || b > 255)
 		return (error_message("Invalid color in the map.\n"), ERROR);
 	if (line[0] == 'F' && game->map.floor_color == ERROR)
 		game->map.floor_color = ((r << 24) | (g << 16) | (b << 8) | 0xFF);
@@ -45,6 +45,8 @@ static int	check_rgb(char *rgb)
 		i++;
 	if (!ft_isdigit(rgb[i]))
 		return (error_message("No or invalid color in the map.\n"), ERROR);
+	while (rgb[i] == '0')
+		i++;
 	while (ft_isdigit(rgb[i]))
 	{
 		i++;

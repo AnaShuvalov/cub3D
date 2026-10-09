@@ -781,3 +781,251 @@
 ==641346== 
 ==641346== For lists of detected and suppressed errors, rerun with: -s
 ==641346== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=sub.sub ./cub3d maps/valid/minimal.cub
+==747099== Memcheck, a memory error detector
+==747099== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==747099== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==747099== Command: ./cub3d maps/valid/minimal.cub
+==747099== 
+==747099== 
+==747099== HEAP SUMMARY:
+==747099==     in use at exit: 318,168 bytes in 3,100 blocks
+==747099==   total heap usage: 70,578 allocs, 67,478 frees, 67,917,440 bytes allocated
+==747099== 
+==747099== 24 bytes in 1 blocks are still reachable in loss record 53 of 2,238
+==747099==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4013E4D: malloc (rtld-malloc.h:56)
+==747099==    by 0x4013E4D: allocate_dtv_entry (dl-tls.c:684)
+==747099==    by 0x4013E4D: allocate_and_init (dl-tls.c:709)
+==747099==    by 0x4013E4D: tls_get_addr_tail (dl-tls.c:907)
+==747099==    by 0x401820B: __tls_get_addr (tls_get_addr.S:55)
+==747099==    by 0x897649C: llvm::getTimeTraceProfilerInstance() (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0x8B4A0F9: llvm::PassManager<llvm::Module, llvm::AnalysisManager<llvm::Module>>::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0xB76E46A: LLVMRunPasses (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0x60BDA3F: ???
+==747099==    by 0x6141121: ???
+==747099==    by 0x61417FB: ???
+==747099==    by 0x612A277: ???
+==747099==    by 0x610E49F: ???
+==747099==    by 0x5CF7D81: ???
+==747099== 
+==747099== 32 bytes in 1 blocks are still reachable in loss record 349 of 2,238
+==747099==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x89C3DAA: ??? (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0x8945731: llvm::ManagedStaticBase::RegisterManagedStatic(void* (*)(), void (*)(void*)) const (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0x89C3424: llvm::sys::DynamicLibrary::getPermanentLibrary(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0xA41E2DE: llvm::EngineBuilder::create(llvm::TargetMachine*) (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0x60C4FC5: ???
+==747099==    by 0x60BD9CC: ???
+==747099==    by 0x613BC21: ???
+==747099==    by 0x6129E57: ???
+==747099==    by 0x610E49F: ???
+==747099==    by 0x5CF7D81: ???
+==747099==    by 0x4074AC: mlx_flush_batch (in /home/anshuval/Documents/GIT/cub3D/cub3D/cub3d)
+==747099== 
+==747099== 48 bytes in 1 blocks are still reachable in loss record 1,814 of 2,238
+==747099==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x894C0BA: ??? (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0x8945731: llvm::ManagedStaticBase::RegisterManagedStatic(void* (*)(), void (*)(void*)) const (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0x89C34D3: llvm::sys::DynamicLibrary::getPermanentLibrary(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0xA41E2DE: llvm::EngineBuilder::create(llvm::TargetMachine*) (in /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+==747099==    by 0x60C4FC5: ???
+==747099==    by 0x60BD9CC: ???
+==747099==    by 0x613BC21: ???
+==747099==    by 0x6129E57: ???
+==747099==    by 0x610E49F: ???
+==747099==    by 0x5CF7D81: ???
+==747099==    by 0x4074AC: mlx_flush_batch (in /home/anshuval/Documents/GIT/cub3D/cub3D/cub3d)
+==747099== 
+==747099== 56 bytes in 1 blocks are indirectly lost in loss record 2,055 of 2,238
+==747099==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x6634885: ???
+==747099==    by 0x6106293: ???
+==747099==    by 0x60EEDB8: ???
+==747099==    by 0x60EEF6A: ???
+==747099==    by 0x60A1109: ???
+==747099==    by 0x60A3C24: ???
+==747099==    by 0x609E9FC: ???
+==747099==    by 0x604DAB7: ???
+==747099==    by 0x608AEAD: ???
+==747099==    by 0x608743C: ???
+==747099==    by 0x601E61A: ???
+==747099== 
+==747099== 104 bytes in 3 blocks are still reachable in loss record 2,197 of 2,238
+==747099==    at 0x484DCD3: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4CBABE5: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC634: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC690: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC48A7: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC74CF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 112 (56 direct, 56 indirect) bytes in 1 blocks are definitely lost in loss record 2,199 of 2,238
+==747099==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x663486E: ???
+==747099==    by 0x6106293: ???
+==747099==    by 0x60EEDB8: ???
+==747099==    by 0x60EEF6A: ???
+==747099==    by 0x60A1109: ???
+==747099==    by 0x60A3C24: ???
+==747099==    by 0x609E9FC: ???
+==747099==    by 0x604DAB7: ???
+==747099==    by 0x608AEAD: ???
+==747099==    by 0x608743C: ???
+==747099==    by 0x601E61A: ???
+==747099== 
+==747099== 182 bytes in 3 blocks are still reachable in loss record 2,207 of 2,238
+==747099==    at 0x484DCD3: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4CBAC1D: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC634: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC690: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC48A7: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC74CF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 633 bytes in 49 blocks are still reachable in loss record 2,212 of 2,238
+==747099==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4CC2751: _XlcCreateDefaultCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC2ABA: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC2C6F: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC7386: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8DC2: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 800 bytes in 50 blocks are still reachable in loss record 2,213 of 2,238
+==747099==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4CC2619: _XlcAddCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC2ACE: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC2C6F: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC7386: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8DC2: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 802 bytes in 88 blocks are still reachable in loss record 2,214 of 2,238
+==747099==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4CBACF6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC634: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC690: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC48A7: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC74CF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 1,028 bytes in 50 blocks are still reachable in loss record 2,219 of 2,238
+==747099==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4CC26E4: _XlcCreateDefaultCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC2ABA: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC2C6F: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC7386: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8DC2: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 1,092 bytes in 91 blocks are still reachable in loss record 2,220 of 2,238
+==747099==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4AEE54E: strdup (strdup.c:42)
+==747099==    by 0x4CBC449: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC690: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC48A7: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC74CF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 1,341 bytes in 91 blocks are still reachable in loss record 2,221 of 2,238
+==747099==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4AEE54E: strdup (strdup.c:42)
+==747099==    by 0x4CBC5B5: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC690: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC48A7: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC74CF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 1,408 bytes in 88 blocks are still reachable in loss record 2,223 of 2,238
+==747099==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4CBACD5: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC634: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC690: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC48A7: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC74CF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 3,600 bytes in 50 blocks are still reachable in loss record 2,227 of 2,238
+==747099==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4CC26B6: _XlcCreateDefaultCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC2ABA: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC2C6F: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC7386: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8DC2: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== 3,640 bytes in 91 blocks are still reachable in loss record 2,229 of 2,238
+==747099==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==747099==    by 0x4CBC431: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CBC690: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC48A7: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC74CF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC72C6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CC12DC: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CE68C9: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCE685: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CCEA9E: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8A84: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099==    by 0x4CB8DC2: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==747099== 
+==747099== LEAK SUMMARY:
+==747099==    definitely lost: 56 bytes in 1 blocks
+==747099==    indirectly lost: 56 bytes in 1 blocks
+==747099==      possibly lost: 0 bytes in 0 blocks
+==747099==    still reachable: 14,734 bytes in 657 blocks
+==747099==         suppressed: 303,322 bytes in 2,441 blocks
+==747099== 
+==747099== For lists of detected and suppressed errors, rerun with: -s
+==747099== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 3 from 3)

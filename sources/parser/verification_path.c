@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:02:58 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/07 16:32:28 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/09 15:38:27 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	check_path_validity(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (error_message("Texture file does not exist or "
-			"no permission.\n"), ERROR);
+				"no permission.\n"), ERROR);
 	if (read(fd, buffer, 1) <= 0)
 	{
 		close(fd);

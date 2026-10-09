@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/09 12:55:58 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/09 15:20:54 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct s_map
 	char	*south_texture_path; // path to south texture from the .cub file
 	char	*west_texture_path; // path to west texture from the .cub file
 	char	*east_texture_path; // path to east texture from the .cub file
-	int		floor_color; // floor color converted to int (hex format)
-	int		ceiling_color; // ceiling color converted to int (hex format)
+	long	floor_color; // floor color converted to int (hex format)
+	long	ceiling_color; // ceiling color converted to int (hex format)
 	mlx_texture_t	*north_texture; // loaded MLX image for north wall
 	mlx_texture_t	*south_texture; // loaded MLX image for south wall
 	mlx_texture_t	*west_texture; // loaded MLX image for west wall
