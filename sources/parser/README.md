@@ -664,3 +664,120 @@
 ==573572== 
 ==573572== For lists of detected and suppressed errors, rerun with: -s
 ==573572== ERROR SUMMARY: 22 errors from 22 contexts (suppressed: 0 from 0)
+
+==641346== Memcheck, a memory error detector
+==641346== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==641346== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==641346== Command: ./cub3d maps/valid/irregular_corridor_rooms.cub
+==641346== 
+==641346== Invalid read of size 8
+==641346==    at 0x40286A8: strncmp (strcmp.S:172)
+==641346==    by 0x400668D: is_dst (dl-load.c:216)
+==641346==    by 0x400810E: _dl_dst_count (dl-load.c:253)
+==641346==    by 0x400810E: expand_dynamic_string_token (dl-load.c:395)
+==641346==    by 0x40082B7: fillin_rpath.isra.0 (dl-load.c:483)
+==641346==    by 0x4008602: decompose_rpath (dl-load.c:654)
+==641346==    by 0x400ABF5: cache_rpath (dl-load.c:696)
+==641346==    by 0x400ABF5: cache_rpath (dl-load.c:677)
+==641346==    by 0x400ABF5: _dl_map_object (dl-load.c:2165)
+==641346==    by 0x4003494: openaux (dl-deps.c:64)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==641346==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==641346==  Address 0x50a0229 is 9 bytes inside a block of size 15 alloc'd
+==641346==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==641346==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==641346==    by 0x40271DF: strdup (strdup.c:42)
+==641346==    by 0x4008594: decompose_rpath (dl-load.c:629)
+==641346==    by 0x400ABF5: cache_rpath (dl-load.c:696)
+==641346==    by 0x400ABF5: cache_rpath (dl-load.c:677)
+==641346==    by 0x400ABF5: _dl_map_object (dl-load.c:2165)
+==641346==    by 0x4003494: openaux (dl-deps.c:64)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==641346==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x400E34D: _dl_open (dl-open.c:883)
+==641346== 
+==641346== Invalid read of size 8
+==641346==    at 0x40286A8: strncmp (strcmp.S:172)
+==641346==    by 0x400668D: is_dst (dl-load.c:216)
+==641346==    by 0x4007F79: _dl_dst_substitute (dl-load.c:295)
+==641346==    by 0x40082B7: fillin_rpath.isra.0 (dl-load.c:483)
+==641346==    by 0x4008602: decompose_rpath (dl-load.c:654)
+==641346==    by 0x400ABF5: cache_rpath (dl-load.c:696)
+==641346==    by 0x400ABF5: cache_rpath (dl-load.c:677)
+==641346==    by 0x400ABF5: _dl_map_object (dl-load.c:2165)
+==641346==    by 0x4003494: openaux (dl-deps.c:64)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==641346==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==641346==  Address 0x50a0229 is 9 bytes inside a block of size 15 alloc'd
+==641346==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==641346==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==641346==    by 0x40271DF: strdup (strdup.c:42)
+==641346==    by 0x4008594: decompose_rpath (dl-load.c:629)
+==641346==    by 0x400ABF5: cache_rpath (dl-load.c:696)
+==641346==    by 0x400ABF5: cache_rpath (dl-load.c:677)
+==641346==    by 0x400ABF5: _dl_map_object (dl-load.c:2165)
+==641346==    by 0x4003494: openaux (dl-deps.c:64)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==641346==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x400E34D: _dl_open (dl-open.c:883)
+==641346== 
+==641346== 
+==641346== HEAP SUMMARY:
+==641346==     in use at exit: 318,168 bytes in 3,100 blocks
+==641346==   total heap usage: 71,141 allocs, 68,041 frees, 68,551,758 bytes allocated
+==641346== 
+==641346== 0 bytes in 1 blocks are definitely lost in loss record 1 of 2,238
+==641346==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==641346==    by 0x4005A22: malloc (rtld-malloc.h:56)
+==641346==    by 0x4005A22: _dl_find_object_update (dl-find_object.c:791)
+==641346==    by 0x400ECCF: dl_open_worker_begin (dl-open.c:735)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x400E34D: _dl_open (dl-open.c:883)
+==641346==    by 0x4AD65FB: dlopen_doit (dlopen.c:56)
+==641346==    by 0x4BBAB57: _dl_catch_exception (dl-error-skeleton.c:208)
+==641346==    by 0x4BBAC22: _dl_catch_error (dl-error-skeleton.c:227)
+==641346==    by 0x4AD60ED: _dlerror_run (dlerror.c:138)
+==641346==    by 0x4AD6687: dlopen_implementation (dlopen.c:71)
+==641346==    by 0x4AD6687: dlopen@@GLIBC_2.34 (dlopen.c:81)
+==641346== 
+==641346== 112 (56 direct, 56 indirect) bytes in 1 blocks are definitely lost in loss record 2,199 of 2,238
+==641346==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==641346==    by 0x663486E: ???
+==641346==    by 0x6106293: ???
+==641346==    by 0x60EEDB8: ???
+==641346==    by 0x60EEF6A: ???
+==641346==    by 0x60A1109: ???
+==641346==    by 0x60A3C24: ???
+==641346==    by 0x609E9FC: ???
+==641346==    by 0x604DAB7: ???
+==641346==    by 0x608AEAD: ???
+==641346==    by 0x608743C: ???
+==641346==    by 0x601E61A: ???
+==641346== 
+==641346== LEAK SUMMARY:
+==641346==    definitely lost: 56 bytes in 2 blocks
+==641346==    indirectly lost: 56 bytes in 1 blocks
+==641346==      possibly lost: 0 bytes in 0 blocks
+==641346==    still reachable: 318,056 bytes in 3,097 blocks
+==641346==         suppressed: 0 bytes in 0 blocks
+==641346== Reachable blocks (those to which a pointer was found) are not shown.
+==641346== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==641346== 
+==641346== For lists of detected and suppressed errors, rerun with: -s
+==641346== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)

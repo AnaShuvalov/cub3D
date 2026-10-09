@@ -1,0 +1,14 @@
+{
+	ignore_lglfw_leaks
+	Memcheck:Leak
+	match-leak-kinds:possible,reachable,indirect
+	...
+	obj:*/libglfw.so*
+}
+{
+	ignore_opengl_leaks
+	Memcheck:Leak
+	match-leak-kinds:possible,reachable,indirect
+	...
+	obj:*/libGL.so*
+}

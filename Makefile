@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/07 13:15:59 by olmatske         ###   ########.fr        #
+#    Updated: 2026/10/09 13:47:18 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,10 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = ./includes/MLX42
 MLX_LIB = $(MLX_DIR)/build/libmlx42.a
 MLX_INC = -I$(MLX_DIR)/include
+
+SUPP_FILE = sub.sub
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=$(SUPP_FILE)
+
 
 UNAME_S := $(shell uname -s)
 
@@ -117,6 +121,10 @@ fclean: clean
 re:
 	$(MAKE) fclean
 	$(MAKE) all
+
+valgrind: fclean
+	$(MAKE) SANITIZE= all
+	valgrind $(VALGRIND_FLAGS) ./$(NAME)
 
 .PHONY: all clean fclean re
 
