@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/09 15:43:17 by anshuval         ###   ########.fr        #
+#    Updated: 2026/10/09 16:00:53 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,7 +133,7 @@ valgrind_all: $(NAME)
 		valgrind $(VALGRIND_FLAGS) ./$(NAME) $$map; \
 	done
 
-.PHONY: all clean fclean re valgrind
+.PHONY: all clean fclean re valgrind valgrind_all
 
 
 
