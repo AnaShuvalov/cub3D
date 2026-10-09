@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/08 14:56:08 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/09 12:55:58 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,6 @@ typedef struct s_keys
 	bool	left; // look left
 	bool	right; // look right
 }	t_keys;
-
-// Image buffer representation for MinilibX
-// Used to store the information of the framebuffer before loading it to the screen
-typedef struct s_img
-{
-	mlx_image_t	*image;
-	int			width; // the width of the image in pixels
-	int			height; // the height of the image in pixels
-}	t_img;
 
 // Player state for movement and raycasting
 // position in grid units (type double - e.g. 4.5), direction and plane are vectors
@@ -117,7 +108,6 @@ typedef struct s_game
 
 // PARSER /////////////////////
 int		parser(int argc, char **argv, t_game *game);
-void	free_game(t_game *game);
 void	free_array(char **array);
 void	error_message(char *s);
 
@@ -129,6 +119,7 @@ int		load_textures(t_map *map);
 // HOOKS ////////////////////
 void	key_reaction(mlx_key_data_t keydata, void *param);
 void	close_game(t_game *game);
+void	free_game(t_game *game);
 void	close_hook(void *param);
 void	exit_on_error(t_game *game, char *s);
 
