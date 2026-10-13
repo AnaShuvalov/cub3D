@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 19:43:41 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 09:51:29 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 10:48:51 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,7 @@ static void	draw(mlx_image_t *img, int start_x, int start_y, uint32_t color)
 	}
 }
 
-static void	minimap_compass(mlx_image_t *img, t_game *game, int allign_right)
-{
-	int	x;
-	int	y;
-	int	center_tile;
-	int	dot_x;
-	int	dot_y;
-
-	center_tile = (MINIMAP_SIZE * MINIMAP_TILE_SIZE) / 2;
-	x = allign_right + center_tile;
-	y = PADDING + center_tile;
-	dot_x = x + (int)round(game->player.dir_x * MINIMAP_TILE_SIZE);
-	dot_y = y + (int)round(game->player.dir_y * MINIMAP_TILE_SIZE);
-	draw(img, dot_x, dot_y, MINIMAP_COMPASS);
-}
-
-static void	get_player(mlx_image_t *img, t_game *game, int allign_right)
+static void	player_with_compass(mlx_image_t *img, t_game *game, int center_x, int center_y)
 {
 	int	x;
 	int	y;
@@ -59,8 +43,6 @@ static void	get_player(mlx_image_t *img, t_game *game, int allign_right)
 	int	player_y;
 	int	radius;
 
-	player_x = (int)(allign_right + (game->player.pos_x * MINIMAP_TILE_SIZE));
-	player_y = (int)(PADDING + (game->player.pos_y * MINIMAP_TILE_SIZE));
 	radius = MINIMAP_PLAYER_SIZE / 2;
 	y = -radius;
 	while (y <= radius)
@@ -69,19 +51,22 @@ static void	get_player(mlx_image_t *img, t_game *game, int allign_right)
 		while (x <= radius)
 		{
 			if ((x * x) + (y * y) <= (radius * radius) + 1)
-				mlx_put_pixel(img, player_x + x, player_y + y, MINIMAP_PLAYER);
+				mlx_put_pixel(img, center_x + x, center_y + y, MINIMAP_PLAYER);
 			x++;
 		}
 		y++;
 	}
+	player_x = center_x + (int)round(game->player.dir_x * MINIMAP_TILE_SIZE);
+	player_y = center_y + (int)round(game->player.dir_y * MINIMAP_TILE_SIZE);
+	draw(img, player_x, player_y, MINIMAP_COMPASS);
 }
 
-static uint32_t	get_colors(t_game *game, int col, int row, int len)
+static uint32_t	get_colors(t_game *game, int col, int row)
 {
 	uint32_t	color;
 
-	if (game->map.grid == NULL || row < 0 || row >= game->map.height
-			|| col < 0 || col >= len)
+	if (row < 0 || row >= game->map.height || game->map.grid[row] == NULL
+			|| col < 0 || col >= (int)ft_strlen(game->map.grid[row]))
 		color = MINIMAP_SPACE;
 	else if (game->map.grid[row][col] == '1')
 		color = MINIMAP_WALLS;
@@ -92,13 +77,31 @@ static uint32_t	get_colors(t_game *game, int col, int row, int len)
 	return (color);
 }
 
-void	draw_map(mlx_image_t *img, t_game *game)
+static void	draw_row_by_row(mlx_image_t *img, t_game *game, int row, int allign_right)
 {
-	int			row;
 	int			col;
-	int			len;
-	int			allign_right;
+	int			start_x;
+	int			start_y;
 	uint32_t	color;
+
+	start_x = game->player.pos_x - (MINIMAP_SIZE / 2);
+	start_y = game->player.pos_y - (MINIMAP_SIZE / 2);
+	col = 0;
+	while (col < MINIMAP_SIZE)
+	{
+		color = get_colors(game, start_x + col, start_y + row);
+		draw(img, allign_right + (col * MINIMAP_TILE_SIZE),
+			PADDING + (row * MINIMAP_TILE_SIZE), color);
+		col++;
+	}
+}
+
+void	draw_minimap(mlx_image_t *img, t_game *game)
+{
+	int	row;
+	int	allign_right;
+	int	center_x;
+	int	center_y;
 
 	allign_right = WIN_WIDTH - PADDING - (MINIMAP_SIZE * MINIMAP_TILE_SIZE);
 	if (allign_right < PADDING)
@@ -106,17 +109,10 @@ void	draw_map(mlx_image_t *img, t_game *game)
 	row = 0;
 	while (row < MINIMAP_SIZE)
 	{
-		col = 0;
-		len = (int)ft_strlen(game->map.grid[row]);
-		while (col < MINIMAP_SIZE)
-		{
-			color = get_colors(game, col, row, len);
-			draw(img, allign_right + (col * MINIMAP_TILE_SIZE),
-				PADDING + (row * MINIMAP_TILE_SIZE), color);
-			col++;
-		}
+		draw_row_by_row(img, game, row, allign_right);
 		row++;
 	}
-	get_player(img, game, allign_right);
-	minimap_compass(img, game, allign_right);
+	center_x = allign_right + (MINIMAP_SIZE * MINIMAP_TILE_SIZE) / 2;
+	center_y = PADDING + (MINIMAP_SIZE * MINIMAP_TILE_SIZE) / 2;
+	player_with_compass(img, game, center_x, center_y);
 }
