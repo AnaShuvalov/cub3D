@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 13:46:25 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 16:07:13 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define MINIMAP_PLAYER 		0x39ff14FF
 # define MINIMAP_SPACE 			0x666666AA
 # define MINIMAP_COMPASS		0xFFFFFFAA
+# define MINIMAP_FRAME			0x222222AA
 
 # define COLOR_CEILING			0x55e4ffFF
 # define COLOR_WALLS			0x895544FF

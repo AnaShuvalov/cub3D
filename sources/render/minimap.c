@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 19:43:41 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 13:47:54 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 16:35:18 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	draw(t_game *game, int start_x, int start_y, uint32_t color)
 	size = MINIMAP_MAX_SIZE / game->map.width;
 	if (game->map.width < game->map.height)
 		size = MINIMAP_MAX_SIZE / game->map.height;
+	if (size > MINIMAP_TILE_SIZE)
+		size = MINIMAP_TILE_SIZE;
 	y = 0;
 	while (y < size)
 	{
@@ -57,22 +59,33 @@ static void	get_player(t_game *game, int allignment, int size)
 		}
 		y++;
 	}
-	x = player_x + (int)round(game->player.dir_x * (MINIMAP_TILE_SIZE / 2));
-	y = player_y + (int)round(game->player.dir_y * (MINIMAP_TILE_SIZE / 2));
+	x = player_x + (int)round(game->player.dir_x * (MINIMAP_TILE_SIZE));
+	y = player_y + (int)round(game->player.dir_y * (MINIMAP_TILE_SIZE));
 	mlx_put_pixel(game->framebuffer, x, y, MINIMAP_COMPASS);
 }
 
-static uint32_t	get_colors(t_game *game, int col, int row, int len)
+static void	draw_frame(t_game *game, int allignment, int size)
 {
-	uint32_t	color;
+	int	w;
+	int	h;
+	int	i;
 
-	if (col < len && game->map.grid[row][col] == '1')
-		color = MINIMAP_WALLS;
-	else if (col < len && game->map.grid[row][col] == '0')
-		color = MINIMAP_FLOOR;
-	else
-		color = MINIMAP_SPACE;
-	return (color);
+	w = game->map.width * size;
+	h = game->map.height * size;
+	i = -1;
+	while (i <= w)
+	{
+		mlx_put_pixel(game->framebuffer, allignment + i, PADDING - 1, MINIMAP_FRAME);
+		mlx_put_pixel(game->framebuffer, allignment + i, PADDING + h, MINIMAP_FRAME);
+		i++;
+	}
+	i = -1;
+	while (i <= h)
+	{
+		mlx_put_pixel(game->framebuffer, allignment - 1, PADDING + i, MINIMAP_FRAME);
+		mlx_put_pixel(game->framebuffer, allignment + w, PADDING + i, MINIMAP_FRAME);
+		i++;
+	}
 }
 
 static void	draw_row_by_row(t_game *game, int row, int allignment, int size)
@@ -85,7 +98,12 @@ static void	draw_row_by_row(t_game *game, int row, int allignment, int size)
 	col = 0;
 	while (col < game->map.width)
 	{
-		color = get_colors(game, col, row, single_row_len);
+		if (col < single_row_len && game->map.grid[row][col] == '1')
+			color = MINIMAP_WALLS;
+		else if (col < single_row_len && game->map.grid[row][col] == '0')
+			color = MINIMAP_FLOOR;
+		else
+			color = MINIMAP_SPACE;
 		draw(game, allignment + (col * size),
 			PADDING + (row * size), color);
 		col++;
@@ -109,6 +127,7 @@ void	draw_minimap(t_game *game)
 	allign_right = WIN_WIDTH - PADDING - (game->map.width * size);
 	if (allign_right < PADDING)
 		allign_right = PADDING;
+	draw_frame(game, allign_right, size);
 	row = 0;
 	while (row < game->map.height)
 	{
