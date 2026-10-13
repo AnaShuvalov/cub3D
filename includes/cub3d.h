@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 10:25:10 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 11:26:16 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
 
-# define MINIMAP_SIZE	 		9
+# define MINIMAP_SIZE	 		15
 # define MINIMAP_TILE_SIZE 		10
 # define MINIMAP_PLAYER_SIZE	4
 # define MINIMAP_COMPASS_SIZE	1
