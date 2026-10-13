@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/09 12:49:04 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 17:23:11 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	main(int argc, char **argv)
 	mlx_key_hook(game.mlx, key_reaction, &game);
 	if (start_game(&game) != 0)
 	{
-		close_game(&game);
+		close_game(&game, 1);
 		return (1);
 	}
-	close_game(&game);
+	close_game(&game, 0);
 	return (0);
 }

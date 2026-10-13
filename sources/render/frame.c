@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:27:12 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 12:46:43 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 17:19:04 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	start_game(t_game *game)
 {
 	if (load_textures(&game->map) != 0)
 	{
-		printf("ERROR: Failed to load textures\n");
+		error_message("Failed to load textures.\n");
 		mlx_close_window(game->mlx);
 		return (1);
 	}

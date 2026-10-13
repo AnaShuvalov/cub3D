@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 16:07:13 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 17:22:16 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int		load_textures(t_map *map);
 
 // HOOKS ////////////////////
 void	key_reaction(mlx_key_data_t keydata, void *param);
-void	close_game(t_game *game);
+void	close_game(t_game *game, int exit_status);
 void	free_game(t_game *game);
 void	close_hook(void *param);
 void	exit_on_error(t_game *game, char *s);

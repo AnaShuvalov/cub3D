@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 15:42:36 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/23 15:05:02 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 17:23:19 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	key_reaction(mlx_key_data_t keydata, void *param)
 
 	game = param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		close_game(game);
+		close_game(game, 0);
 	if (keydata.action == MLX_PRESS)
 		on_press(keydata, game);
 	if (keydata.action == MLX_RELEASE)

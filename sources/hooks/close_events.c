@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 15:42:32 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/09 13:09:04 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 17:29:37 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ void	exit_on_error(t_game *game, char *s)
 {
 	if (s)
 		error_message(s);
-	close_game(game);
+	close_game(game, 1);
 }
 
-void	close_game(t_game *game)
+void	close_game(t_game *game, int exit_status)
 {
 	if (game == NULL)
 		return ;
 	free_game(game);
 	if (game->mlx)
 		mlx_terminate(game->mlx);
-	exit(0);
+	exit(exit_status);
 }
 
 void	close_hook(void *param)
@@ -71,5 +71,5 @@ void	close_hook(void *param)
 	t_game	*game;
 
 	game = param;
-	close_game(game);
+	close_game(game, 0);
 }
