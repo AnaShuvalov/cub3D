@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 11:26:16 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 13:46:25 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	800
 
-# define MINIMAP_SIZE	 		15
+# define MINIMAP_MAX_SIZE	 	160
 # define MINIMAP_TILE_SIZE 		10
 # define MINIMAP_PLAYER_SIZE	4
 # define MINIMAP_COMPASS_SIZE	1
@@ -125,8 +125,8 @@ void	close_hook(void *param);
 void	exit_on_error(t_game *game, char *s);
 
 // RENDER ///////////////////
-void	render_frame(void	*param);
-void	draw_minimap(mlx_image_t *img, t_game *game);
+void	render_frame(void *param);
+void	draw_minimap(t_game *game);
 void	draw_floor_and_ceiling(t_game *game);
 
 #endif

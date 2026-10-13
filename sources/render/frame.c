@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:27:12 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 10:24:52 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 12:46:43 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	game_loop(void *param)
 
 	game = param;
 	render_frame(game);
-	draw_minimap(game->framebuffer, game);
+	draw_minimap(game);
 }
 
 int	start_game(t_game *game)
