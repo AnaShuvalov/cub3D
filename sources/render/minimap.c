@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 19:43:41 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 16:35:18 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/13 16:54:54 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ static void	get_player(t_game *game, int allignment, int size)
 		while (x <= radius)
 		{
 			if ((x * x) + (y * y) <= (radius * radius) + 1)
-				mlx_put_pixel(game->framebuffer, player_x + x, player_y + y, MINIMAP_PLAYER);
+				mlx_put_pixel(game->framebuffer, player_x + x,
+					player_y + y, MINIMAP_PLAYER);
 			x++;
 		}
 		y++;
 	}
-	x = player_x + (int)round(game->player.dir_x * (MINIMAP_TILE_SIZE));
-	y = player_y + (int)round(game->player.dir_y * (MINIMAP_TILE_SIZE));
+	x = player_x + (int)round(game->player.dir_x * MINIMAP_TILE_SIZE);
+	y = player_y + (int)round(game->player.dir_y * MINIMAP_TILE_SIZE);
 	mlx_put_pixel(game->framebuffer, x, y, MINIMAP_COMPASS);
 }
 
@@ -75,15 +76,19 @@ static void	draw_frame(t_game *game, int allignment, int size)
 	i = -1;
 	while (i <= w)
 	{
-		mlx_put_pixel(game->framebuffer, allignment + i, PADDING - 1, MINIMAP_FRAME);
-		mlx_put_pixel(game->framebuffer, allignment + i, PADDING + h, MINIMAP_FRAME);
+		mlx_put_pixel(game->framebuffer, allignment + i,
+			PADDING - 1, MINIMAP_FRAME);
+		mlx_put_pixel(game->framebuffer, allignment + i,
+			PADDING + h, MINIMAP_FRAME);
 		i++;
 	}
 	i = -1;
 	while (i <= h)
 	{
-		mlx_put_pixel(game->framebuffer, allignment - 1, PADDING + i, MINIMAP_FRAME);
-		mlx_put_pixel(game->framebuffer, allignment + w, PADDING + i, MINIMAP_FRAME);
+		mlx_put_pixel(game->framebuffer, allignment - 1,
+			PADDING + i, MINIMAP_FRAME);
+		mlx_put_pixel(game->framebuffer, allignment + w,
+			PADDING + i, MINIMAP_FRAME);
 		i++;
 	}
 }
