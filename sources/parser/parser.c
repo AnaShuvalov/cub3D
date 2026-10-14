@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/24 15:02:59 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/14 11:38:07 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 		|| (is_space_only(line) == OK && *map != NULL))
 		return (create_map_linked_list(line, map));
 	else
-		return (error_message("Extra information in the .cub file.\n"), ERROR);
+		return (error_message("Invalid information in the .cub file.\n"), ERROR);
 	return (OK);
 }
 
@@ -91,7 +91,7 @@ static void	read_map(int fd, t_game *game)
 	if (set_player(game) == ERROR)
 	{
 		free_game(game);
-		ft_error("Only one player spawn point per map is allowed.\n");
+		ft_error("Exactly one player spawn point per map is demanded.\n");
 	}
 	if (validate_grid(game) == ERROR)
 	{

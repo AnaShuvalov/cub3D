@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/09 16:00:53 by anshuval         ###   ########.fr        #
+#    Updated: 2026/10/14 11:30:28 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,14 +122,20 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
+test_invalid_maps: $(NAME)
+	@printf "Testing invalid maps\n"
+	@for map in maps/invalid/*.cub; do \
+		printf "\n======== %s ========\n" "$${map##*/}"; \
+		./$(NAME) "$$map" 2>&1 || true; \
+	done
+
 valgrind: $(NAME)
 	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(MAP)
 
 valgrind_all: $(NAME)
+	@printf "Testing with valgrind\n"
 	@for map in maps/invalid/*.cub; do \
-		echo "\n"; \
-		echo "Testing $$map"; \
-		echo "\n"; \
+		printf "\n======== %s ========\n" "$${map##*/}"; \
 		valgrind $(VALGRIND_FLAGS) ./$(NAME) $$map; \
 	done
 
