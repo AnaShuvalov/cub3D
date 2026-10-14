@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 18:20:17 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/14 11:38:07 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/14 14:33:48 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static int	populate_game(t_game *game, char *line, t_list **map)
 		|| (is_space_only(line) == OK && *map != NULL))
 		return (create_map_linked_list(line, map));
 	else
-		return (error_message("Invalid information in the .cub file.\n"), ERROR);
+		return (error_message("Invalid information in the "
+				".cub file.\n"), ERROR);
 	return (OK);
 }
 

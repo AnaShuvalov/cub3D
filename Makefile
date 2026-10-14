@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/14 11:30:28 by anshuval         ###   ########.fr        #
+#    Updated: 2026/10/14 14:32:16 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,7 +136,7 @@ valgrind_all: $(NAME)
 	@printf "Testing with valgrind\n"
 	@for map in maps/invalid/*.cub; do \
 		printf "\n======== %s ========\n" "$${map##*/}"; \
-		valgrind $(VALGRIND_FLAGS) ./$(NAME) $$map; \
+		valgrind $(VALGRIND_FLAGS) ./$(NAME) $$map 2>&1 || true; \
 	done
 
 .PHONY: all clean fclean re valgrind valgrind_all
