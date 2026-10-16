@@ -1,0 +1,68 @@
+{
+	ignore_glfw_leaks
+	Memcheck:Leak
+	match-leak-kinds:all
+	...
+	obj:*/libglfw*
+}
+{
+	ignore_opengl_leaks
+	Memcheck:Leak
+	match-leak-kinds:all
+	...
+	obj:*/libGL*
+}
+{
+	ignore_x11_leaks
+	Memcheck:Leak
+	match-leak-kinds:all
+	...
+	obj:*/libX11*
+}
+{
+	ignore_llvm_leaks
+	Memcheck:Leak
+	match-leak-kinds:all
+	...
+	obj:*/libLLVM*
+}
+{
+	ignore_dri_graphics_leaks
+	Memcheck:Leak
+	match-leak-kinds:all
+	...
+	obj:*dri*
+}
+{
+	ignore_glibc_dl_open
+	Memcheck:Leak
+	match-leak-kinds:all
+	...
+	fun:*dl*
+}
+{
+	ignore_glibc_dl_read
+	Memcheck:Addr8
+	...
+	fun:*dl*
+}
+{
+	ignore_mlx_init_internal_caloc
+	Memcheck:Leak
+	match-leak-kinds:all
+	fun:calloc
+	obj:*
+	obj:*
+	obj:*
+	obj:*
+	obj:*
+	obj:*
+	obj:*
+	obj:*
+	obj:*
+	obj:*
+	obj:*
+	...
+	fun:mlx_init
+}
+

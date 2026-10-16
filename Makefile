@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/07 13:15:59 by olmatske         ###   ########.fr        #
+#    Updated: 2026/10/14 14:32:16 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,10 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = ./includes/MLX42
 MLX_LIB = $(MLX_DIR)/build/libmlx42.a
 MLX_INC = -I$(MLX_DIR)/include
+
+SUPP_FILE = sub.sub
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=$(SUPP_FILE)
+MAP ?= maps/valid/minimal.cub
 
 UNAME_S := $(shell uname -s)
 
@@ -118,7 +122,24 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY: all clean fclean re
+test_invalid_maps: $(NAME)
+	@printf "Testing invalid maps\n"
+	@for map in maps/invalid/*.cub; do \
+		printf "\n======== %s ========\n" "$${map##*/}"; \
+		./$(NAME) "$$map" 2>&1 || true; \
+	done
+
+valgrind: $(NAME)
+	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(MAP)
+
+valgrind_all: $(NAME)
+	@printf "Testing with valgrind\n"
+	@for map in maps/invalid/*.cub; do \
+		printf "\n======== %s ========\n" "$${map##*/}"; \
+		valgrind $(VALGRIND_FLAGS) ./$(NAME) $$map 2>&1 || true; \
+	done
+
+.PHONY: all clean fclean re valgrind valgrind_all
 
 
 

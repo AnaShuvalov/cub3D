@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/28 15:23:08 by anshuval          #+#    #+#             */
-/*   Updated: 2026/09/24 14:56:12 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/14 11:39:36 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ void	check_and_convert_map_into_grid(t_list *map, t_game *game)
 	{
 		ft_lstclear(&map, free);
 		free_game(game);
-		ft_error("Failed to build map grid\n");
+		exit(1);
 	}
 }

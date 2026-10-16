@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:27:12 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/07 13:25:10 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/13 17:19:04 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	game_loop(void *param)
 
 	game = param;
 	render_frame(game);
-	draw_map(game->framebuffer, game);
+	draw_minimap(game);
 }
 
 int	start_game(t_game *game)
 {
 	if (load_textures(&game->map) != 0)
 	{
-		printf("ERROR: Failed to load textures\n");
+		error_message("Failed to load textures.\n");
 		mlx_close_window(game->mlx);
 		return (1);
 	}

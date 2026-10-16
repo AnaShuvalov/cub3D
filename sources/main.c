@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 19:11:09 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/08 14:54:23 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/13 17:23:11 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	free_game(t_game *game)
-{
-	if (game == NULL)
-		return ;
-	if (game->map.north_texture)
-		free(game->map.north_texture);
-	if (game->map.south_texture)
-		free(game->map.south_texture);
-	if (game->map.west_texture)
-		free(game->map.west_texture);
-	if (game->map.east_texture)
-		free(game->map.east_texture);
-	if (game->map.grid)
-		free_array(game->map.grid);
-	ft_bzero(&game->map, sizeof(t_map));
-}
 
 static void	init_game(t_game *game)
 {
@@ -56,9 +39,9 @@ int	main(int argc, char **argv)
 	mlx_key_hook(game.mlx, key_reaction, &game);
 	if (start_game(&game) != 0)
 	{
-		close_game(&game);
+		close_game(&game, 1);
 		return (1);
 	}
-	close_game(&game);
+	close_game(&game, 0);
 	return (0);
 }
