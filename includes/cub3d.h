@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/08 14:56:08 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/12 13:18:26 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@
 # define MINIMAP_SPACE 			0x666666AA
 # define MINIMAP_COMPASS		0xFFFFFFAA
 
-# define COLOR_CEILING			0x55e4ffFF
+# define COLOR_CEILING			0x11080DFF
 # define COLOR_WALLS			0x895544FF
-# define COLOR_FLOOR			0x56db32FF
+# define COLOR_FLOOR			0x280400FF
 # define COLOR_PLAYER 			0xcb137fFF
 
 // Key movemment flags - used for smooth wlaking and fluid movement.

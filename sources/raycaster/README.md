@@ -11,6 +11,7 @@
 - [X] is there a check for textures?
 - [ ] hook up floor and ceiling colors from map sruct
 - [ ] why does the camera/view slow down when I get closer to the walls?
+- [ ] make buffer between walls
 
 - buffer between player and wall
 - protect corners

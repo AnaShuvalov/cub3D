@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/07 17:47:01 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/12 13:12:00 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 #define TILE 64
 
-#define COLOR_CEILING		0x55e4ffFF
-#define COLOR_WALLS			0x895544FF
-#define COLOR_FLOOR			0x56db32FF
-#define COLOR_PLAYER 		0xcb137fFF
+// #define COLOR_CEILING		0x55e4ffFF
+// #define COLOR_WALLS			0x895544FF
+// #define COLOR_FLOOR			0x56db32FF
+// #define COLOR_PLAYER 		0xcb137fFF
 
 #define	MOVEMENT_SPEED	0.03
 #define	ROTATION_SPEED	0.04
