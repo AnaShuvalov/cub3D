@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/03 21:24:50 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/16 17:01:09 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,20 @@ static void	walk_forward_backward(t_game *game)
 {
 	double	move_x;
 	double	move_y;
+	double	speed;
 
 	move_x = 0;
 	move_y = 0;
+	speed = MOVEMENT_SPEED * game->mlx->delta_time;
 	if (game->key.w)
 	{
-		move_x = game->player.dir_x * MOVEMENT_SPEED;
-		move_y = game->player.dir_y * MOVEMENT_SPEED;
+		move_x = game->player.dir_x * speed;
+		move_y = game->player.dir_y * speed;
 	}
 	if (game->key.s)
 	{
-		move_x -= game->player.dir_x * MOVEMENT_SPEED;
-		move_y -= game->player.dir_y * MOVEMENT_SPEED;
+		move_x -= game->player.dir_x * speed;
+		move_y -= game->player.dir_y * speed;
 	}
 	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y))
 		game->player.pos_x += move_x;
@@ -71,18 +73,20 @@ static void	strafe_left_right(t_game *game)
 {
 	double	move_x;
 	double	move_y;
+	double	speed;
 
 	move_x = 0;
 	move_y = 0;
+	speed = MOVEMENT_SPEED * game->mlx->delta_time;
 	if (game->key.a)
 	{
-		move_x = -game->player.plane_x * MOVEMENT_SPEED;
-		move_y = -game->player.plane_y * MOVEMENT_SPEED;
+		move_x = -game->player.plane_x * speed;
+		move_y = -game->player.plane_y * speed;
 	}
 	if (game->key.d)
 	{
-		move_x = game->player.plane_x * MOVEMENT_SPEED;
-		move_y = game->player.plane_y * MOVEMENT_SPEED;
+		move_x = game->player.plane_x * speed;
+		move_y = game->player.plane_y * speed;
 	}
 	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y))
 		game->player.pos_x += move_x;
@@ -92,10 +96,13 @@ static void	strafe_left_right(t_game *game)
 
 void	direction_handler(t_game *game)
 {
+	double	rotation_speed;
+
+	rotation_speed = ROTATION_SPEED * game->mlx->delta_time;
 	if (game->key.right)
-		rotate_player(&game->player, ROTATION_SPEED);
+		rotate_player(&game->player, rotation_speed);
 	if (game->key.left)
-		rotate_player(&game->player, -ROTATION_SPEED);
+		rotate_player(&game->player, -rotation_speed);
 	if (game->key.w || game->key.s)
 		walk_forward_backward(game);
 	if (game->key.a || game->key.d)

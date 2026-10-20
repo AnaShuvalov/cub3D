@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:27:12 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 17:19:04 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/16 15:14:45 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

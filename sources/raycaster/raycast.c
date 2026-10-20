@@ -6,11 +6,33 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:09 by olmatske          #+#    #+#             */
-/*   Updated: 2026/09/27 17:32:34 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/16 18:34:56 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
+#include <sys/time.h>
+
+void	print_fps_terminal(void)
+{
+	static double	last_time = 0;
+	static int		frame_count = 0;
+	struct timeval	time;
+	double			current_time;
+
+	gettimeofday(&time, NULL);
+	current_time = time.tv_sec * 1000.0 + time.tv_usec / 1000.0;
+	
+	frame_count++;
+
+	// Update and print exactly once per second
+	if (current_time - last_time >= 1000.0)
+	{
+		printf("FPS: %d\n", frame_count);
+		frame_count = 0;
+		last_time = current_time;
+	}
+}
 
 // Calculates ray's direction based on which column we're drawing
 static void	init_ray_direction(t_ray *ray, t_player *player, int x)
@@ -95,6 +117,7 @@ void	render_frame(void	*param)
 		init_ray(&ray, &game->player, x);
 		perform_dda(game, &ray);
 		draw_wall_slice(game, &ray, x);
+		print_fps_terminal();
 		x++;
 	}
 }

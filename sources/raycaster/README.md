@@ -12,10 +12,11 @@
 - [ ] hook up floor and ceiling colors from map sruct
 - [ ] why does the camera/view slow down when I get closer to the walls?
 - [ ] make buffer between walls
+- [ ] lines of floor and ceiling on top and bottom
 
 - buffer between player and wall
 - protect corners
 - fisheye at first, must be hardcoded
 - raycast can 'glitch' through walls
 
-- [ ] do we need to have up and down key movements too?
+- [X] do we need to have up and down key movements too?
