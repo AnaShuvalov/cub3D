@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 14:43:39 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/07 17:26:55 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/20 17:17:59 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	calculate_wall_dimentions(t_ray *ray)
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	if (ray->draw_end >= WIN_HEIGHT)
-		ray->draw_end = WIN_HEIGHT - 1;
+		ray->draw_end = WIN_HEIGHT;
 }
 
 static void	draw_column(t_game *game, t_ray *ray, mlx_texture_t *texture, double brightness, int x)
