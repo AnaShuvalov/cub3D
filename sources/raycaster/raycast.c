@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:09 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/16 18:34:56 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/20 16:03:31 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	render_frame(void	*param)
 		init_ray(&ray, &game->player, x);
 		perform_dda(game, &ray);
 		draw_wall_slice(game, &ray, x);
-		print_fps_terminal();
 		x++;
 	}
+	print_fps_terminal();
 }

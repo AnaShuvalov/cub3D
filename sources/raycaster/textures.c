@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 14:05:37 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/07 17:42:19 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/20 16:23:35 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	draw_floor_and_ceiling(t_game *game)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			mlx_put_pixel(game->background, x, y, COLOR_CEILING);
+			mlx_put_pixel(game->background, x, y, game->map.ceiling_color);
 			x++;
 		}
 		y++;
@@ -99,7 +99,7 @@ void	draw_floor_and_ceiling(t_game *game)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			mlx_put_pixel(game->background, x, y, COLOR_FLOOR);
+			mlx_put_pixel(game->background, x, y, game->map.floor_color);
 			x++;
 		}
 		y++;
