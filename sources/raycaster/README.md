@@ -12,9 +12,12 @@
 - [X] hook up floor and ceiling colors from map sruct
 - [X] why does the camera/view slow down when I get closer to the walls?
 	-> it's to be expected in raycasting
-- [ ] make buffer between walls
+- [X] make buffer between walls
 - [X] lines of floor and ceiling on top and bottom
-- [ ] remove FPS counter
+- [X] remove FPS counter
+- [X] Norminette
+- [ ] bonus directory
+	- [ ] wall collision (mandatory: upon wall, stop - bonus: upon wall, slide)
 
 - buffer between player and wall
 - protect corners

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/14 14:32:16 by anshuval         ###   ########.fr        #
+#    Updated: 2026/10/21 16:05:58 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ RAYCASTER =		sources/raycaster/raycast.c \
 				sources/raycaster/camera.c \
 				sources/raycaster/graphics.c \
 				sources/raycaster/orientation.c \
-				sources/raycaster/wallcolors.c \
+				sources/raycaster/orientation_wrapper.c \
 				sources/raycaster/textures.c
 
 

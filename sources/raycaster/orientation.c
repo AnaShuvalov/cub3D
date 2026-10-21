@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/21 14:27:40 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/21 16:04:43 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ static int	is_wall(t_game *game, double x, double y)
 	return (0);
 }
 
-static int	check_collision(t_game *game, double	x, double y)
+static int	check_collision(t_game *game, double x, double y)
 {
 	double	r;
 
 	r = PLAYER_RADIUS;
-	return (is_wall(game, x - r, y) || is_wall(game, x + r, y) ||
-			is_wall(game, x, y - r) || is_wall(game, x, y + r));
+	return (is_wall(game, x - r, y) || is_wall(game, x + r, y)
+		|| is_wall(game, x, y - r) || is_wall(game, x, y + r));
 }
 
-static void	rotate_player(t_player *player, double angle)
+void	rotate_player(t_player *player, double angle)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -49,11 +49,12 @@ static void	rotate_player(t_player *player, double angle)
 	player->dir_x = player->dir_x * cos(angle) - player->dir_y * sin(angle);
 	player->dir_y = old_dir_x * sin(angle) + player->dir_y * cos(angle);
 	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(angle) - player->plane_y * sin(angle);
+	player->plane_x = player->plane_x * cos(angle)
+		- player->plane_y * sin(angle);
 	player->plane_y = old_plane_x * sin(angle) + player->plane_y * cos(angle);
 }
 
-static void	walk_forward_backward(t_game *game)
+void	walk_forward_backward(t_game *game)
 {
 	double	move_x;
 	double	move_y;
@@ -78,7 +79,7 @@ static void	walk_forward_backward(t_game *game)
 		game->player.pos_y += move_y;
 }
 
-static void	strafe_left_right(t_game *game)
+void	strafe_left_right(t_game *game)
 {
 	double	move_x;
 	double	move_y;
@@ -101,19 +102,4 @@ static void	strafe_left_right(t_game *game)
 		game->player.pos_x += move_x;
 	if (!check_collision(game, game->player.pos_x, game->player.pos_y + move_y))
 		game->player.pos_y += move_y;
-}
-
-void	direction_handler(t_game *game)
-{
-	double	rotation_speed;
-
-	rotation_speed = ROTATION_SPEED * game->mlx->delta_time;
-	if (game->key.right)
-		rotate_player(&game->player, rotation_speed);
-	if (game->key.left)
-		rotate_player(&game->player, -rotation_speed);
-	if (game->key.w || game->key.s)
-		walk_forward_backward(game);
-	if (game->key.a || game->key.d)
-		strafe_left_right(game);
 }

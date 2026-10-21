@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:13 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/07 18:00:34 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/21 15:46:50 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static void	march_ray(t_game *game, t_ray *ray)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
-			ray->side = 0; // hit x axis
+			ray->side = 0;
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_dist_y;
 			ray->map_y += ray->step_y;
-			ray->side = 1; // hit y axis
+			ray->side = 1;
 		}
 		if (hit_wall(&game->map, ray->map_x, ray->map_y))
 			ray->wall_hit = 1;
@@ -55,15 +55,16 @@ static	void	setup_wall_drawing(t_game *game, t_ray *ray)
 
 	texture = get_texture(ray, game);
 	if (!texture)
-		return;
+		return ;
 	texture_width = texture->width;
 	if (ray->side == 0)
 		wall_x = game->player.pos_y + ray->perp_wall_dist * ray->ray_dir_y;
 	else
 		wall_x = game->player.pos_x + ray->perp_wall_dist * ray->ray_dir_x;
 	wall_x -= floor(wall_x);
-	ray->texture_x = (int) (wall_x * (double)texture_width);
-	if ((ray->side == 0 && ray->ray_dir_x > 0) || (ray->side == 1 && ray->ray_dir_y < 0))
+	ray->texture_x = (int)(wall_x * (double)texture_width);
+	if ((ray->side == 0 && ray->ray_dir_x > 0) || (ray->side == 1
+			&& ray->ray_dir_y < 0))
 		ray->texture_x = texture_width - ray->texture_x - 1;
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
@@ -73,6 +74,7 @@ static	void	setup_wall_drawing(t_game *game, t_ray *ray)
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
 }
+
 void	perform_dda(t_game *game, t_ray *ray)
 {
 	march_ray(game, ray);
