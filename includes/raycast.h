@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/16 17:01:52 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/21 14:28:38 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "MLX42/MLX42.h"
 
 #define TILE 64
+#define PLAYER_RADIUS 0.03
 
 // #define COLOR_CEILING		0x55e4ffFF
 // #define COLOR_WALLS			0x895544FF

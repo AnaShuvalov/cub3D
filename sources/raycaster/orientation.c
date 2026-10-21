@@ -6,7 +6,7 @@
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/16 17:01:09 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/21 14:27:40 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ static int	is_wall(t_game *game, double x, double y)
 	if (game->map.grid[map_y][map_x] != '0')
 		return (1);
 	return (0);
+}
+
+static int	check_collision(t_game *game, double	x, double y)
+{
+	double	r;
+
+	r = PLAYER_RADIUS;
+	return (is_wall(game, x - r, y) || is_wall(game, x + r, y) ||
+			is_wall(game, x, y - r) || is_wall(game, x, y + r));
 }
 
 static void	rotate_player(t_player *player, double angle)
@@ -63,9 +72,9 @@ static void	walk_forward_backward(t_game *game)
 		move_x -= game->player.dir_x * speed;
 		move_y -= game->player.dir_y * speed;
 	}
-	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y))
+	if (!check_collision(game, game->player.pos_x + move_x, game->player.pos_y))
 		game->player.pos_x += move_x;
-	if (!is_wall(game, game->player.pos_x, game->player.pos_y + move_y))
+	if (!check_collision(game, game->player.pos_x, game->player.pos_y + move_y))
 		game->player.pos_y += move_y;
 }
 
@@ -88,9 +97,9 @@ static void	strafe_left_right(t_game *game)
 		move_x = game->player.plane_x * speed;
 		move_y = game->player.plane_y * speed;
 	}
-	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y))
+	if (!check_collision(game, game->player.pos_x + move_x, game->player.pos_y))
 		game->player.pos_x += move_x;
-	if (!is_wall(game, game->player.pos_x, game->player.pos_y + move_y))
+	if (!check_collision(game, game->player.pos_x, game->player.pos_y + move_y))
 		game->player.pos_y += move_y;
 }
 
