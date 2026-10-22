@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 21:58:47 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 14:52:59 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/22 15:07:58 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@ void	walk_forward_backward(t_game *game)
 		move_x -= game->player.dir_x * speed;
 		move_y -= game->player.dir_y * speed;
 	}
-	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y))
+	if (!is_wall(game, game->player.pos_x + move_x,
+			game->player.pos_y + move_y))
+	{
 		game->player.pos_x += move_x;
-	if (!is_wall(game, game->player.pos_x, game->player.pos_y + move_y))
 		game->player.pos_y += move_y;
+	}
 }
 
 void	strafe_left_right(t_game *game)
