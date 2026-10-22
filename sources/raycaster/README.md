@@ -16,8 +16,10 @@
 - [X] lines of floor and ceiling on top and bottom
 - [X] remove FPS counter
 - [X] Norminette
-- [ ] bonus directory
-	- [ ] wall collision (mandatory: upon wall, stop - bonus: upon wall, slide)
+- [X] bonus directory
+	- [X] wall collision (mandatory: upon wall, stop - bonus: upon wall, slide)
+- [ ] BONUS MAKEFILE ARGUMENT
+- [ ] Cheat Sheet in Readme
 
 - buffer between player and wall
 - protect corners
