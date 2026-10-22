@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 11:33:37 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/22 14:29:57 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,13 @@ void			draw_wall_slice(t_game *game, t_ray *ray, int x);
 void			draw_floor_and_ceiling(t_game *game);
 void			direction_handler(t_game *game);
 void			clear_framebuffer(t_game *game);
-uint32_t		get_wall_color(t_ray *ray);
 int				load_textures(t_map *map);
 mlx_texture_t	*get_texture(t_ray *ray, t_game *game);
 uint32_t		get_texture_pixel(mlx_texture_t *texture, int x, int y);
 
 // BONUS /////////////////////////////////////////////////////////////////////
-void			bonus_handler(t_game *game)
-void			bonus_rotate_player(t_player *player, double angle);
-void			bonus_walk_forward_backward(t_game *game);
-void			bonus_strafe_left_right(t_game *game);
+void			rotate_player(t_player *player, double angle);
+void			walk_forward_backward(t_game *game);
+void			strafe_left_right(t_game *game);
 
 #endif

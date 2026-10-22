@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_collision.c                                   :+:      :+:    :+:   */
+/*   wall_collision_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 11:33:23 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/22 14:30:17 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	check_collision(t_game *game, double x, double y)
 		|| is_wall(game, x, y - r) || is_wall(game, x, y + r));
 }
 
-void	bonus_rotate_player(t_player *player, double angle)
+void	rotate_player(t_player *player, double angle)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -54,7 +54,7 @@ void	bonus_rotate_player(t_player *player, double angle)
 	player->plane_y = old_plane_x * sin(angle) + player->plane_y * cos(angle);
 }
 
-void	bonus_walk_forward_backward(t_game *game)
+void	walk_forward_backward(t_game *game)
 {
 	double	move_x;
 	double	move_y;
@@ -79,7 +79,7 @@ void	bonus_walk_forward_backward(t_game *game)
 		game->player.pos_y += move_y;
 }
 
-void	bonus_strafe_left_right(t_game *game)
+void	strafe_left_right(t_game *game)
 {
 	double	move_x;
 	double	move_y;

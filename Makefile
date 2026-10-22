@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/22 11:09:43 by olmatske         ###   ########.fr        #
+#    Updated: 2026/10/22 14:54:39 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,18 +21,19 @@ B_CYAN	:= \033[1;36m
 MAGENTA	:= \033[0;35m
 NC    	:= \033[0m
 
-NAME = cub3d
+NAME 		= cub3D
+NAME_BONUS	= cub3D_bonus
 
-LIBFT_DIR = ./includes/libft
-LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_DIR	= ./includes/libft
+LIBFT		= $(LIBFT_DIR)/libft.a
 
 MLX_DIR = ./includes/MLX42
 MLX_LIB = $(MLX_DIR)/build/libmlx42.a
 MLX_INC = -I$(MLX_DIR)/include
 
-SUPP_FILE = sub.sub
-VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=$(SUPP_FILE)
-MAP ?= maps/valid/minimal.cub
+SUPP_FILE		= sub.sub
+VALGRIND_FLAGS	= --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=$(SUPP_FILE)
+MAP 			?= maps/valid/minimal.cub
 
 UNAME_S := $(shell uname -s)
 
@@ -46,41 +47,42 @@ else
 				-ldl -lGL -lm -lpthread
 endif
 
-INCLUDES = -Iincludes -I$(LIBFT_DIR) -Iincludes/get_next_line
-BASE_CFLAGS = -Wall -Werror -Wextra -g3
-CFLAGS = $(BASE_CFLAGS) $(INCLUDES) $(MLX_INC)
+INCLUDES	= -Iincludes -I$(LIBFT_DIR) -Iincludes/get_next_line
+BASE_CFLAGS	= -Wall -Werror -Wextra -g3
+CFLAGS		= $(BASE_CFLAGS) $(INCLUDES) $(MLX_INC)
 
-PARSER =		sources/main.c \
-				sources/parser/parser.c \
-				sources/parser/verification_colors.c \
-				sources/parser/verification_map.c \
-				sources/parser/verification_path.c \
-				sources/parser/verification_player.c \
-				sources/parser/all_about_errors.c \
-				sources/parser/grid_building.c \
-				includes/get_next_line/get_next_line.c \
-				includes/get_next_line/get_next_line_utils.c
-			
-RAYCASTER =		sources/raycaster/raycast.c \
-				sources/raycaster/camera.c \
-				sources/raycaster/graphics.c \
-				sources/raycaster/orientation.c \
-				sources/raycaster/orientation_wrapper.c \
-				sources/raycaster/textures.c
+COMMON_SOURCES		=	sources/main.c \
+						sources/parser/parser.c \
+						sources/parser/verification_colors.c \
+						sources/parser/verification_map.c \
+						sources/parser/verification_path.c \
+						sources/parser/verification_player.c \
+						sources/parser/all_about_errors.c \
+						sources/parser/grid_building.c \
+						includes/get_next_line/get_next_line.c \
+						includes/get_next_line/get_next_line_utils.c \
+						sources/raycaster/raycast.c \
+						sources/raycaster/camera.c \
+						sources/raycaster/graphics.c \
+						sources/raycaster/textures.c \
+						sources/hooks/key_events.c \
+						sources/hooks/close_events.c
 
-BONUS =			sources/bonus/wall_collision.c \
-				sources/bonus/wrapper.c
+MANDATORY_SOURCES	=	$(COMMON_SOURCES) \
+						sources/render/frame.c \
+						sources/raycaster/orientation.c
 
-HOOKS =			sources/hooks/key_events.c \
-				sources/hooks/close_events.c
-
-RENDER =		sources/render/frame.c \
-				sources/render/minimap.c
+BONUS_SOURCES		=	$(COMMON_SOURCES) \
+						sources/render/frame_bonus.c \
+						sources/raycaster/orientation_bonus.c \
+						sources/raycaster/wrapper_bonus.c \
+						sources/render/minimap_bonus.c
 
 SRCS = $(PARSER) $(RAYCASTER) $(HOOKS) $(RENDER)
 
-OBJ_DIR = obj
-OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJ_DIR 		= obj
+OBJECTS 		= $(MANDATORY_SOURCES:%.c=$(OBJ_DIR)/%.o)
+BONUS_OBJECTS	= $(BONUS_SOURCES:%.c=$(OBJ_DIR)/%.o)
 
 CC = cc
 RM = rm -rf
@@ -91,7 +93,16 @@ $(NAME): $(OBJECTS) $(LIBFT) $(MLX_LIB)
 	@printf "$(YELLOW)⠋$(NC) Linking $(NAME)...\n"
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 	@printf "$(GREEN)✔$(NC) $(NAME) built successfully!\n"
-	@printf "$(MAGENTA)▶$(NC) You can now start the game: $(B_CYAN)./cub3d maps/(in)valid/map.cub$(NC)\n"
+	@printf "$(MAGENTA)▶$(NC) You can now start the game: $(B_CYAN)./$(NAME) maps/(in)valid/*.cub$(NC)\n"
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(BONUS_OBJECTS) $(LIBFT) $(MLX_LIB)
+	@printf "$(YELLOW)⠋$(NC) Linking $(NAME_BONUS)...\n"
+	@$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT) $(MLX_FLAGS) -o $(NAME_BONUS)
+	@printf "$(GREEN)✔$(NC) $(NAME_BONUS) built successfully!\n"
+	@printf "$(MAGENTA)▶$(NC) You can now start the BONUS game: $(B_CYAN)./$(NAME_BONUS) maps/(in)valid/*.cub$(NC)\n"
+
 
 $(LIBFT):
 	@printf "$(YELLOW)⠋$(NC) Building libft...\n"
@@ -115,7 +126,7 @@ clean:
 
 fclean: clean
 	@printf "$(YELLOW)⠋$(NC) Removing $(NAME) and libft...\n"
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(NAME_BONUS)
 	@$(MAKE) -C $(LIBFT_DIR) fclean --silent
 	@printf "$(GREEN)✔$(NC) $(NAME) and libft cleaned!\n"
 	@printf "$(B_CYAN)✷$(NC) Full clean complete!\n"
@@ -133,6 +144,8 @@ test_invalid_maps: $(NAME)
 
 valgrind: $(NAME)
 	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(MAP)
+valgrind_bonus: $(NAME_BONUS)
+	valgrind $(VALGRIND_FLAGS) ./$(NAME_BONUS) $(MAP)
 
 valgrind_all: $(NAME)
 	@printf "Testing with valgrind\n"
@@ -141,7 +154,7 @@ valgrind_all: $(NAME)
 		valgrind $(VALGRIND_FLAGS) ./$(NAME) $$map 2>&1 || true; \
 	done
 
-.PHONY: all clean fclean re valgrind valgrind_all
+.PHONY: all clean fclean re bonus valgrind valgrind_bonus valgrind_all test_invalid_maps
 
 
 
