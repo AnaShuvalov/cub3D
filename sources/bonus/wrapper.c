@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   orientation_wrapper.c                              :+:      :+:    :+:   */
+/*   wrapper.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 21:58:47 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/21 16:08:49 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/22 11:32:16 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 
-void	direction_handler(t_game *game)
+void	bonus_handler(t_game *game)
 {
 	double	rotation_speed;
 

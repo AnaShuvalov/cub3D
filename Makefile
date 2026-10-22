@@ -6,7 +6,7 @@
 #    By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/21 16:05:58 by olmatske         ###   ########.fr        #
+#    Updated: 2026/10/22 11:09:43 by olmatske         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,8 @@ RAYCASTER =		sources/raycaster/raycast.c \
 				sources/raycaster/orientation_wrapper.c \
 				sources/raycaster/textures.c
 
+BONUS =			sources/bonus/wall_collision.c \
+				sources/bonus/wrapper.c
 
 HOOKS =			sources/hooks/key_events.c \
 				sources/hooks/close_events.c

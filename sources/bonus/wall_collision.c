@@ -1,0 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wall_collision.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
+/*   Updated: 2026/10/22 11:33:23 by olmatske         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "raycast.h"
+#include "math.h"
+
+static int	is_wall(t_game *game, double x, double y)
+{
+	int	map_x;
+	int	map_y;
+
+	map_x = (int)x;
+	map_y = (int)y;
+	if (x < 0 || y < 0 || map_y >= game->map.height || map_x >= game->map.width)
+		return (1);
+	if (!game->map.grid[map_y])
+		return (1);
+	if (map_x >= (int)ft_strlen(game->map.grid[map_y]))
+		return (1);
+	if (game->map.grid[map_y][map_x] != '0')
+		return (1);
+	return (0);
+}
+
+static int	check_collision(t_game *game, double x, double y)
+{
+	double	r;
+
+	r = PLAYER_RADIUS;
+	return (is_wall(game, x - r, y) || is_wall(game, x + r, y)
+		|| is_wall(game, x, y - r) || is_wall(game, x, y + r));
+}
+
+void	bonus_rotate_player(t_player *player, double angle)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = player->dir_x;
+	player->dir_x = player->dir_x * cos(angle) - player->dir_y * sin(angle);
+	player->dir_y = old_dir_x * sin(angle) + player->dir_y * cos(angle);
+	old_plane_x = player->plane_x;
+	player->plane_x = player->plane_x * cos(angle)
+		- player->plane_y * sin(angle);
+	player->plane_y = old_plane_x * sin(angle) + player->plane_y * cos(angle);
+}
+
+void	bonus_walk_forward_backward(t_game *game)
+{
+	double	move_x;
+	double	move_y;
+	double	speed;
+
+	move_x = 0;
+	move_y = 0;
+	speed = MOVEMENT_SPEED * game->mlx->delta_time;
+	if (game->key.w)
+	{
+		move_x = game->player.dir_x * speed;
+		move_y = game->player.dir_y * speed;
+	}
+	if (game->key.s)
+	{
+		move_x -= game->player.dir_x * speed;
+		move_y -= game->player.dir_y * speed;
+	}
+	if (!check_collision(game, game->player.pos_x + move_x, game->player.pos_y))
+		game->player.pos_x += move_x;
+	if (!check_collision(game, game->player.pos_x, game->player.pos_y + move_y))
+		game->player.pos_y += move_y;
+}
+
+void	bonus_strafe_left_right(t_game *game)
+{
+	double	move_x;
+	double	move_y;
+	double	speed;
+
+	move_x = 0;
+	move_y = 0;
+	speed = MOVEMENT_SPEED * game->mlx->delta_time;
+	if (game->key.a)
+	{
+		move_x = -game->player.plane_x * speed;
+		move_y = -game->player.plane_y * speed;
+	}
+	if (game->key.d)
+	{
+		move_x = game->player.plane_x * speed;
+		move_y = game->player.plane_y * speed;
+	}
+	if (!check_collision(game, game->player.pos_x + move_x, game->player.pos_y))
+		game->player.pos_x += move_x;
+	if (!check_collision(game, game->player.pos_x, game->player.pos_y + move_y))
+		game->player.pos_y += move_y;
+}
