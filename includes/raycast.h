@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 14:29:57 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/22 15:25:51 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define RAYCAST_H
 
 # include "cub3d.h"
-# include "MLX42/MLX42.h"
 // #include <sys/time.h>	// for fps
 
 # define TILE 64

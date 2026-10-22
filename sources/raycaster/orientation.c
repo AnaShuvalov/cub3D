@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 21:58:47 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 15:07:58 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/22 15:34:40 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	walk_forward_backward(t_game *game)
 	move_x = 0;
 	move_y = 0;
 	speed = MOVEMENT_SPEED * game->mlx->delta_time;
+	if (speed > 0.2)
+		speed = 0.2;
 	if (game->key.w)
 	{
 		move_x = game->player.dir_x * speed;
@@ -80,6 +82,8 @@ void	strafe_left_right(t_game *game)
 	move_x = 0;
 	move_y = 0;
 	speed = MOVEMENT_SPEED * game->mlx->delta_time;
+	if (speed > 0.2)
+		speed = 0.2;
 	if (game->key.a)
 	{
 		move_x = -game->player.plane_x * speed;
@@ -90,10 +94,12 @@ void	strafe_left_right(t_game *game)
 		move_x = game->player.plane_x * speed;
 		move_y = game->player.plane_y * speed;
 	}
-	if (!is_wall(game, game->player.pos_x + move_x, game->player.pos_y))
+	if (!is_wall(game, game->player.pos_x + move_x,
+			game->player.pos_y + move_y))
+	{
 		game->player.pos_x += move_x;
-	if (!is_wall(game, game->player.pos_x, game->player.pos_y + move_y))
 		game->player.pos_y += move_y;
+	}
 }
 
 void	direction_handler(t_game *game)

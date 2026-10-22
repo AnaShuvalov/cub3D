@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:13 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/21 15:46:50 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/22 15:52:53 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ static void	march_ray(t_game *game, t_ray *ray)
 		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
 	else
 		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
+	if (ray->perp_wall_dist < 0.0001)
+		ray->perp_wall_dist = 0.0001;
 }
 
-static	void	setup_wall_drawing(t_game *game, t_ray *ray)
+static void	setup_wall_drawing(t_game *game, t_ray *ray)
 {
 	double			wall_x;
 	int				texture_width;

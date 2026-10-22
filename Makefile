@@ -6,7 +6,7 @@
 #    By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/24 15:30:27 by anshuval          #+#    #+#              #
-#    Updated: 2026/10/22 15:03:40 by anshuval         ###   ########.fr        #
+#    Updated: 2026/10/22 16:12:30 by anshuval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,8 +77,6 @@ BONUS_SOURCES		=	$(COMMON_SOURCES) \
 						sources/raycaster/orientation_bonus.c \
 						sources/raycaster/wrapper_bonus.c \
 						sources/render/minimap_bonus.c
-
-SRCS = $(PARSER) $(RAYCASTER) $(HOOKS) $(RENDER)
 
 OBJ_DIR 		= obj
 OBJECTS 		= $(MANDATORY_SOURCES:%.c=$(OBJ_DIR)/%.o)
@@ -159,17 +157,3 @@ valgrind_all: $(NAME)
 	done
 
 .PHONY: all clean fclean re bonus re_bonus valgrind valgrind_bonus valgrind_all test_invalid_maps
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////////
-#		EXPLANATION FOR THE OS DETECTION
-#
-#	• 'uname -s' is the shell command to detect the operating system name (for MacOS it's Darwin)
-#	• $(shell ...) performs a shell command and stores it's output in the UNAME_S variable
-#	• ifeq (A, B) is a conditional saying "if A equals B perform the following action", like the if
-#		condition but shorter
-#	• endif closes the block and is playing the role of a closing curly bracket '}', since
-#		Makefiles don't use those
-#	
-# /////////////////////////////////////////////////////////////////////////////////////////////////

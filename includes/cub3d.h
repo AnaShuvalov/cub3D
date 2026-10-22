@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/21 16:41:07 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/22 16:08:01 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@
 # define MINIMAP_SPACE 			0x666666AA
 # define MINIMAP_COMPASS		0xFFFFFFAA
 # define MINIMAP_FRAME			0x222222AA
-
-# define COLOR_CEILING			0x11080DFF
-# define COLOR_WALLS			0x895544FF
-# define COLOR_FLOOR			0x280400FF
-# define COLOR_PLAYER 			0xcb137fFF
 
 // Key movemment flags - used for smooth wlaking and fluid movement.
 // If a key is pressed the bool is set to TRUE. When the key is released,
@@ -124,7 +119,6 @@ void	key_reaction(mlx_key_data_t keydata, void *param);
 void	close_game(t_game *game, int exit_status);
 void	free_game(t_game *game);
 void	close_hook(void *param);
-void	exit_on_error(t_game *game, char *s);
 
 // RENDER ///////////////////
 void	render_frame(void *param);

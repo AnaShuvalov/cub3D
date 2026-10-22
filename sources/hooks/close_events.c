@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 15:42:32 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/13 17:29:37 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/22 16:08:07 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,6 @@ void	free_game(t_game *game)
 	if (game->map.grid)
 		free_array(game->map.grid);
 	ft_bzero(&game->map, sizeof(t_map));
-}
-
-void	exit_on_error(t_game *game, char *s)
-{
-	if (s)
-		error_message(s);
-	close_game(game, 1);
 }
 
 void	close_game(t_game *game, int exit_status)

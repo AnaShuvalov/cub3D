@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:21:16 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 15:12:02 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/22 15:35:16 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	walk_forward_backward(t_game *game)
 	move_x = 0;
 	move_y = 0;
 	speed = MOVEMENT_SPEED * game->mlx->delta_time;
+	if (speed > 0.2)
+		speed = 0.2;
 	if (game->key.w)
 	{
 		move_x = game->player.dir_x * speed;
@@ -87,6 +89,8 @@ void	strafe_left_right(t_game *game)
 	move_x = 0;
 	move_y = 0;
 	speed = MOVEMENT_SPEED * game->mlx->delta_time;
+	if (speed > 0.2)
+		speed = 0.2;
 	if (game->key.a)
 	{
 		move_x = -game->player.plane_x * speed;
