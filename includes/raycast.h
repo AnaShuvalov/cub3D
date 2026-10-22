@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 15:25:51 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/22 16:23:14 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // #include <sys/time.h>	// for fps
 
 # define TILE 64
-# define PLAYER_RADIUS 0.03
+# define PLAYER_RADIUS 0.15
 
 # define MOVEMENT_SPEED	3
 # define ROTATION_SPEED	4

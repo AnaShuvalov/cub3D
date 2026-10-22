@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrapper_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 21:58:47 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 14:31:57 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/22 16:48:11 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   orientation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 21:58:47 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 15:34:40 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/22 16:47:29 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

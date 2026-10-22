@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 14:15:13 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 15:52:53 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/22 16:47:57 by olmatske         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
