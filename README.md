@@ -45,25 +45,17 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 	111111111111111111111
 
 ## Metadata Identifiers
-	NO <path>: Path to North wall .png texture.
-
-	SO <path>: Path to South wall .png texture.
-
-	WE <path>: Path to West wall .png texture.
-
-	EA <path>: Path to East wall .png texture.
-
-	F <R,G,B>: Floor color (0 to 255 per channel).
-
+	NO <path>: Path to North wall .png texture
+	SO <path>: Path to South wall .png texture
+	WE <path>: Path to West wall .png texture
+	EA <path>: Path to East wall .png texture
+	F <R,G,B>: Floor color (0 to 255 per channel)
 	C <R,G,B>: Ceiling color (0 to 255 per channel).
 
 ## Grid Characters
-	1: Wall.
-
-	0: Empty walkable space.
-
-	(Space): Unreachable empty space.
-
+	1: Wall
+	0: Empty walkable space
+	(Space): Unreachable empty space
 	N, S, E, W: Exactly one player spawn position and facing direction.
 
 ## Project Structure
@@ -95,11 +87,14 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 		│   ├── raycast.c
 		│   ├── camera.c
 		│   ├── graphcs.c
-		│   ├── orientation.c		
-		│   ├── wallcolors.c
+		│   ├── orientation.c
+		│   ├── orientation_bonus.c
+		│   ├── textures.c
+		│   ├── wrapper_bonus.c
 		├── render/
 		│   ├── frame.c
-		│   └── minimap.c
+		│   ├── frame_bonus.c
+		│   └── minimap_bonus.c
 		└── hooks/
 			├── close_events.c
 			└── key_events.c
@@ -107,7 +102,7 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 ## Installation & Compilation
 	git clone <repository_url> cub3d
 	cd cub3d
-	make
+	make or make bonus
 
 ## Controls
 
@@ -124,4 +119,9 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 Run the executable with a single .cub map file as an argument:
 
 	Bash
-	./cub3D maps/(in)valid/subject_map.cub
+	./cub3D maps/(in)valid/*.cub
+	or
+	Bash
+	./cub3D_bonus maps/(in)valid/*.cub
+
+## Resources
