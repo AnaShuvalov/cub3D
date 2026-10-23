@@ -161,17 +161,14 @@ AI was used mostly for things around the code rather than the code itself:
 - **Understanding the math.** Such as why the camera plane is perpendicular to the direction vector, how the rotation formulas with cos and sin work, why we use the perpendicular distance instead of the real one (no fisheye), and how to scale the minimap to the map size. After that we wrote and tested the code ourselves and checked it against the tutorial.
 - **Reviewing and debugging.** Norm problems and to help us understand a few bugs (for example walls disappearing for a split second when standing right next to them).
 - **Makefile.** Help structure and understand the twerks in the Makefile for our gamification purpose - terminal styling, ading the ANSI escape color codes, checkmark symbols, silencing the extra info and organizing the clean separation bewteen the chapters.
+- **Maps.** Most of the maps are purely AI generated.
 - **This README.** Help with the wording and structure.
 
 ## Parser Mindmap
 
-Roughly the order the parser got built in. Some of the things we tried didn't work and got thrown out, those are crossed out.
-
 **1. Setup**
 - [x] Outline the structs in the header (`t_game`, `t_map`, `t_player`, `t_keys`)
 - [x] Init `t_game` and a basic `main`
-- [x] First Makefile
-- [x] Add get_next_line
 
 **2. The argument and the file**
 - [x] Exactly one argument
@@ -183,32 +180,30 @@ Roughly the order the parser got built in. Some of the things we tried didn't wo
 **3. Reading line by line**
 - [x] Read with get_next_line
 - [x] Cut off `\n` and `\r` at the end
-- [x] Turn tabs into spaces straight away, so nothing after that has to care about them
 - [x] Skip spaces at the start of the identifier lines
 - [x] Look at the first character and send the line to the right check (texture / color / map)
+- [x] Turn tabs into spaces straight away, so nothing after that has to care about them
 
 **4. Textures (NO, SO, WE, EA)**
 - [x] Identifier is spelled right and followed by exactly one path
-- [x] ~~Path has to be `.xpm`~~ → dropped when we switched to MLX42
-- [x] Path has to be `.png`
+- [x] ~~Path has to be `.xpm`~~ Path has to be `.png`
 - [x] File exists, opens and isn't empty
 - [x] No duplicate lines
 
 **5. Colors (F, C)**
-- [x] Count the commas first, exactly 2 (`ft_split` would just swallow `255,,0`)
+- [x] Count the commas first, exactly 2
 - [x] Exactly 3 values, only digits
 - [x] Every value between 0 and 255
 - [x] A huge number can't overflow and wrap around into a "valid" one
 - [x] No duplicate lines
 - [x] Pack R, G, B into one color for MLX42
+- [x] Color has to be with the 0x prefix for MLX42
 
 **6. The map**
 - [x] Map has to be the last thing in the file, so no identifiers after it
 - [x] Linked list helpers added to libft
-- [x] Store the map lines in a linked list, since we don't know the height until EOF
-- [x] Empty lines before the map: skip
-- [x] Empty lines inside the map: error
-- [x] Empty lines after the map: trim
+- [x] Store the map lines in a linked list - we don't know the height until EOF
+- [x] Empty lines before the map: skip. inside the map: error. after the map: trim
 - [x] Only allowed characters (`0`, `1`, space, `N`, `S`, `E`, `W`)
 - [x] Linked list → `char **grid` (reusing the strings, only the nodes get freed)
 - [x] Width = the longest row, height = number of rows
@@ -240,7 +235,7 @@ Roughly the order the parser got built in. Some of the things we tried didn't wo
 - [x] Move it to the top right corner, own colors for walls / floor / empty space
 - [x] Tile size scales with the map so it always fits
 - [x] ~~Square player~~ → it overlapped the walls
-- [x] Round player: `x*x + y*y <= r*r`
+- [x] Round player: `x*x + y*y <= r*r`. Pyphagor's theorem
 - [x] Compass dot in front of the player, showing where you're looking
 - [x] ~~Minimap centered on the player~~ → it worked, but we didn't like it, so we went back
 - [x] Frame around the minimap
