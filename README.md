@@ -109,14 +109,9 @@ A scene file must contain 6 metadata identifiers followed by the grid layout. Th
 ## Instructions
 
 ### Installation & Compilation
-MLX42 is built with cmake, so you need cmake and glfw installed (they are on the campus machines).
-
-```bash
-git clone <repository_url> cub3d
-cd cub3d
-make          # mandatory -> ./cub3D
-make bonus    # bonus     -> ./cub3D_bonus
-```
+	git clone <repository_url> cub3d
+	cd cub3d
+	make or make bonus
 
 `make clean`, `make fclean`, `make re` and `make re_bonus` work as usual.
 
@@ -134,10 +129,11 @@ make bonus    # bonus     -> ./cub3D_bonus
 ### Usage
 Run the executable with a single .cub map file as an argument:
 
-```bash
-./cub3D maps/valid/minimal.cub
-./cub3D_bonus maps/valid/big_maze.cub
-```
+	Bash
+	./cub3D maps/(in)valid/*.cub
+	or
+	Bash
+	./cub3D_bonus maps/(in)valid/*.cub
 
 There are test maps in `maps/valid/` and broken ones in `maps/invalid/`. To run all the invalid ones at once:
 
@@ -158,14 +154,15 @@ make valgrind_bonus MAP=maps/valid/minimal.cub
 - [Fabien Sanglard - Game Engine Black Book: Wolfenstein 3D](https://fabiensanglard.net/gebbwolf3d/): how the original game did it in 1992.
 - [Rotation matrix (Wikipedia)](https://en.wikipedia.org/wiki/Rotation_matrix): for turning the direction and camera plane with the arrow keys.
 - [Digital Differential Analyzer (Wikipedia)](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm)): the general idea behind stepping a ray through a grid.
-- [Valgrind manual](https://valgrind.org/docs/manual/manual.html): for leak checking and writing the suppression file.
 
 ### AI usage
-We used AI as a kind of extra study buddy, mostly for things around the code rather than the code itself:
+AI was used mostly for things around the code rather than the code itself:
 
-- **Understanding the math.** When the tutorial was not enough, we asked AI to explain things in a different way, for example why the camera plane is perpendicular to the direction vector, how the rotation formulas with cos and sin work, why we use the perpendicular distance instead of the real one (no fisheye), and how to scale the minimap to the map size. After that we wrote and tested the code ourselves and checked it against the tutorial.
-- **Reviewing and debugging.** We asked it to go over our code to look for memory leaks, missing edge cases in the parser and norm problems, and to help us understand a few bugs (for example walls disappearing for a moment when standing right next to them). Every suggestion was tested by us before it went in, and some we threw away.
-- **Makefile.** Help with splitting the Makefile into a mandatory and a bonus build.
+- **Understanding the math.** Such as why the camera plane is perpendicular to the direction vector, how the rotation formulas with cos and sin work, why we use the perpendicular distance instead of the real one (no fisheye), and how to scale the minimap to the map size. After that we wrote and tested the code ourselves and checked it against the tutorial.
+- **Reviewing and debugging.** Norm problems and to help us understand a few bugs (for example walls disappearing for a split second when standing right next to them).
+- **Makefile.** Help structure and understand the twerks in the Makefile for our gamification purpose - terminal styling, ading the ANSI escape color codes, checkmark symbols, silencing the extra info and organizing the clean separation bewteen the chapters.
 - **This README.** Help with the wording and structure.
 
-We went through all of it together, and both of us can explain every part of the project.
+## Parser Mindmap
+
+## Raycaster Mindmap
