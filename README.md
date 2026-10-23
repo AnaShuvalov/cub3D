@@ -20,11 +20,18 @@ The project was split into two categories:
 
 **Customizable Environments**: Solid ceiling and floor colors parsed from standard RGB values.
 
-**Robust Map Parsing**:
-	Argument validation and .cub file format verification.
-	Resilient metadata extraction handling arbitrary order and blank lines.
+**Map Parsing**:
+	Argument validation, .cub file access verification.
+	Metadata verification handling blank lines in map and outside of it.
 	Map boundary validation ensuring the playable grid is completely enclosed by walls (1).
 	Explicit player spawn orientation (N, S, E, W).
+
+###  Bonus features
+**Minimap system**: a 2D map in the right hand top corner of the play screen with player compass indicator.
+
+**Wall collisions**: Wall sliding physics and collision detection.
+
+**Depth shading**: Distance lighting darkening distance walls.
 	
 ## Scene File Specifications (.cub)
 A scene file must contain 6 metadata identifiers followed by the grid layout:
@@ -86,7 +93,7 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 		├── raycaster/
 		│   ├── raycast.c
 		│   ├── camera.c
-		│   ├── graphcs.c
+		│   ├── graphics.c
 		│   ├── orientation.c
 		│   ├── orientation_bonus.c
 		│   ├── textures.c
@@ -99,12 +106,14 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 			├── close_events.c
 			└── key_events.c
 
-## Installation & Compilation
+## Instructions
+
+### Installation & Compilation
 	git clone <repository_url> cub3d
 	cd cub3d
 	make or make bonus
 
-## Controls
+### Controls
 
 	Key				Action
 	W				Move forward
@@ -115,7 +124,7 @@ A scene file must contain 6 metadata identifiers followed by the grid layout:
 	Right Arrow		Rotate camera right
 	ESC/Red Cross	Exit application cleanly
 
-## Usage
+### Usage
 Run the executable with a single .cub map file as an argument:
 
 	Bash
