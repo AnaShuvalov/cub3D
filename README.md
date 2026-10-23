@@ -154,6 +154,9 @@ make valgrind_bonus MAP=maps/valid/minimal.cub
 - [Fabien Sanglard - Game Engine Black Book: Wolfenstein 3D](https://fabiensanglard.net/gebbwolf3d/): how the original game did it in 1992.
 - [Rotation matrix (Wikipedia)](https://en.wikipedia.org/wiki/Rotation_matrix): for turning the direction and camera plane with the arrow keys.
 - [Digital Differential Analyzer (Wikipedia)](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm)): the general idea behind stepping a ray through a grid.
+- [Cub3D documentation](https://harm-smits.github.io/42docs/projects/cub3d)
+- [Jun Han Ng's Approach and Explanation (Was very useful!)](https://hackmd.io/@nszl/H1LXByIE2#dda-algorithm)
+- Of course a whole lot of help from peers, from introduction to helpful tips on how to make the game more efficient using good practices in ame development (lot of credits to jkauker!)
 
 ### AI usage
 AI was used mostly for things around the code rather than the code itself:
@@ -248,4 +251,31 @@ AI was used mostly for things around the code rather than the code itself:
 - [x] Norminette
 - [x] Split everything into mandatory and `_bonus` files
 
-## Raycaster Mindmap
+## Raycaster Roadmap
+
+- [X] Minimap with walls n stuff
+- [X] raycaster
+- [X] movement (vector with normalization, meaning the speed is the same)
+- [X] vector addition -> movement speed and rotational speed
+- [X] wall collisiion
+- [X] shader
+- [x] hook up textures
+- [X] sticky walls
+- [X] is there a check for textures?
+- [X] hook up floor and ceiling colors from map sruct
+- [X] why does the camera/view slow down when I get closer to the walls?
+	-> it's to be expected in raycasting
+- [X] make buffer between walls and player
+- [X] fix lines of floor and ceiling on top and bottom
+- [X] remove FPS counter
+- [X] Norminette
+- [X] bonus directory
+	- [X] wall collision (mandatory: upon wall, stop - bonus: upon wall, slide)
+- [X] bonus makefile argument
+- [ ] Cheat Sheet in Readme
+
+**Notes**
+- buffer between player and wall
+- protect corners
+- fisheye at first, must be hardcoded
+- raycast can 'glitch' through walls
