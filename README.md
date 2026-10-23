@@ -149,14 +149,14 @@ make valgrind_bonus MAP=maps/valid/minimal.cub
 ```
 
 ## Resources
-- [MLX42 documentation](https://github.com/codam-coding-college/MLX42): for the window, images, key hooks and loading png textures.
-- [Lode's Computer Graphics Tutorial - Raycasting](https://lodev.org/cgtutor/raycasting.html): the tutorial basically everybody uses for cub3D. The DDA, the camera plane and the texture mapping all come from here.
-- [Fabien Sanglard - Game Engine Black Book: Wolfenstein 3D](https://fabiensanglard.net/gebbwolf3d/): how the original game did it in 1992.
-- [Rotation matrix (Wikipedia)](https://en.wikipedia.org/wiki/Rotation_matrix): for turning the direction and camera plane with the arrow keys.
-- [Digital Differential Analyzer (Wikipedia)](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm)): the general idea behind stepping a ray through a grid.
+- [MLX42 documentation](https://github.com/codam-coding-college/MLX42)
+- [Lode's Computer Graphics Tutorial - Raycasting](https://lodev.org/cgtutor/raycasting.html)
+- [Fabien Sanglard - Game Engine Black Book: Wolfenstein 3D](https://fabiensanglard.net/gebbwolf3d/)
+- [Rotation matrix (Wikipedia)](https://en.wikipedia.org/wiki/Rotation_matrix)
+- [Digital Differential Analyzer (Wikipedia)](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm))
 - [Cub3D documentation](https://harm-smits.github.io/42docs/projects/cub3d)
 - [Jun Han Ng's Approach and Explanation (Was very useful!)](https://hackmd.io/@nszl/H1LXByIE2#dda-algorithm)
-- Of course a whole lot of help from peers, from introduction to helpful tips on how to make the game more efficient using good practices in ame development (lot of credits to jkauker!)
+- Of course a whole lot of help from peers, from introduction to helpful tips on how to make the game more efficient using good practices in game development (lot of credits to jkauker!)
 
 ### AI usage
 AI was used mostly for things around the code rather than the code itself:
@@ -169,7 +169,7 @@ AI was used mostly for things around the code rather than the code itself:
 
 ## Parser Roadmap
 
-- [X] structs in header (t_game, t_map, t_player, t_keys) & basic main
+- [X] structs in header (t_game, t_map, t_player, t_keys), basic main
 - [X] .cub file verification
 	- [X] extension check (.cub, not hidden, not a directory)
 	- [X] open opens the file cleanly
@@ -195,8 +195,8 @@ AI was used mostly for things around the code rather than the code itself:
 	- [X] set player pos (tile center + 0.5) and dir/plane vectors (plane initialize to 0??)
 - [X] enclosed by walls check (flood fill?)
 - [X] error handling and exits
-	- [X] error_message prints Error\n message, ft_error exits directly
 	- [X] free_game cleans paths, textures, grid, framebuffer + bzero for safety (avoids double free)
+	- [X] error_message prints Error\n message, ft_error exits directly
 - [X] key hooks
 	- [X] press/release bool. pressed->true,released->false
 	- [X] ESC and close cross cleanly close window
@@ -204,7 +204,7 @@ AI was used mostly for things around the code rather than the code itself:
 	- [X] tile size scaling so it fits on screen
 	- [X] round player dot with Pythagor's theorem (x*x + y*y <= r*r)
 	- [X] compass dot
-	- [X] frame around minimap & skip if map exceeds 160 tiles
+	- [X] frame around minimap and skip if map exceeds 160 tiles
 	- ~~centered minimap on player~~ -> tried it, didn't like it, reverted
 - [X] automated test_invalid_maps in Makefile
 
