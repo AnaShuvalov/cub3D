@@ -172,50 +172,41 @@ AI was used mostly for things around the code rather than the code itself:
 - [X] structs in header (t_game, t_map, t_player, t_keys) & basic main
 - [X] .cub file verification
 	- [X] extension check (.cub, not hidden, not a directory)
-	- [X] permissions & file opens
+	- [X] open opens the file cleanly
 - [X] gnl line by line reading
-	- [X] strip newline / CR
+	- [X] strip \n \r
 	- [X] replace tabs with spaces right away
-- [X] texture identifiers (NO, SO, WE, EA)
+- [X] textures
+	- [X] path to the .png exists, readable, not empty
 	- [X] only .png textures
-	- [X] file exists, readable, not empty
-	- [X] no duplicates
-- [X] colors (F, C)
-	- [X] count commas first (exactly 2, so split doesn't swallow empty values)
-	- [X] 0-255 per channel, no int overflow wrapping
-	- [X] pack RGB into single uint32 for MLX42
+	- [X] the struct is not populated so far. if populated - it has been dupplicated
+- [X] colors
+	- [X] count commas first (exactly 2)
+	- [X] 0-255 per color, no int overflow by counting number of int
+	- [X] RGB into uint32 for MLX42 - bitwise operaqtion
 - [X] map parsing
 	- [X] map must come last in the file
 	- [X] read into linked list first (don't know height until EOF)
-	- [X] list to grid (char **grid)
-	- [X] empty lines: skip before map, error inside, trim trailing
-- [X] player setup
+	- [X] delete the trailing new lines after
+	- [X] revertback list to grid 
+	- [X] new lines - skip before map, error inside
+- [X] player
 	- [X] exactly one spawn (N, S, E, W)
-	- [X] set player pos (tile center + 0.5) and dir/plane vectors
-- [X] enclosed by walls check (spaces & shorter adjacent rows count as open)
-- [X] error handling & clean exits
-	- [X] error_message() prints Error + message, ft_error() exits directly
-	- [X] free_game() cleans paths, textures, grid, framebuffer + bzero for safety
-- [X] key hooks & window close
-	- [X] press/release boolean flags (for smooth walking without key delay)
-	- [X] ESC & red cross cleanly close window
-- [X] minimap & compass (bonus)
+	- [X] set player pos (tile center + 0.5) and dir/plane vectors (plane initialize to 0??)
+- [X] enclosed by walls check (flood fill?)
+- [X] error handling and exits
+	- [X] error_message prints Error\n message, ft_error exits directly
+	- [X] free_game cleans paths, textures, grid, framebuffer + bzero for safety (avoids double free)
+- [X] key hooks
+	- [X] press/release bool. pressed->true,released->false
+	- [X] ESC and close cross cleanly close window
+- [X] minimap 
 	- [X] tile size scaling so it fits on screen
-	- [X] round player dot with Pythagoras theorem (x*x + y*y <= r*r)
-	- [X] compass indicator dot
+	- [X] round player dot with Pythagor's theorem (x*x + y*y <= r*r)
+	- [X] compass dot
 	- [X] frame around minimap & skip if map exceeds 160 tiles
 	- ~~centered minimap on player~~ -> tried it, didn't like it, reverted
-- [X] testing & leaks
-	- [X] automated test_invalid_maps in Makefile
-	- [X] valgrind suppression file (sub.sub) for MLX driver noise
-	- [X] Norminette
-
-**Notes**
-- ft_split eats double commas (255,,0), so comma count is checked first
-- open() happily opens directories, so check if it's a folder explicitly
-- map must be last so we know when empty lines become invalid
-- trailing empty lines at end of map took two commits to get right
-
+- [X] automated test_invalid_maps in Makefile
 
 ## Raycaster Roadmap
 
