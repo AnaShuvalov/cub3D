@@ -167,56 +167,55 @@ AI was used mostly for things around the code rather than the code itself:
 - **Maps.** Most of the maps are purely AI generated.
 - **This README.** Help with the wording and structure.
 
-## Parser Mindmap
+## Parser Roadmap
 
-- [x] outline the structs in the header for t_game, t_map, t_player, t_keys. init t_game
-- [x] check for exactly one argument passed. it has to end in .cub and it is not a hidden file
-- [x] not a directory (open happily opens those too) -> check the permissions
-- [x] read with get_next_line, cut off \n and \r at the end
-- [x] Skip spaces at the start of the identifier lines
-- [x] Look at the first character and send the line to the right check (texture / color / map)
-- [x] Turn tabs into spaces straight away, so nothing after that has to care about them
-- [x] Identifier is spelled right and followed by exactly one path
-- [x] ~~Path has to be .xpm~~ Path has to be .png
-- [x] File exists, opens and isn't empty
-- [x] No duplicate lines
-- [x] Count the commas first, exactly 2
-- [x] Exactly 3 values, only digits
-- [x] Every value between 0 and 255
-- [x] A huge number can't overflow and wrap around into a "valid" one
-- [x] No duplicate lines
-- [x] Pack R, G, B into one color for MLX42
-- [x] Color has to be with the 0x prefix for MLX42
-- [x] Map has to be the last thing in the file, so no identifiers after it
-- [x] Linked list helpers added to libft
-- [x] Store the map lines in a linked list - we don't know the height until EOF
-- [x] Empty lines before the map: skip. inside the map: error. after the map: trim
-- [x] Only allowed characters 
-- [x] Linked list
-- [x] Width = the longest row, height = number of rows
-- [x] Exactly one N, S, E or W
-- [x] Spawn in the middle of the tile (x + 0.5, y + 0.5)
-- [x] Set the direction vector and the camera plane from the letter
-- [x] Every walkable tile and the player can't touch a space or the edge of the map
-- [x] Shorter rows count as open, so a 0 hanging past the row above is caught too
-- [x] All 4 textures, F, C and the map are there
-- [x] Error\n + a message on stderr for every case
-- [x] error_message only prints so we can still free, ft_error prints and exits ->only used before anything is allocated
-- [x] Everything gets freed on every error path
-- [x] ~~Move the player directly in the key callback~~ → rewritten
-- [x] Key press / release only flips a bool in t_keys, the game loop does the moving, so you can hold keys and press two at once
-- [x] ESC and the red cross both go through close_game
-- [x] close_game takes an exit status
-- [x] ft_bzero so a second call can't double free
-- [x] Move minimap to the top right corner, own colors for walls / floor / empty space
-- [x] Tile size scales with the map so it always fits
-- [x] ~~Square player~~ → it overlapped the walls
-- [x] Round player: x*x + y*y <= r*r. Pyphagor's theorem
-- [x] Compass dot in front of the player, showing where you're looking
-- [x] ~~Minimap centered on the player~~ → it worked, but we didn't like it, so we went back
-- [x] Frame around the minimap
-- [x] Maps that are too big don't get a minimap (they used to wrap around to the other side of the screen)
-- [x] Split everything into mandatory and bonus files
+- [X] structs in header (t_game, t_map, t_player, t_keys) & basic main
+- [X] .cub file verification
+	- [X] extension check (.cub, not hidden, not a directory)
+	- [X] permissions & file opens
+- [X] gnl line by line reading
+	- [X] strip newline / CR
+	- [X] replace tabs with spaces right away
+- [X] texture identifiers (NO, SO, WE, EA)
+	- [X] only .png textures
+	- [X] file exists, readable, not empty
+	- [X] no duplicates
+- [X] colors (F, C)
+	- [X] count commas first (exactly 2, so split doesn't swallow empty values)
+	- [X] 0-255 per channel, no int overflow wrapping
+	- [X] pack RGB into single uint32 for MLX42
+- [X] map parsing
+	- [X] map must come last in the file
+	- [X] read into linked list first (don't know height until EOF)
+	- [X] list to grid (char **grid)
+	- [X] empty lines: skip before map, error inside, trim trailing
+- [X] player setup
+	- [X] exactly one spawn (N, S, E, W)
+	- [X] set player pos (tile center + 0.5) and dir/plane vectors
+- [X] enclosed by walls check (spaces & shorter adjacent rows count as open)
+- [X] error handling & clean exits
+	- [X] error_message() prints Error + message, ft_error() exits directly
+	- [X] free_game() cleans paths, textures, grid, framebuffer + bzero for safety
+- [X] key hooks & window close
+	- [X] press/release boolean flags (for smooth walking without key delay)
+	- [X] ESC & red cross cleanly close window
+- [X] minimap & compass (bonus)
+	- [X] tile size scaling so it fits on screen
+	- [X] round player dot with Pythagoras theorem (x*x + y*y <= r*r)
+	- [X] compass indicator dot
+	- [X] frame around minimap & skip if map exceeds 160 tiles
+	- ~~centered minimap on player~~ -> tried it, didn't like it, reverted
+- [X] testing & leaks
+	- [X] automated test_invalid_maps in Makefile
+	- [X] valgrind suppression file (sub.sub) for MLX driver noise
+	- [X] Norminette
+
+**Notes**
+- ft_split eats double commas (255,,0), so comma count is checked first
+- open() happily opens directories, so check if it's a folder explicitly
+- map must be last so we know when empty lines become invalid
+- trailing empty lines at end of map took two commits to get right
+
 
 ## Raycaster Roadmap
 
