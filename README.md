@@ -165,36 +165,21 @@ AI was used mostly for things around the code rather than the code itself:
 - **Reviewing and debugging.** Norm problems and to help us understand a few bugs (for example walls disappearing for a split second when standing right next to them).
 - **Makefile.** Help structure and understand the twerks in the Makefile for our gamification purpose - terminal styling, ading the ANSI escape color codes, checkmark symbols, silencing the extra info and organizing the clean separation bewteen the chapters.
 - **Maps.** Most of the maps are purely AI generated.
-- **Mindmap.** Dividing mindmaps into readable structures.
 - **This README.** Help with the wording and structure.
 
 ## Parser Mindmap
 
-**1. Setup**
-- [x] Outline the structs in the header (`t_game`, `t_map`, `t_player`, `t_keys`)
-- [x] Init `t_game` and a basic `main`
-
-**2. The argument and the file**
-- [x] Exactly one argument
-- [x] Has to end in `.cub`
-- [x] Not a hidden file like `.cub` on its own
-- [x] Not a directory (`open()` happily opens those too)
-- [x] File opens, otherwise check the permissions
-
-**3. Reading line by line**
-- [x] Read with get_next_line
-- [x] Cut off `\n` and `\r` at the end
+- [x] outline the structs in the header for t_game, t_map, t_player, t_keys. init t_game
+- [x] check for exactly one argument passed. it has to end in .cub and it is not a hidden file
+- [x] not a directory (open happily opens those too) -> check the permissions
+- [x] read with get_next_line, cut off \n and \r at the end
 - [x] Skip spaces at the start of the identifier lines
 - [x] Look at the first character and send the line to the right check (texture / color / map)
 - [x] Turn tabs into spaces straight away, so nothing after that has to care about them
-
-**4. Textures (NO, SO, WE, EA)**
 - [x] Identifier is spelled right and followed by exactly one path
-- [x] ~~Path has to be `.xpm`~~ Path has to be `.png`
+- [x] ~~Path has to be .xpm~~ Path has to be .png
 - [x] File exists, opens and isn't empty
 - [x] No duplicate lines
-
-**5. Colors (F, C)**
 - [x] Count the commas first, exactly 2
 - [x] Exactly 3 values, only digits
 - [x] Every value between 0 and 255
@@ -202,55 +187,36 @@ AI was used mostly for things around the code rather than the code itself:
 - [x] No duplicate lines
 - [x] Pack R, G, B into one color for MLX42
 - [x] Color has to be with the 0x prefix for MLX42
-
-**6. The map**
 - [x] Map has to be the last thing in the file, so no identifiers after it
 - [x] Linked list helpers added to libft
 - [x] Store the map lines in a linked list - we don't know the height until EOF
 - [x] Empty lines before the map: skip. inside the map: error. after the map: trim
-- [x] Only allowed characters (`0`, `1`, space, `N`, `S`, `E`, `W`)
-- [x] Linked list → `char **grid` (reusing the strings, only the nodes get freed)
+- [x] Only allowed characters 
+- [x] Linked list
 - [x] Width = the longest row, height = number of rows
-
-**7. Player**
 - [x] Exactly one N, S, E or W
-- [x] Spawn in the middle of the tile (`x + 0.5`, `y + 0.5`)
+- [x] Spawn in the middle of the tile (x + 0.5, y + 0.5)
 - [x] Set the direction vector and the camera plane from the letter
-
-**8. Closed by walls**
 - [x] Every walkable tile and the player can't touch a space or the edge of the map
-- [x] Shorter rows count as open, so a `0` hanging past the row above is caught too
-
-**9. Last check before the game starts**
+- [x] Shorter rows count as open, so a 0 hanging past the row above is caught too
 - [x] All 4 textures, F, C and the map are there
-- [x] `Error\n` + a message on stderr for every case
-- [x] `error_message()` only prints so we can still free, `ft_error()` prints and exits (only used before anything is allocated)
+- [x] Error\n + a message on stderr for every case
+- [x] error_message only prints so we can still free, ft_error prints and exits ->only used before anything is allocated
 - [x] Everything gets freed on every error path
-
-**10. Hooks**
 - [x] ~~Move the player directly in the key callback~~ → rewritten
-- [x] Key press / release only flips a bool in `t_keys`, the game loop does the moving, so you can hold keys and press two at once
-- [x] ESC and the red cross both go through `close_game()`
-- [x] `close_game()` takes an exit status
-- [x] `free_game()` frees paths, textures, images and the grid, then `ft_bzero` so a second call can't double free
-
-**11. Minimap (bonus)**
-- [x] Draw the grid in the loop
-- [x] Move it to the top right corner, own colors for walls / floor / empty space
+- [x] Key press / release only flips a bool in t_keys, the game loop does the moving, so you can hold keys and press two at once
+- [x] ESC and the red cross both go through close_game
+- [x] close_game takes an exit status
+- [x] ft_bzero so a second call can't double free
+- [x] Move minimap to the top right corner, own colors for walls / floor / empty space
 - [x] Tile size scales with the map so it always fits
 - [x] ~~Square player~~ → it overlapped the walls
-- [x] Round player: `x*x + y*y <= r*r`. Pyphagor's theorem
+- [x] Round player: x*x + y*y <= r*r. Pyphagor's theorem
 - [x] Compass dot in front of the player, showing where you're looking
 - [x] ~~Minimap centered on the player~~ → it worked, but we didn't like it, so we went back
 - [x] Frame around the minimap
 - [x] Maps that are too big don't get a minimap (they used to wrap around to the other side of the screen)
-
-**12. Breaking it on purpose**
-- [x] Lots of broken maps in `maps/invalid/` (this found a few parser bugs)
-- [x] `make test_invalid_maps` runs them all at once
-- [x] Valgrind + a suppression file (`sub.sub`) for the MLX/GLFW leaks that aren't ours
-- [x] Norminette
-- [x] Split everything into mandatory and `_bonus` files
+- [x] Split everything into mandatory and bonus files
 
 ## Raycaster Roadmap
 

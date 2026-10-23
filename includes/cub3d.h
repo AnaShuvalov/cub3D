@@ -6,7 +6,7 @@
 /*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 15:34:13 by anshuval          #+#    #+#             */
-/*   Updated: 2026/10/22 16:08:01 by anshuval         ###   ########.fr       */
+/*   Updated: 2026/10/23 16:28:52 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	free_array(char **array);
 void	error_message(char *s);
 
 // RAYCASTER ///////////////////////////////
-void	render_frame(void	*param);
 int		start_game(t_game *game);
 int		load_textures(t_map *map);
 

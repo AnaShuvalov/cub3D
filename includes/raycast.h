@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmatske <olmatske@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: anshuval <anshuval@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:56:46 by olmatske          #+#    #+#             */
-/*   Updated: 2026/10/22 16:23:14 by olmatske         ###   ########.fr       */
+/*   Updated: 2026/10/23 16:29:01 by anshuval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_ray
 }	t_ray;
 
 // FUNCTIONS ///////////////////////////////////////////////////////////////////
-void			render_frame(void	*param);
 void			perform_dda(t_game *game, t_ray *ray);
 void			init_dda_vars(t_ray *ray);
 void			draw_wall_slice(t_game *game, t_ray *ray, int x);
